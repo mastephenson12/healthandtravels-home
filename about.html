@@ -7,9 +7,28 @@
     <meta name="description" content="Learn about Mark Stephenson, RN, founder of Health & Travels, Sage Trip Planner, and the Arizona Hikers Association. Focused on safe, kid-friendly outdoor planning.">
     <link rel="canonical" href="https://healthandtravels.com/about">
 
+    <!-- Google Fonts Matching Beehiiv -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "AboutPage",
+      "mainEntity": {
+        "@type": "Person",
+        "@id": "https://healthandtravels.com/about#mark-stephenson",
+        "name": "Mark Stephenson",
+        "jobTitle": "Founder, Editor, Registered Nurse (RN)",
+        "knowsAbout": ["Arizona Hiking", "Family Travel", "Heat Safety", "Wilderness Safety"],
+        "sameAs": [
+          "https://github.com/mastephenson12"
+        ]
+      }
+    }
+    </script>
 
     <style>
         :root {
@@ -32,7 +51,7 @@
             color: var(--text-dark);
             margin: 0;
             padding: 0;
-            line-height: 1.7;
+            line-height: 1.6;
         }
         header {
             background: #ffffff;
@@ -41,7 +60,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
         .logo { 
@@ -51,22 +70,49 @@
             color: var(--primary); 
             text-decoration: none; 
             text-transform: uppercase;
+            letter-spacing: -0.5px;
         }
         .logo span { color: var(--accent-orange); }
-        nav a { margin-left: 20px; color: var(--link-color); text-decoration: none; font-family: var(--font-button); font-weight: 600; }
-        nav a:hover { color: var(--accent-teal); }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        h1 { font-family: var(--font-heading); color: var(--text-heading); font-size: 2.5rem; text-transform: uppercase; margin-bottom: 8px; }
-        .subtitle { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; }
-        .author-card {
-            background: #ffffff;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 40px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
+        nav a { 
+            margin-left: 20px; 
+            color: var(--link-color); 
+            text-decoration: none; 
+            font-family: var(--font-button);
+            font-weight: 600; 
         }
-        .author-card h2 { font-family: var(--font-heading); color: var(--text-heading); text-transform: uppercase; margin-top: 0; }
+        nav a:hover { color: var(--accent-teal); }
+        .hero {
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #004D40 100%);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero h1 { 
+            font-family: var(--font-heading);
+            font-size: 2.6rem; 
+            margin-bottom: 12px; 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.95; margin: 0; }
+        .container { max-width: 900px; margin: 40px auto; padding: 0 20px; }
+        
+        .author-box {
+            background: #F0FDF4;
+            border-left: 5px solid var(--accent-teal);
+            padding: 30px;
+            border-radius: 6px;
+            margin-bottom: 40px;
+        }
+        .author-box h2 { 
+            font-family: var(--font-heading);
+            margin: 0 0 12px 0; 
+            color: var(--text-heading); 
+            text-transform: uppercase;
+            font-size: 1.8rem;
+        }
         .badge {
             display: inline-block;
             background: #E0F2FE;
@@ -79,17 +125,36 @@
             margin-bottom: 16px;
             text-transform: uppercase;
         }
+        
+        .section-title { 
+            font-family: var(--font-heading);
+            font-size: 1.8rem; 
+            margin-bottom: 16px; 
+            color: var(--text-heading); 
+            text-transform: uppercase;
+        }
+
         .ecosystem-list {
             background: #F9FAFB;
             border: 1px solid var(--border-color);
             border-radius: 8px;
             padding: 24px;
             list-style: none;
+            margin-bottom: 40px;
         }
         .ecosystem-list li { margin-bottom: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--border-color); }
         .ecosystem-list li:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
-        .ecosystem-list strong { color: var(--text-heading); font-family: var(--font-button); }
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.95rem; margin-top: 60px; background: #F9FAFB; }
+        .ecosystem-list strong { color: var(--text-heading); font-family: var(--font-button); font-size: 1.1rem; }
+
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            border-top: 1px solid var(--border-color); 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            background: #F9FAFB;
+            margin-top: 60px;
+        }
     </style>
 </head>
 <body>
@@ -104,11 +169,16 @@
         </nav>
     </header>
 
-    <div class="container">
-        <h1>About Health & Travels</h1>
-        <p class="subtitle">Building practical, health-conscious tools and guides for families exploring the American Southwest.</p>
+    <section class="hero">
+        <div class="hero-content">
+            <h1>About Health & Travels</h1>
+            <p>Practical, health-conscious tools and guides for families exploring Arizona and the Southwest.</p>
+        </div>
+    </section>
 
-        <div class="author-card">
+    <div class="container">
+
+        <div class="author-box">
             <span class="badge">Founder & Editor</span>
             <h2>Mark Stephenson, RN</h2>
             <p>I am an Arizona father, Registered Nurse (RN), and long-time outdoor enthusiast. I created Health & Travels because traditional travel guides frequently skip the exact practical details families need to stay safe—like accurate heat risks, shade availability, bathroom locations, water refills, and realistic kid stamina limits.</p>
@@ -116,8 +186,8 @@
             <p>Combining my clinical background in health and safety with years of hands-on Arizona trail experience, my goal is to give parents straightforward, reliable information so they can explore Arizona with confidence.</p>
         </div>
 
-        <h2>The Health & Travels Ecosystem</h2>
-        <p>Health & Travels operates across a unified suite of publications and tools:</p>
+        <h2 class="section-title">The Health & Travels Ecosystem</h2>
+        <p>Health & Travels operates across a unified suite of publications and trip-planning tools:</p>
 
         <ul class="ecosystem-list">
             <li>
@@ -137,6 +207,7 @@
                 Community resources, printable trail checklists, and member benefits for outdoor enthusiasts throughout Arizona.
             </li>
         </ul>
+
     </div>
 
     <footer>
