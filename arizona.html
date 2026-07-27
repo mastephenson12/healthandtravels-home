@@ -7,7 +7,12 @@
     <meta name="description" content="Explore family-friendly Arizona destination hubs. Practical guides for hiking, weekend trips, and summer escapes in Sedona, Flagstaff, Pinetop, Prescott, and Tucson.">
     <link rel="canonical" href="https://healthandtravels.com/arizona">
 
-    <!-- Structured Data (JSON-LD) for Arizona Destination Hub -->
+    <!-- Google Fonts Matching Beehiiv -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -25,16 +30,21 @@
 
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-accent: #2563eb;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
+            --primary: #030712;
+            --accent-teal: #00796B;
+            --accent-orange: #E65100;
+            --bg-light: #FFFFFF;
+            --text-dark: #030712;
+            --text-heading: #111827;
+            --text-muted: #1F2937;
+            --border-color: #E5E7EB;
+            --link-color: #0C4A6E;
+            --font-heading: 'Helvetica Neue', 'Arial Narrow', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --font-button: 'Inter', sans-serif;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: var(--font-body);
             background-color: var(--bg-light);
             color: var(--text-dark);
             margin: 0;
@@ -43,66 +53,132 @@
         }
         header {
             background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        nav a { margin-left: 20px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
-        nav a:hover { color: var(--primary-accent); }
+        .logo { 
+            font-family: var(--font-heading);
+            font-size: 1.6rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            text-decoration: none; 
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--accent-orange); }
+        nav a { 
+            margin-left: 20px; 
+            color: var(--link-color); 
+            text-decoration: none; 
+            font-family: var(--font-button);
+            font-weight: 600; 
+        }
+        nav a:hover { color: var(--accent-teal); }
         .hero {
-            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #004D40 100%);
             color: #ffffff;
-            padding: 48px 20px;
+            padding: 50px 20px;
             text-align: center;
         }
-        .hero h1 { margin: 0 0 12px 0; font-size: 2.2rem; }
-        .hero p { opacity: 0.95; font-size: 1.1rem; max-width: 700px; margin: 0 auto; }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero h1 { 
+            font-family: var(--font-heading);
+            font-size: 2.6rem; 
+            margin-bottom: 12px; 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.95; margin: 0; }
         .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
-        .section-title { font-size: 1.6rem; color: var(--primary); margin-bottom: 8px; border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; margin-top: 20px; }
+        
+        .section-title { 
+            font-family: var(--font-heading);
+            font-size: 1.8rem; 
+            margin-bottom: 8px; 
+            color: var(--text-heading); 
+            text-transform: uppercase;
+            text-align: center;
+        }
+        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin-bottom: 40px; }
         .card {
-            background: var(--card-bg);
+            background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 10px;
+            border-radius: 8px;
             padding: 24px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.02);
             transition: transform 0.2s;
         }
-        .card:hover { transform: translateY(-3px); }
-        .card h3 { color: var(--primary); margin-top: 0; font-size: 1.3rem; }
-        .tag { display: inline-block; background: #e0f2fe; color: #0369a1; padding: 2px 8px; border-radius: 4px; font-size: 0.8rem; font-weight: 600; margin-bottom: 12px; }
+        .card:hover { transform: translateY(-3px); border-color: var(--accent-teal); }
+        .card h3 { 
+            font-family: var(--font-heading);
+            color: var(--text-heading); 
+            margin-top: 0; 
+            text-transform: uppercase;
+            font-size: 1.3rem;
+        }
+        .tag { 
+            display: inline-block; 
+            background: #E0F2FE; 
+            color: var(--link-color); 
+            padding: 2px 8px; 
+            border-radius: 4px; 
+            font-family: var(--font-button);
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            margin-bottom: 12px; 
+            text-transform: uppercase;
+        }
+
         .cta-box {
-            background: #eff6ff;
-            border: 1px solid #bfdbfe;
-            border-radius: 12px;
+            background: #F0FDF4;
+            border: 1px solid var(--accent-teal);
+            border-radius: 8px;
             padding: 30px;
             text-align: center;
             margin: 50px 0;
         }
-        .cta-box h2 { color: var(--primary); margin-top: 0; }
+        .cta-box h2 { 
+            font-family: var(--font-heading);
+            color: var(--text-heading); 
+            margin-top: 0;
+            text-transform: uppercase;
+        }
         .btn {
             display: inline-block;
-            background: var(--primary-accent);
+            font-family: var(--font-button);
+            background: var(--accent-orange);
             color: #ffffff;
             padding: 12px 24px;
-            border-radius: 8px;
+            border-radius: 6px;
             text-decoration: none;
-            font-weight: 600;
+            font-weight: 700;
             margin-top: 12px;
+            text-transform: uppercase;
         }
-        .btn:hover { background: var(--primary); }
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+        .btn:hover { opacity: 0.9; }
+
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            border-top: 1px solid var(--border-color); 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            background: #F9FAFB;
+            margin-top: 60px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="/" class="logo">Health & Travels</a>
+        <a href="/" class="logo">Health <span>&</span> Travels</a>
         <nav>
             <a href="/">Home</a>
             <a href="/about">About</a>
@@ -112,59 +188,61 @@
     </header>
 
     <section class="hero">
-        <h1>Explore Arizona Family Destinations</h1>
-        <p>Verified logistics on shade, restrooms, heat warnings, stroller fit, and drive times across Arizona's top outdoor spots.</p>
+        <div class="hero-content">
+            <h1>Arizona Family Travel Directory</h1>
+            <p>Verified logistics on shade, restrooms, heat warnings, stroller fit, and drive times across Arizona.</p>
+        </div>
     </section>
 
     <div class="container">
 
-        <!-- Destination Hub Grid -->
-        <h2 class="section-title">Popular Regional Guides</h2>
+        <h2 class="section-title">Popular Regional Destinations</h2>
+        <p class="section-subtitle">Select a destination to view family trip guides and interactive planning tools.</p>
+        
         <div class="grid-3">
             <div class="card">
                 <span class="tag">Red Rock Country</span>
                 <h3>Sedona & Oak Creek</h3>
                 <p>Kid-tested alternatives to overcrowded spots like Devil's Bridge. Features early arrival windows, shade ratings, and creek splash spots.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan Sedona Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Sedona Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
                 <span class="tag">Mogollon Rim</span>
                 <h3>Pinetop-Lakeside & Show Low</h3>
                 <p>Beat the Phoenix heat in the cool pines. Lakeside walking loops, park playgrounds, and family-friendly mountain hikes.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan Pinetop Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Pinetop Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
                 <span class="tag">High Country</span>
                 <h3>Flagstaff & Williams</h3>
                 <p>Ponderosa pine trails, high-altitude considerations, lava tubes, and family day trips near the Grand Canyon.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan Flagstaff Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Flagstaff Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
                 <span class="tag">Central Highlands</span>
                 <h3>Prescott & Jerome</h3>
                 <p>Watson Lake boulder walks, historic downtown squares, shaded creek hikes, and moderate driving distance from Phoenix.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan Prescott Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Prescott Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
                 <span class="tag">Southern Arizona</span>
                 <h3>Tucson & Saguaro Country</h3>
                 <p>Desert trail safety, Saguaro National Park family stops, Sabino Canyon tram logistics, and winter/spring timing.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan Tucson Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Tucson Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
                 <span class="tag">Colorado River</span>
                 <h3>Lake Havasu & Yuma</h3>
                 <p>Water-based family escapes, river parks, winter sun outings, and heat management guidelines for low-desert travel.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--primary-accent); font-weight: 600;">Plan River Trip in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan River Trip in Sage &rarr;</a>
             </div>
         </div>
 
-        <!-- Interactive Planner CTA -->
         <div class="cta-box">
             <h2>Need a Custom Family Itinerary?</h2>
             <p>Filter Arizona destinations instantly by your kids' ages, shade requirements, stroller accessibility, and total drive time.</p>
@@ -174,7 +252,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/" style="color: var(--text-muted);">Home</a> | <a href="/about" style="color: var(--text-muted);">About</a> | <a href="/editorial-standards" style="color: var(--text-muted);">Standards</a></p>
+        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/" style="color: var(--link-color);">Home</a> | <a href="/about" style="color: var(--link-color);">About</a> | <a href="/editorial-standards" style="color: var(--link-color);">Standards</a></p>
     </footer>
 
 </body>
