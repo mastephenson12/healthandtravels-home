@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Sitemaps across the Health & Travels network
+Sitemap: https://healthandtravels.com/sitemap.xml
+Sitemap: https://newsletter.healthandtravels.com/sitemap.xml
+Sitemap: https://sage.healthandtravels.com/sitemap.xml
+Sitemap: https://freedom.healthandtravels.com/sitemap.xml
