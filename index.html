@@ -7,6 +7,10 @@
     <meta name="description" content="Health & Travels helps families plan Arizona hikes, day trips, and weekend getaways with practical details on heat, shade, difficulty, bathrooms, water, drive times, and kid suitability.">
     <link rel="canonical" href="https://healthandtravels.com/">
 
+    <!-- FAVICON CONFIGURATION -->
+    <link rel="icon" type="image/jpeg" href="Health ad Travels Logo 512x512.jpg">
+    <link rel="apple-touch-icon" href="Health ad Travels Logo 512x512.jpg">
+
     <!-- Google Fonts Matching Beehiiv (Lato & Inter) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -84,6 +88,14 @@
             text-decoration: none; 
             text-transform: uppercase;
             letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .logo img {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
         }
         .logo span { color: var(--accent-orange); }
         nav a { 
@@ -197,7 +209,10 @@
 <body>
 
     <header>
-        <a href="/" class="logo">Health <span>&</span> Travels</a>
+        <a href="/" class="logo">
+            <img src="Health ad Travels Logo 512x512.jpg" alt="Health & Travels Icon">
+            Health <span>&</span> Travels
+        </a>
         <nav>
             <a href="/about">About</a>
             <a href="/arizona">Arizona Hub</a>
