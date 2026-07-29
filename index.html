@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Health & Travels | Arizona Family Hikes, Outdoor Planning & Travel Guides</title>
+    <title>Health & Travels | Arizona Family Hikes, Outdoor Planning & Heat Safety</title>
     <meta name="description" content="Health & Travels helps families plan Arizona hikes, day trips, and weekend getaways with practical details on heat, shade, difficulty, bathrooms, water, drive times, and kid suitability.">
     <link rel="canonical" href="https://healthandtravels.com/">
 
@@ -11,10 +11,10 @@
     <link rel="icon" type="image/jpeg" href="Health ad Travels Logo 512x512.jpg">
     <link rel="apple-touch-icon" href="Health ad Travels Logo 512x512.jpg">
 
-    <!-- Google Fonts Matching Beehiiv (Lato & Inter) -->
+    <!-- Google Fonts (Lato, Inter & Montserrat) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700&family=Lato:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@800;900&display=swap" rel="stylesheet">
 
     <!-- AdSense Script -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4161437990209561" crossorigin="anonymous"></script>
@@ -29,6 +29,7 @@
           "@id": "https://healthandtravels.com/#organization",
           "name": "Health & Travels",
           "url": "https://healthandtravels.com",
+          "logo": "https://healthandtravels.com/Health%20ad%20Travels%20Logo%20512x512.jpg",
           "founder": {
             "@type": "Person",
             "name": "Mark Stephenson",
@@ -49,19 +50,25 @@
 
     <style>
         :root {
-            --primary: #030712;
-            --accent-teal: #00796B;
-            --accent-orange: #E65100;
-            --bg-light: #FFFFFF;
-            --text-dark: #030712;
-            --text-heading: #111827;
-            --text-muted: #1F2937;
-            --border-color: #E5E7EB;
-            --link-color: #0C4A6E;
-            --font-heading: 'Helvetica Neue', 'Arial Narrow', sans-serif;
+            --primary: #0F172A;
+            --accent-teal: #0D9488;
+            --accent-orange: #EA580C;
+            --bg-light: #F8FAFC;
+            --card-bg: #FFFFFF;
+            --text-dark: #0F172A;
+            --text-heading: #0F172A;
+            --text-muted: #475569;
+            --border-color: #E2E8F0;
+            --link-color: #0284C7;
+            --font-heading: 'Montserrat', sans-serif;
             --font-body: 'Lato', sans-serif;
             --font-button: 'Inter', sans-serif;
         }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             font-family: var(--font-body);
             background-color: var(--bg-light);
@@ -70,19 +77,29 @@
             padding: 0;
             line-height: 1.6;
         }
+
+        /* HEADER / NAVBAR */
         header {
             background: #ffffff;
-            border-bottom: 2px solid var(--border-color);
-            padding: 16px 24px;
+            border-bottom: 1px solid var(--border-color);
+            padding: 12px 24px;
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+        
+        .nav-container {
+            max-width: 1100px;
+            margin: 0 auto;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1200px;
-            margin: 0 auto;
         }
+
         .logo { 
             font-family: var(--font-heading);
-            font-size: 1.6rem; 
+            font-size: 1.25rem; 
             font-weight: 900; 
             color: var(--primary); 
             text-decoration: none; 
@@ -90,194 +107,364 @@
             letter-spacing: -0.5px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
+
         .logo img {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
+            width: 42px;
+            height: 42px;
+            border-radius: 8px;
+            object-fit: cover;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
         }
+
         .logo span { color: var(--accent-orange); }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
         nav a { 
-            margin-left: 20px; 
-            color: var(--link-color); 
+            color: var(--text-dark); 
             text-decoration: none; 
             font-family: var(--font-button);
             font-weight: 600; 
+            font-size: 0.95rem;
+            transition: color 0.2s;
         }
+
         nav a:hover { color: var(--accent-teal); }
+
+        .nav-cta {
+            background-color: var(--accent-orange);
+            color: #ffffff !important;
+            padding: 8px 16px;
+            border-radius: 6px;
+            transition: opacity 0.2s;
+        }
+
+        .nav-cta:hover { opacity: 0.9; }
+
+        /* HERO SECTION */
         .hero {
-            background: linear-gradient(135deg, var(--accent-teal) 0%, #004D40 100%);
-            color: #ffffff;
+            background: linear-gradient(180deg, #FFF7ED 0%, #FFEDD5 100%);
+            border-bottom: 1px solid #FED7AA;
             padding: 60px 20px;
             text-align: center;
         }
-        .hero-content { max-width: 800px; margin: 0 auto; }
+
+        .hero-content { max-width: 850px; margin: 0 auto; }
+
+        .hero-logo-wrapper {
+            margin-bottom: 20px;
+        }
+
+        .hero-logo-wrapper img {
+            width: 110px;
+            height: 110px;
+            border-radius: 20px;
+            box-shadow: 0 10px 25px -5px rgba(234, 88, 12, 0.25);
+            transition: transform 0.3s ease;
+        }
+
+        .hero-logo-wrapper img:hover {
+            transform: scale(1.05);
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background-color: #FFEDD5;
+            border: 1px solid #FDBA74;
+            color: #9A3412;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            font-family: var(--font-button);
+        }
+
         .hero h1 { 
             font-family: var(--font-heading);
-            font-size: 2.8rem; 
+            font-size: 2.5rem; 
+            margin-top: 0;
             margin-bottom: 16px; 
             font-weight: 900; 
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            color: #431407;
+            line-height: 1.2;
         }
-        .hero p { font-size: 1.2rem; opacity: 0.95; margin-bottom: 30px; }
+
+        .hero p { 
+            font-size: 1.2rem; 
+            color: #7C2D12; 
+            margin-bottom: 30px; 
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
         .btn-group { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+
         .btn {
             font-family: var(--font-button);
             padding: 14px 28px;
-            border-radius: 6px;
+            border-radius: 8px;
             font-weight: 700;
             text-decoration: none;
             transition: all 0.2s;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
+            font-size: 0.95rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
-        .btn-teal { background-color: var(--accent-orange); color: #ffffff; }
-        .btn-teal:hover { opacity: 0.9; }
-        .btn-outline { border: 2px solid #ffffff; color: #ffffff; }
-        .btn-outline:hover { background-color: rgba(255,255,255,0.15); }
-        .container { max-width: 1100px; margin: 40px auto; padding: 0 20px; }
+
+        .btn-primary { 
+            background-color: var(--accent-orange); 
+            color: #ffffff; 
+            box-shadow: 0 4px 12px rgba(234, 88, 12, 0.3);
+        }
+
+        .btn-primary:hover { 
+            background-color: #C2410C; 
+            transform: translateY(-1px);
+        }
+
+        .btn-outline { 
+            background-color: #ffffff;
+            border: 1px solid #FDBA74; 
+            color: #9A3412; 
+        }
+
+        .btn-outline:hover { 
+            background-color: #FFF7ED; 
+        }
+
+        /* MAIN CONTENT LAYOUT */
+        .container { max-width: 1100px; margin: 50px auto; padding: 0 20px; }
+
         .section-title { 
             font-family: var(--font-heading);
             text-align: center; 
-            font-size: 2rem; 
+            font-size: 1.8rem; 
             margin-bottom: 8px; 
             color: var(--text-heading); 
-            text-transform: uppercase;
         }
-        .section-subtitle { text-align: center; color: var(--text-muted); margin-bottom: 40px; font-size: 1.1rem; }
-        
+
+        .section-subtitle { 
+            text-align: center; 
+            color: var(--text-muted); 
+            margin-bottom: 40px; 
+            font-size: 1.05rem; 
+        }
+
+        /* SNAPSHOT SECTION */
         .snapshot-box {
-            background: #F9FAFB;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 30px;
-            margin-bottom: 50px;
-        }
-        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; }
-        .card {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 24px;
-            transition: transform 0.2s;
+            border-radius: 12px;
+            padding: 36px 24px;
+            margin-bottom: 60px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .card:hover { transform: translateY(-3px); border-color: var(--accent-teal); }
+
+        .grid-3 { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            padding: 24px;
+            transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover { 
+            transform: translateY(-3px); 
+            border-color: var(--accent-teal); 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+
         .card h3 { 
             font-family: var(--font-heading);
             color: var(--text-heading); 
             margin-top: 0; 
-            text-transform: uppercase;
-            font-size: 1.3rem;
-        }
-        
-        .author-box {
-            background: #F0FDF4;
-            border-left: 5px solid var(--accent-teal);
-            padding: 24px;
-            border-radius: 6px;
-            margin: 50px 0;
-        }
-        .author-box h3 { 
-            font-family: var(--font-heading);
-            margin: 0 0 8px 0; 
-            color: var(--text-heading); 
-            text-transform: uppercase;
+            font-size: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .faq-item { margin-bottom: 16px; background: #ffffff; border: 1px solid var(--border-color); border-radius: 6px; padding: 20px; }
+        .card p {
+            color: var(--text-muted);
+            font-size: 0.98rem;
+            flex-grow: 1;
+        }
+
+        .card-link {
+            display: inline-block;
+            margin-top: 16px;
+            color: var(--accent-teal);
+            font-weight: 700;
+            text-decoration: none;
+            font-family: var(--font-button);
+        }
+
+        .card-link:hover { text-decoration: underline; }
+
+        /* AUTHOR BOX */
+        .author-box {
+            background: #F0FDF4;
+            border: 1px solid #BBF7D0;
+            border-left: 6px solid var(--accent-teal);
+            padding: 28px;
+            border-radius: 10px;
+            margin: 60px 0;
+        }
+
+        .author-box h3 { 
+            font-family: var(--font-heading);
+            margin: 0 0 10px 0; 
+            color: #166534; 
+            font-size: 1.3rem;
+        }
+
+        .author-box p { margin: 0; color: #14532D; font-size: 1.05rem; }
+
+        /* FAQ SECTION */
+        .faq-item { 
+            margin-bottom: 16px; 
+            background: #ffffff; 
+            border: 1px solid var(--border-color); 
+            border-radius: 8px; 
+            padding: 20px; 
+        }
+
         .faq-item h4 { 
             font-family: var(--font-heading);
             margin: 0 0 8px 0; 
             color: var(--text-heading); 
-            text-transform: uppercase;
             font-size: 1.1rem;
         }
-        .faq-item p { margin: 0; color: var(--text-dark); }
 
+        .faq-item p { margin: 0; color: var(--text-muted); }
+
+        /* FOOTER */
         footer { 
             text-align: center; 
             padding: 40px 20px; 
             border-top: 1px solid var(--border-color); 
             color: var(--text-muted); 
             font-size: 0.95rem; 
-            background: #F9FAFB;
+            background: #ffffff;
+        }
+
+        footer a { color: var(--link-color); text-decoration: none; }
+        footer a:hover { text-decoration: underline; }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.8rem; }
+            nav a:not(.nav-cta) { display: none; }
         }
     </style>
 </head>
 <body>
 
+    <!-- STICKY NAVBAR -->
     <header>
-        <a href="/" class="logo">
-            <img src="Health ad Travels Logo 512x512.jpg" alt="Health & Travels Icon">
-            Health <span>&</span> Travels
-        </a>
-        <nav>
-            <a href="/about">About</a>
-            <a href="/arizona">Arizona Hub</a>
-            <a href="https://sage.healthandtravels.com">Sage Planner</a>
-            <a href="https://newsletter.healthandtravels.com">Newsletter</a>
-        </nav>
+        <div class="nav-container">
+            <a href="/" class="logo">
+                <img src="Health ad Travels Logo 512x512.jpg" alt="Health & Travels Logo">
+                Health <span>&</span> Travels
+            </a>
+            <nav>
+                <a href="https://sage.healthandtravels.com">Sage Planner</a>
+                <a href="https://newsletter.healthandtravels.com">Newsletter</a>
+                <a href="https://sage.healthandtravels.com" class="nav-cta">Start Planning ⚡</a>
+            </nav>
+        </div>
     </header>
 
+    <!-- HERO SECTION WITH BRAND LOGO -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Plan Safe, Smart Arizona Family Adventures</h1>
-            <p>Practical, kid-tested guides covering heat safety, trail difficulty, shade, restrooms, and family stamina across Arizona.</p>
-            <div class="btn-group">
-                <a href="https://sage.healthandtravels.com" class="btn btn-teal">Launch Sage Planner</a>
-                <a href="https://newsletter.healthandtravels.com" class="btn btn-outline">Read Newsletter</a>
+            
+            <div class="hero-logo-wrapper">
+                <img src="Health ad Travels Logo 512x512.jpg" alt="Health & Travels Badge">
             </div>
+
+            <div class="hero-badge">
+                🏥 Clinical Safety Meets Family Outdoor Adventure
+            </div>
+
+            <h1>Plan Safer, Stress-Free Arizona Family Trips</h1>
+            
+            <p>Kid-friendly hikes, heat-safety guides, and local trail logistics—curated by an Arizona dad & Registered Nurse.</p>
+            
+            <div class="btn-group">
+                <a href="https://sage.healthandtravels.com" class="btn btn-primary">⚡ Launch Sage AI Planner</a>
+                <a href="https://newsletter.healthandtravels.com" class="btn btn-outline">✉️ Read Newsletter</a>
+            </div>
+
         </div>
     </section>
 
     <div class="container">
 
+        <!-- LOGISTICS SNAPSHOT -->
         <section class="snapshot-box">
             <h2 class="section-title">The Family Logistics Snapshot</h2>
-            <p class="section-subtitle">We focus on the non-negotiable details other guides overlook before you leave home.</p>
+            <p class="section-subtitle">We focus on the non-negotiable details standard travel guides overlook before you leave home.</p>
+            
             <div class="grid-3">
                 <div class="card">
                     <h3>🌡️ Heat & Shade Index</h3>
-                    <p>Real-world evaluation of trail sun exposure, safe morning departure times, and water requirement guidelines.</p>
+                    <p>Real-world evaluation of sun exposure, safe morning departure windows, and hydration guidelines designed for desert conditions.</p>
                 </div>
                 <div class="card">
-                    <h3>🚽 Restrooms & Water</h3>
-                    <p>Exact locations of trailheads with functioning facilities, potable water refills, and emergency pull-offs.</p>
+                    <h3>🚻 Restrooms & Water</h3>
+                    <p>Verified trailhead locations featuring functioning facilities, drinking water refills, and emergency pull-off spots.</p>
                 </div>
                 <div class="card">
                     <h3>👶 Kid & Stroller Fit</h3>
-                    <p>Realistic age ratings based on elevation gains, trail drop-offs, and stroller/carrier accessibility.</p>
+                    <p>Realistic age suitability based on elevation gain, steep drop-offs, shade cover, and stroller or carrier compatibility.</p>
                 </div>
             </div>
         </section>
 
+        <!-- DESTINATIONS -->
         <h2 class="section-title">Top Arizona Destination Hubs</h2>
         <p class="section-subtitle">Explore verified family logistics for popular Arizona getaways.</p>
-        <div class="grid-3">
+        
+        <div class="grid-3" style="margin-bottom: 60px;">
             <div class="card">
                 <h3>Sedona & Red Rock</h3>
-                <p>Shade levels, parking bottlenecks, and kid-safe trail alternatives for Devil's Bridge & Bell Rock.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Explore in Sage &rarr;</a>
+                <p>Shade ratings, parking bottlenecks, and kid-safe trail alternatives to Devil's Bridge and Bell Rock.</p>
+                <a href="https://sage.healthandtravels.com" class="card-link">Explore in Sage Planner &rarr;</a>
             </div>
             <div class="card">
                 <h3>Pinetop-Lakeside</h3>
-                <p>Cooler Mogollon Rim pine escapes, lakeside walks, and summer family activity planning.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Explore in Sage &rarr;</a>
+                <p>Cooler Mogollon Rim pine forest escapes, lakeside walks, and summer family activity planning.</p>
+                <a href="https://sage.healthandtravels.com" class="card-link">Explore in Sage Planner &rarr;</a>
             </div>
             <div class="card">
                 <h3>Flagstaff & Northern AZ</h3>
                 <p>High-altitude family hikes, stroller-accessible forest trails, and seasonal weather precautions.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Explore in Sage &rarr;</a>
+                <a href="https://sage.healthandtravels.com" class="card-link">Explore in Sage Planner &rarr;</a>
             </div>
         </div>
 
+        <!-- AUTHOR BOX -->
         <div class="author-box">
-            <h3>About the Author & Founder</h3>
+            <h3>About the Founder</h3>
             <p><strong>Mark Stephenson, RN</strong> is an Arizona father, registered nurse, and outdoor enthusiast. Health & Travels combines clinical health awareness—including hydration, heat-illness prevention, and safety protocols—with hands-on family trail experience across Arizona.</p>
         </div>
 
+        <!-- FAQ -->
         <h2 class="section-title">Frequently Asked Questions</h2>
         <p class="section-subtitle">Direct answers about Health & Travels and our planning tools.</p>
         
@@ -287,7 +474,7 @@
         </div>
         <div class="faq-item">
             <h4>What is Sage by Health & Travels?</h4>
-            <p>Sage is our custom adventure-planning tool located at <code>sage.healthandtravels.com</code>. It helps families filter destinations based on children's ages, current weather, shade availability, and stamina levels.</p>
+            <p>Sage is our custom adventure-planning tool located at <code>sage.healthandtravels.com</code>. It helps families filter destinations based on children's ages, weather conditions, shade availability, and stamina levels.</p>
         </div>
         <div class="faq-item">
             <h4>How are your trail safety guidelines verified?</h4>
@@ -296,8 +483,9 @@
 
     </div>
 
+    <!-- FOOTER -->
     <footer>
-        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/about" style="color: var(--link-color);">About</a> | <a href="/arizona" style="color: var(--link-color);">Arizona Hub</a> | <a href="https://sage.healthandtravels.com" style="color: var(--link-color);">Sage Planner</a></p>
+        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="https://sage.healthandtravels.com">Sage Planner</a> | <a href="https://newsletter.healthandtravels.com">Newsletter</a></p>
     </footer>
 
 </body>
