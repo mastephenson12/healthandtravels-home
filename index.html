@@ -3,15 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health & Travels | Arizona Trail Air Quality & Hiking Guide</title>
-  <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking and direct Google Maps navigation.">
+  <title>Health & Travels | Arizona Hiking Guide & Air Quality Tracking</title>
+  <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking, direct Google Maps navigation, and health insights.">
 
-  <!-- Simple CSS Styling -->
+  <!-- Styles -->
   <style>
     :root {
       --primary: #2c5e3b;
+      --primary-dark: #1e4128;
+      --accent: #d97706;
       --light-bg: #f4f7f5;
       --dark-text: #222;
+      --white: #ffffff;
     }
 
     body {
@@ -23,15 +26,73 @@
       padding: 0;
     }
 
+    /* Navigation Bar */
+    nav {
+      background-color: var(--white);
+      border-bottom: 1px solid #e2e8f0;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    }
+
+    .logo-container {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+      color: var(--primary);
+    }
+
+    .logo-img {
+      height: 40px;
+      width: auto;
+      border-radius: 4px;
+    }
+
+    .site-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      margin: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      align-items: center;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--dark-text);
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    /* Header Banner */
     header {
       background-color: var(--primary);
-      color: white;
-      padding: 2rem 1rem;
+      color: var(--white);
+      padding: 2.5rem 1rem;
       text-align: center;
     }
 
     header h1 {
       margin: 0 0 0.5rem 0;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 1.1rem;
+      opacity: 0.9;
     }
 
     main {
@@ -40,6 +101,7 @@
       padding: 0 1rem;
     }
 
+    /* Trail Cards */
     .trail-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -48,7 +110,7 @@
     }
 
     .trail-card {
-      background: white;
+      background: var(--white);
       border-radius: 8px;
       padding: 1.5rem;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
@@ -67,7 +129,7 @@
       margin: 1rem 0;
     }
 
-    /* AQI Status Badges */
+    /* AQI Badges */
     .aqi-badge {
       display: inline-block;
       padding: 0.35rem 0.75rem;
@@ -85,7 +147,7 @@
     .btn-maps {
       display: inline-block;
       background-color: var(--primary);
-      color: white;
+      color: var(--white);
       text-decoration: none;
       padding: 0.6rem 1rem;
       border-radius: 5px;
@@ -95,7 +157,61 @@
     }
 
     .btn-maps:hover {
-      background-color: #1e4128;
+      background-color: var(--primary-dark);
+    }
+
+    /* Newsletter Section */
+    .newsletter-section {
+      background: var(--white);
+      border-radius: 8px;
+      padding: 2rem;
+      margin-top: 3rem;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .newsletter-section h2 {
+      color: var(--primary);
+      margin-top: 0;
+    }
+
+    .newsletter-form {
+      display: flex;
+      gap: 0.5rem;
+      justify-content: center;
+      max-width: 480px;
+      margin: 1.5rem auto 0 auto;
+    }
+
+    .newsletter-form input[type="email"] {
+      flex: 1;
+      padding: 0.75rem 1rem;
+      border: 1px solid #cbd5e1;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .newsletter-form button {
+      background-color: var(--accent);
+      color: var(--white);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    .newsletter-form button:hover {
+      background-color: #b45309;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem 1rem;
+      color: #64748b;
+      font-size: 0.9rem;
     }
   </style>
 
@@ -171,91 +287,128 @@
 </head>
 <body>
 
+  <!-- Navigation Bar with Logo and Links -->
+  <nav>
+    <a href="#" class="logo-container">
+      <!-- Update src to your actual logo image filename if different -->
+      <img src="logo.png" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
+      <span class="site-title">Health & Travels</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#trails">Trails</a></li>
+      <li><a href="#sage">Sage</a></li>
+      <li><a href="#newsletter">Newsletter</a></li>
+    </ul>
+  </nav>
+
+  <!-- Header Banner -->
   <header>
     <h1>Health & Travels</h1>
-    <p>Arizona Hiking Guide & Live Air Quality Tracking</p>
+    <p>Arizona Trail Guide, Live Air Quality, and Health Insights</p>
   </header>
 
   <main>
-    <h2>Featured Trails</h2>
-    <div class="trail-grid">
+    <!-- Trail Guide Section -->
+    <section id="trails">
+      <h2>Featured Trails & Real-Time Air Quality</h2>
+      <div class="trail-grid">
 
-      <!-- Trail 1: Phoenix -->
-      <div class="trail-card">
-        <div>
-          <h3>Camelback Mountain</h3>
-          <p><strong>Location:</strong> Phoenix, AZ</p>
-          <p>Popular, challenging summit hike offering panoramic views of the Valley.</p>
-          
-          <div class="aqi-container">
-            <strong>Live Air Quality:</strong>
-            <div id="aqi-camelback-mountain">
-              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+        <!-- Trail 1: Phoenix -->
+        <div class="trail-card">
+          <div>
+            <h3>Camelback Mountain</h3>
+            <p><strong>Location:</strong> Phoenix, AZ</p>
+            <p>Popular, challenging summit hike offering panoramic views of the Valley.</p>
+            
+            <div class="aqi-container">
+              <strong>Live Air Quality:</strong>
+              <div id="aqi-camelback-mountain">
+                <span class="aqi-badge aqi-loading">Checking AQI...</span>
+              </div>
             </div>
           </div>
+
+          <a class="btn-maps" 
+             href="https://www.google.com/maps/search/?api=1&query=Camelback+Mountain+Echo+Canyon+Trailhead" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            📍 Open in Google Maps
+          </a>
         </div>
 
-        <a class="btn-maps" 
-           href="https://www.google.com/maps/search/?api=1&query=Camelback+Mountain+Echo+Canyon+Trailhead" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          📍 Open in Google Maps
-        </a>
-      </div>
+        <!-- Trail 2: Sedona -->
+        <div class="trail-card">
+          <div>
+            <h3>Cathedral Rock</h3>
+            <p><strong>Location:</strong> Sedona, AZ</p>
+            <p>Iconic red rock scramble with scenic vistas and vortex energy access.</p>
 
-      <!-- Trail 2: Sedona -->
-      <div class="trail-card">
-        <div>
-          <h3>Cathedral Rock</h3>
-          <p><strong>Location:</strong> Sedona, AZ</p>
-          <p>Iconic red rock scramble with scenic vistas and vortex energy access.</p>
-
-          <div class="aqi-container">
-            <strong>Live Air Quality:</strong>
-            <div id="aqi-cathedral-rock">
-              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+            <div class="aqi-container">
+              <strong>Live Air Quality:</strong>
+              <div id="aqi-cathedral-rock">
+                <span class="aqi-badge aqi-loading">Checking AQI...</span>
+              </div>
             </div>
           </div>
+
+          <a class="btn-maps" 
+             href="https://www.google.com/maps/search/?api=1&query=Cathedral+Rock+Trailhead+Sedona" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            📍 Open in Google Maps
+          </a>
         </div>
 
-        <a class="btn-maps" 
-           href="https://www.google.com/maps/search/?api=1&query=Cathedral+Rock+Trailhead+Sedona" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          📍 Open in Google Maps
-        </a>
-      </div>
+        <!-- Trail 3: Flagstaff -->
+        <div class="trail-card">
+          <div>
+            <h3>Humphreys Peak</h3>
+            <p><strong>Location:</strong> Flagstaff, AZ</p>
+            <p>Hike to the highest natural point in the state of Arizona (12,637 ft).</p>
 
-      <!-- Trail 3: Flagstaff -->
-      <div class="trail-card">
-        <div>
-          <h3>Humphreys Peak</h3>
-          <p><strong>Location:</strong> Flagstaff, AZ</p>
-
-          <p>Hike to the highest natural point in the state of Arizona (12,637 ft).</p>
-
-          <div class="aqi-container">
-            <strong>Live Air Quality:</strong>
-            <div id="aqi-humphreys-peak">
-              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+            <div class="aqi-container">
+              <strong>Live Air Quality:</strong>
+              <div id="aqi-humphreys-peak">
+                <span class="aqi-badge aqi-loading">Checking AQI...</span>
+              </div>
             </div>
           </div>
+
+          <a class="btn-maps" 
+             href="https://www.google.com/maps/search/?api=1&query=Humphreys+Peak+Trailhead+Flagstaff" 
+             target="_blank" 
+             rel="noopener noreferrer">
+            📍 Open in Google Maps
+          </a>
         </div>
 
-        <a class="btn-maps" 
-           href="https://www.google.com/maps/search/?api=1&query=Humphreys+Peak+Trailhead+Flagstaff" 
-           target="_blank" 
-           rel="noopener noreferrer">
-          📍 Open in Google Maps
-        </a>
       </div>
+    </section>
 
-    </div>
+    <!-- Sage Section Placeholder -->
+    <section id="sage" style="margin-top: 3rem;">
+      <h2>Sage Health Insights</h2>
+      <p>Discover personalized wellness advice, elevation tips, and environmental health guidance for Southwestern travel.</p>
+    </section>
+
+    <!-- Newsletter Sign-Up Section -->
+    <section id="newsletter" class="newsletter-section">
+      <h2>Subscribe to the Health & Travels Newsletter</h2>
+      <p>Get weekly Arizona trail reports, air quality alerts, and wellness tips straight to your inbox.</p>
+      
+      <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+        <input type="email" placeholder="Enter your email address" required>
+        <button type="submit">Subscribe</button>
+      </form>
+    </section>
   </main>
+
+  <footer>
+    <p>&copy; Health & Travels. All rights reserved.</p>
+  </footer>
 
   <!-- Google Air Quality Fetch Script -->
   <script>
-    // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual key from Google Cloud Console
     const GOOGLE_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"; 
 
     const TRAIL_LOCATIONS = [
@@ -266,7 +419,7 @@
 
     async function fetchTrailAQI(latitude, longitude) {
       if (GOOGLE_API_KEY === "YOUR_GOOGLE_MAPS_API_KEY") {
-        return { aqi: 32, category: "Good (Demo)" }; // Mock fallback if key isn't pasted yet
+        return { aqi: 32, category: "Good (Demo)" }; 
       }
 
       const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${GOOGLE_API_KEY}`;
@@ -275,9 +428,7 @@
         const response = await fetch(url, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            location: { latitude, longitude }
-          })
+          body: JSON.stringify({ location: { latitude, longitude } })
         });
 
         if (!response.ok) throw new Error("API Error");
