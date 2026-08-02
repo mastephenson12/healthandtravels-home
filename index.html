@@ -3,865 +3,329 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health & Travels | Arizona Family & Group Outdoor Adventure Hub</title>
-  <meta name="description" content="Plan heat-safe, kid-friendly family trips, hikes, and group adventures across Arizona with the Sage AI Trip Planner and real-time safety calculators.">
+  <title>Health & Travels | Arizona Trail Air Quality & Hiking Guide</title>
+  <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking and direct Google Maps navigation.">
 
-  <!-- Open Graph / Social Sharing -->
-  <meta property="og:title" content="Health & Travels | Arizona Family & Group Adventures">
-  <meta property="og:description" content="Heat-safe itineraries, kid-fit hikes, hydration calculators, shade guides, and group logistics across Arizona.">
-  <meta property="og:type" content="website">
-  <meta property="og:image" content="Health%20ad%20Travels%20Logo%20512x512.png">
-
-  <!-- Progressive Web App Manifest -->
-  <link rel="manifest" href="manifest.json">
-  <meta name="theme-color" content="#1047a2">
-
-  <!-- Enriched Structured Schema Data (Google SEO & Rich Snippets) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
-      {
-        "@type": "Organization",
-        "name": "Health & Travels",
-        "url": "https://healthandtravels.com",
-        "logo": "https://healthandtravels.com/Health%20ad%20Travels%20Logo%20512x512.png"
-      },
-      {
-        "@type": "TouristAttraction",
-        "name": "Bell Rock Pathway",
-        "description": "Family-friendly hard-pack hiking loop in Sedona, Arizona with restroom facilities and shade stops.",
-        "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "Sedona",
-          "addressRegion": "AZ",
-          "addressCountry": "US"
-        },
-        "isAccessibleForFree": true,
-        "publicAccess": true
-      },
-      {
-        "@type": "FAQPage",
-        "mainEntity": [
-          {
-            "@type": "Question",
-            "name": "How much water do kids and adults need for hiking in Arizona?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "For Arizona hikes above 85°F, adults and kids should carry 0.75 to 1 liter of water per hour, plus electrolyte packs to prevent heat exertion."
-            }
-          },
-          {
-            "@type": "Question",
-            "name": "What is the Sage AI Planner?",
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": "Sage AI is an intelligent travel assistant designed to craft heat-conscious, family and group itineraries with restroom access, shade ratings, and parking logistics across Arizona."
-            }
-          }
-        ]
-      }
-    ]
-  }
-  </script>
-
+  <!-- Simple CSS Styling -->
   <style>
-    /* Global Reset & Design System */
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-
     :root {
-      --primary: #1047a2;
-      --primary-hover: #0d3982;
-      --primary-light: #eff6ff;
-      --accent-orange: #ea580c;
-      --accent-green: #16a34a;
-      --text-dark: #0f172a;
-      --text-muted: #475569;
-      --bg-light: #f8fafc;
-      --border-color: #e2e8f0;
-      --radius: 12px;
-      --shadow: 0 4px 12px rgba(15, 23, 42, 0.06);
+      --primary: #2c5e3b;
+      --light-bg: #f4f7f5;
+      --dark-text: #222;
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background-color: #ffffff;
-      color: var(--text-dark);
       line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
+      color: var(--dark-text);
+      background-color: var(--light-bg);
+      margin: 0;
+      padding: 0;
     }
 
-    /* Top Navigation */
-    nav {
-      max-width: 1100px;
-      margin: 0 auto;
-      padding: 18px 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--border-color);
-    }
-
-    .nav-brand {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-dark);
-      font-weight: 700;
-      font-size: 1.15rem;
-    }
-
-    .nav-logo {
-      width: 42px;
-      height: 42px;
-      border-radius: 50%;
-      object-fit: cover;
-    }
-
-    .nav-links {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
-
-    .nav-link {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: color 0.2s ease;
-    }
-
-    .nav-link:hover {
-      color: var(--primary);
-    }
-
-    .btn-nav {
-      padding: 8px 16px;
+    header {
       background-color: var(--primary);
-      color: #ffffff !important;
-      border-radius: 6px;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-nav:hover {
-      background-color: var(--primary-hover);
-    }
-
-    /* Hero Section */
-    .hero {
-      max-width: 880px;
-      margin: 0 auto;
-      padding: 50px 24px 40px 24px;
+      color: white;
+      padding: 2rem 1rem;
       text-align: center;
     }
 
-    .hero-logo {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      object-fit: cover;
-      margin-bottom: 20px;
-      box-shadow: var(--shadow);
+    header h1 {
+      margin: 0 0 0.5rem 0;
     }
 
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 16px;
-      background-color: var(--primary-light);
-      color: var(--primary);
-      font-size: 0.85rem;
-      font-weight: 700;
-      border-radius: 20px;
-      border: 1px solid #d0e1fd;
-      margin-bottom: 20px;
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
     }
 
-    h1 {
-      font-size: 2.8rem;
-      font-weight: 800;
-      color: var(--text-dark);
-      letter-spacing: -0.025em;
-      line-height: 1.2;
-      margin-bottom: 18px;
+    .trail-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
     }
 
-    .text-blue {
+    .trail-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1.5rem;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      border: 1px solid #e2e8f0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .trail-card h3 {
+      margin-top: 0;
       color: var(--primary);
     }
 
-    p.subtitle {
-      font-size: 1.2rem;
-      color: var(--text-muted);
-      max-width: 680px;
-      margin: 0 auto 32px auto;
+    .aqi-container {
+      margin: 1rem 0;
     }
 
-    .cta-group {
-      display: flex;
-      justify-content: center;
-      gap: 14px;
-      flex-wrap: wrap;
-    }
-
-    .btn-primary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background-color: var(--primary);
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      border-radius: 8px;
-      transition: all 0.2s ease;
-      box-shadow: 0 4px 10px rgba(16, 71, 162, 0.25);
-    }
-
-    .btn-primary:hover {
-      background-color: var(--primary-hover);
-      transform: translateY(-2px);
-    }
-
-    .btn-secondary {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 14px 28px;
-      background-color: #ffffff;
-      color: #334155;
-      font-weight: 600;
-      font-size: 1rem;
-      text-decoration: none;
-      border-radius: 8px;
-      border: 1px solid #cbd5e1;
-      transition: background-color 0.2s ease;
-    }
-
-    .btn-secondary:hover {
-      background-color: var(--bg-light);
-      border-color: #94a3b8;
-    }
-
-    /* Sage Starter Prompt Chips */
-    .prompt-pills-container {
-      margin-top: 32px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      align-items: center;
-    }
-
-    .prompt-label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    .prompt-pill {
-      background-color: var(--bg-light);
-      border: 1px solid var(--border-color);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--text-dark);
-      text-decoration: none;
-      transition: all 0.2s ease;
+    /* AQI Status Badges */
+    .aqi-badge {
       display: inline-block;
-    }
-
-    .prompt-pill:hover {
-      background-color: var(--primary-light);
-      border-color: var(--primary);
-      color: var(--primary);
-    }
-
-    /* Interactive Calculator Section */
-    .calc-section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 36px 28px;
-      background: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-    }
-
-    .calc-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .calc-header h2 {
-      font-size: 1.5rem;
-      color: var(--text-dark);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .calc-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin-bottom: 24px;
-    }
-
-    .calc-field label {
-      display: block;
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text-muted);
-      margin-bottom: 6px;
-    }
-
-    .calc-field input, .calc-field select {
-      width: 100%;
-      padding: 10px 12px;
-      border: 1px solid #cbd5e1;
-      border-radius: 8px;
-      font-size: 0.95rem;
-      outline: none;
-      transition: border-color 0.2s ease;
-    }
-
-    .calc-field input:focus, .calc-field select:focus {
-      border-color: var(--primary);
-    }
-
-    .calc-results-card {
-      background: var(--primary-light);
-      border: 1px solid #bfdbfe;
-      border-radius: 10px;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-    }
-
-    .metric-box h4 {
-      font-size: 0.8rem;
-      text-transform: uppercase;
-      color: var(--text-muted);
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .metric-value {
-      font-size: 1.4rem;
-      font-weight: 800;
-      color: var(--primary);
-    }
-
-    .metric-sub {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-    }
-
-    .heat-alert-box {
-      grid-column: 1 / -1;
-      padding: 12px 16px;
-      border-radius: 8px;
+      padding: 0.35rem 0.75rem;
+      border-radius: 20px;
       font-size: 0.9rem;
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 8px;
     }
 
-    .alert-green { background-color: #dcfce7; color: #15803d; }
-    .alert-yellow { background-color: #fef9c3; color: #a16207; }
-    .alert-red { background-color: #fee2e2; color: #b91c1c; }
+    .aqi-loading { background-color: #e2e8f0; color: #4a5568; }
+    .aqi-good { background-color: #d1fae5; color: #065f46; }      /* 0-50 Green */
+    .aqi-moderate { background-color: #fef3c7; color: #92400e; }  /* 51-100 Yellow */
+    .aqi-sensitive { background-color: #ffedd5; color: #9a3412; } /* 101-150 Orange */
+    .aqi-unhealthy { background-color: #fee2e2; color: #991b1b; } /* 151+ Red */
 
-    /* Trail Safety Badge Demo Section */
-    .badge-demo-section {
-      max-width: 900px;
-      margin: 40px auto;
-      padding: 0 24px;
-    }
-
-    .badge-demo-section h2 {
-      font-size: 1.4rem;
-      margin-bottom: 8px;
-    }
-
-    .trail-card-preview {
-      background-color: #ffffff;
-      border: 1px solid var(--border-color);
-      border-radius: var(--radius);
-      padding: 24px;
-      box-shadow: var(--shadow);
-      margin-top: 16px;
-    }
-
-    .trail-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .trail-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: var(--text-dark);
-    }
-
-    .trail-location {
-      font-size: 0.9rem;
-      color: var(--text-muted);
-    }
-
-    .badges-flex {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 14px;
-    }
-
-    .trail-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 12px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      background-color: var(--bg-light);
-      border: 1px solid var(--border-color);
-    }
-
-    .maps-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 14px;
-      background-color: #1a73e8;
+    .btn-maps {
+      display: inline-block;
+      background-color: var(--primary);
       color: white;
       text-decoration: none;
-      font-size: 0.85rem;
-      font-weight: 600;
-      border-radius: 6px;
-      margin-top: 12px;
-      transition: background-color 0.2s;
-    }
-
-    .maps-btn:hover {
-      background-color: #1557b0;
-    }
-
-    /* Microclimate Escapes Section */
-    .escapes-section {
-      background-color: var(--bg-light);
-      border-top: 1px solid var(--border-color);
-      border-bottom: 1px solid var(--border-color);
-      padding: 60px 24px;
-    }
-
-    .escapes-container {
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .section-title {
-      text-align: center;
-      margin-bottom: 36px;
-    }
-
-    .section-title h2 {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--text-dark);
-    }
-
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    .escapes-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .escape-card {
-      background: #ffffff;
-      padding: 24px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-color);
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-
-    .escape-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow);
-    }
-
-    .escape-icon {
-      font-size: 2rem;
-      margin-bottom: 12px;
-    }
-
-    .escape-card h3 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .escape-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-      margin-bottom: 12px;
-    }
-
-    .escape-tag {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--primary);
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-
-    /* Key Features Section */
-    .features-section {
-      padding: 60px 24px;
-      max-width: 1000px;
-      margin: 0 auto;
-    }
-
-    .features-container {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 24px;
-    }
-
-    .feature-card {
-      background-color: #ffffff;
-      padding: 28px;
-      border-radius: var(--radius);
-      border: 1px solid var(--border-color);
-    }
-
-    .feature-icon {
-      font-size: 1.8rem;
-      margin-bottom: 12px;
-    }
-
-    .feature-card h3 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: var(--text-dark);
-      margin-bottom: 8px;
-    }
-
-    .feature-card p {
-      font-size: 0.95rem;
-      color: var(--text-muted);
-    }
-
-    /* Footer */
-    footer {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 40px 24px;
-      text-align: center;
-      color: #94a3b8;
-      font-size: 0.9rem;
-      border-top: 1px solid var(--border-color);
-    }
-
-    footer a {
-      color: var(--text-muted);
-      text-decoration: none;
+      padding: 0.6rem 1rem;
+      border-radius: 5px;
       font-weight: 500;
+      text-align: center;
+      margin-top: 1rem;
     }
 
-    footer a:hover {
-      color: var(--primary);
-    }
-
-    @media (max-width: 640px) {
-      h1 { font-size: 2.1rem; }
-      p.subtitle { font-size: 1.05rem; }
-      .cta-group { flex-direction: column; }
-      .btn-primary, .btn-secondary { width: 100%; justify-content: center; }
-      .nav-links { gap: 10px; }
+    .btn-maps:hover {
+      background-color: #1e4128;
     }
   </style>
+
+  <!-- Schema.org SEO Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "item": {
+          "@type": "Place",
+          "name": "Camelback Mountain - Echo Canyon Trail",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Phoenix",
+            "addressRegion": "AZ",
+            "postalCode": "85018",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 33.5153,
+            "longitude": -111.9618
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 2,
+        "item": {
+          "@type": "Place",
+          "name": "Cathedral Rock Trail",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Sedona",
+            "addressRegion": "AZ",
+            "postalCode": "86336",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 34.8213,
+            "longitude": -111.7925
+          }
+        }
+      },
+      {
+        "@type": "ListItem",
+        "position": 3,
+        "item": {
+          "@type": "Place",
+          "name": "Humphreys Peak Trailhead",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Flagstaff",
+            "addressRegion": "AZ",
+            "postalCode": "86001",
+            "addressCountry": "US"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 35.3283,
+            "longitude": -111.7118
+          }
+        }
+      }
+    ]
+  }
+  </script>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <a href="#" class="nav-brand">
-      <img src="Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels Logo" class="nav-logo">
-      <span>Health & Travels</span>
-    </a>
-    <div class="nav-links">
-      <a href="#safety-calc" class="nav-link">Calculator</a>
-      <a href="#escapes" class="nav-link">Escapes</a>
-      <a href="https://sage.healthandtravels.com" class="nav-link btn-nav">⚡ Open Sage AI</a>
-    </div>
-  </nav>
-
-  <!-- Hero Header -->
-  <header class="hero">
-    <img src="Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels Logo" class="hero-logo">
-
-    <div>
-      <span class="badge">🏜️ Arizona Family & Group Outdoor Hub</span>
-    </div>
-
-    <h1>
-      Safer Arizona Group Adventures,<br>
-      <span class="text-blue">Planned with Confidence.</span>
-    </h1>
-
-    <p class="subtitle">
-      Eliminate travel friction with heat-conscious itineraries, kid-safe hike ratings, water requirement calculators, shade guides, and bathroom access.
-    </p>
-
-    <div class="cta-group">
-      <a href="https://sage.healthandtravels.com" class="btn-primary">
-        ⚡ Launch Sage AI Trip Planner
-      </a>
-      <a href="https://newsletter.healthandtravels.com" class="btn-secondary">
-        ✉️ Join Free Newsletter
-      </a>
-    </div>
-
-    <!-- Quick Prompt Pills for Sage AI -->
-    <div class="prompt-pills-container">
-      <span class="prompt-label">Try Sage AI Prompts:</span>
-      <a href="https://sage.healthandtravels.com?prompt=Build%20a%20stroller-friendly%20Sedona%20itinerary%20with%20shade%20and%20restrooms" class="prompt-pill">🚼 Stroller-Friendly Sedona Day</a>
-      <a href="https://sage.healthandtravels.com?prompt=Find%20cool%20water%20swimming%20holes%20near%20Payson%20for%20a%20group" class="prompt-pill">💦 Payson Creek Escapes</a>
-      <a href="https://sage.healthandtravels.com?prompt=Plan%20a%2036-hour%20Prescott%20family%20trip%20with%20easy%20hikes" class="prompt-pill">🌲 36 Hours in Prescott</a>
-    </div>
+  <header>
+    <h1>Health & Travels</h1>
+    <p>Arizona Hiking Guide & Live Air Quality Tracking</p>
   </header>
 
-  <!-- Interactive Water & Heat Safety Widget -->
-  <section class="calc-section" id="safety-calc">
-    <div class="calc-header">
-      <div>
-        <h2>☀️ Group Hydration & Heat Safety Calculator</h2>
-        <p style="font-size: 0.95rem; color: var(--text-muted);">Calculate precise water, electrolyte, and heat limits for your Arizona trail outing.</p>
-      </div>
-    </div>
-    
-    <div class="calc-grid">
-      <div class="calc-field">
-        <label for="duration">Hike Duration (Hours)</label>
-        <input type="number" id="duration" value="2.5" step="0.5" min="0.5" max="10" oninput="calculateSafety()">
-      </div>
-      <div class="calc-field">
-        <label for="adults">Adults (Count)</label>
-        <input type="number" id="adults" value="2" min="1" max="20" oninput="calculateSafety()">
-      </div>
-      <div class="calc-field">
-        <label for="kids">Kids / Seniors (Count)</label>
-        <input type="number" id="kids" value="2" min="0" max="20" oninput="calculateSafety()">
-      </div>
-      <div class="calc-field">
-        <label for="temp">Forecast Temp (°F)</label>
-        <select id="temp" onchange="calculateSafety()">
-          <option value="75">Under 80°F (Mild / Winter)</option>
-          <option value="88" selected>80°F - 95°F (Warm / Spring)</option>
-          <option value="102">Over 95°F (Extreme Desert Heat)</option>
-        </select>
-      </div>
-    </div>
+  <main>
+    <h2>Featured Trails</h2>
+    <div class="trail-grid">
 
-    <div class="calc-results-card">
-      <div class="metric-box">
-        <h4>Total Water Required</h4>
-        <div class="metric-value" id="waterRequirement">7.5 Liters</div>
-        <div class="metric-sub" id="waterGallons">(~2.0 Gallons Total)</div>
-      </div>
-      <div class="metric-box">
-        <h4>Electrolyte Packs</h4>
-        <div class="metric-value" id="electrolyteCount">4 Packs</div>
-        <div class="metric-sub">Minimum 1 pack per person</div>
-      </div>
-      <div class="metric-box">
-        <h4>Recommended Cutoff Time</h4>
-        <div class="metric-value" id="cutoffTime">10:00 AM</div>
-        <div class="metric-sub">Off the trail before peak heat</div>
-      </div>
-
-      <div class="heat-alert-box alert-yellow" id="heatAlert">
-        <span>☀️ Moderate Heat Risk: Finish hiking by 10:00 AM. Ensure every child carries electrolytes and wears shade hats.</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Live Trail Health-Badge Sample with Google Maps & AQI Layer -->
-  <section class="badge-demo-section">
-    <h2>🥾 Health & Safety Trail Badges</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem;">Every trail guide on Health & Travels includes real-time Google environmental & map data at a glance.</p>
-
-    <div class="trail-card-preview">
-      <div class="trail-card-header">
+      <!-- Trail 1: Phoenix -->
+      <div class="trail-card">
         <div>
-          <span class="trail-title">Bell Rock Pathway (Family Loop)</span>
-          <div class="trail-location">Sedona, AZ • 3.6 Miles • Easy / Kid-Friendly</div>
+          <h3>Camelback Mountain</h3>
+          <p><strong>Location:</strong> Phoenix, AZ</p>
+          <p>Popular, challenging summit hike offering panoramic views of the Valley.</p>
+          
+          <div class="aqi-container">
+            <strong>Live Air Quality:</strong>
+            <div id="aqi-camelback-mountain">
+              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+            </div>
+          </div>
         </div>
-        <span class="badge" style="margin-bottom:0;">Red Rock Pass Required</span>
-      </div>
 
-      <div class="badges-flex">
-        <span class="trail-badge" style="background-color: #dcfce7; color: #15803d; border-color: #bbf7d0;">🍃 <b>Google AQI:</b> 22 (Good)</span>
-        <span class="trail-badge">🌳 <b>Shade Score:</b> Moderate (30%)</span>
-        <span class="trail-badge">🚾 <b>Restrooms:</b> Vault at Trailhead</span>
-        <span class="trail-badge">📱 <b>Cell Service:</b> Full LTE</span>
-        <span class="trail-badge">🐾 <b>Dog Paw-Safe:</b> Before 10 AM</span>
-        <span class="trail-badge">🛒 <b>Wagon / Stroller:</b> Hard-pack (Yes)</span>
-      </div>
-
-      <div style="margin-top: 14px;">
-        <a href="https://www.google.com/maps/search/?api=1&query=Bell+Rock+Pathway+Trailhead+Sedona+AZ" target="_blank" rel="noopener" class="maps-btn">
-          📍 Open Trailhead in Google Maps
+        <a class="btn-maps" 
+           href="https://www.google.com/maps/search/?api=1&query=Camelback+Mountain+Echo+Canyon+Trailhead" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          📍 Open in Google Maps
         </a>
       </div>
-    </div>
-  </section>
 
-  <!-- Microclimate Escapes Section -->
-  <section class="escapes-section" id="escapes">
-    <div class="escapes-container">
-      <div class="section-title">
-        <h2>Arizona Microclimate Guide</h2>
-        <p>Beat the heat or find winter sunshine with seasonal elevation shifts.</p>
-      </div>
+      <!-- Trail 2: Sedona -->
+      <div class="trail-card">
+        <div>
+          <h3>Cathedral Rock</h3>
+          <p><strong>Location:</strong> Sedona, AZ</p>
+          <p>Iconic red rock scramble with scenic vistas and vortex energy access.</p>
 
-      <div class="escapes-grid">
-        <div class="escape-card">
-          <div class="escape-icon">🌲</div>
-          <span class="escape-tag">Summer Escape (7,000+ ft)</span>
-          <h3>Flagstaff & San Francisco Peaks</h3>
-          <p>Pine forests, cool mountain breezes, family-friendly chairlifts, and 20°F cooler temperatures than Phoenix.</p>
-          <a href="https://sage.healthandtravels.com?prompt=Plan%20a%20cool%20summer%20day%20trip%20in%20Flagstaff%20for%20a%20family" class="nav-link">Plan Flagstaff Trip →</a>
+          <div class="aqi-container">
+            <strong>Live Air Quality:</strong>
+            <div id="aqi-cathedral-rock">
+              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+            </div>
+          </div>
         </div>
 
-        <div class="escape-card">
-          <div class="escape-icon">💦</div>
-          <span class="escape-tag">Creek & Water Holes</span>
-          <h3>Mogollon Rim & Payson Waters</h3>
-          <p>Canyon creeks, shade-drenched swimming holes, and family camping loops under ponderosa pines.</p>
-          <a href="https://sage.healthandtravels.com?prompt=Show%20me%20family-friendly%20creek%20hikes%20near%20Payson" class="nav-link">Plan Creek Trip →</a>
+        <a class="btn-maps" 
+           href="https://www.google.com/maps/search/?api=1&query=Cathedral+Rock+Trailhead+Sedona" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          📍 Open in Google Maps
+        </a>
+      </div>
+
+      <!-- Trail 3: Flagstaff -->
+      <div class="trail-card">
+        <div>
+          <h3>Humphreys Peak</h3>
+          <p><strong>Location:</strong> Flagstaff, AZ</p>
+
+          <p>Hike to the highest natural point in the state of Arizona (12,637 ft).</p>
+
+          <div class="aqi-container">
+            <strong>Live Air Quality:</strong>
+            <div id="aqi-humphreys-peak">
+              <span class="aqi-badge aqi-loading">Checking AQI...</span>
+            </div>
+          </div>
         </div>
 
-        <div class="escape-card">
-          <div class="escape-icon">🌵</div>
-          <span class="escape-tag">Winter & Spring Sunshine</span>
-          <h3>Sonoran Desert Parks (Phoenix / Tucson)</h3>
-          <p>Flat, wildflower-rich loops perfect for toddlers, grandparents, and beginner group hikes from October to April.</p>
-          <a href="https://sage.healthandtravels.com?prompt=Find%20easy%20flat%20Sonoran%20desert%20walks%20for%20families" class="nav-link">Plan Desert Trip →</a>
-        </div>
+        <a class="btn-maps" 
+           href="https://www.google.com/maps/search/?api=1&query=Humphreys+Peak+Trailhead+Flagstaff" 
+           target="_blank" 
+           rel="noopener noreferrer">
+          📍 Open in Google Maps
+        </a>
       </div>
+
     </div>
-  </section>
+  </main>
 
-  <!-- Value Features Section -->
-  <section class="features-section">
-    <div class="features-container">
-      <div class="feature-card">
-        <div class="feature-icon">🌡️</div>
-        <h3>Heat & Shade Safety</h3>
-        <p>Real-time Arizona temperature warnings and shade ratings to ensure you finish outdoor hikes before peak sun hours.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🥾</div>
-        <h3>Kid-Verified Logistics</h3>
-        <p>Practical trail details including stroller accessibility, kid fatigue ratings, parking cutoff times, and water availability.</p>
-      </div>
-
-      <div class="feature-card">
-        <div class="feature-icon">🤖</div>
-        <h3>Sage AI Planner</h3>
-        <p>Custom day itineraries built around family pacing, early-morning starts, and essential rest stops across Sedona, Phoenix, and beyond.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>© 2026 Health & Travels. All rights reserved.</p>
-    <p style="margin-top: 10px;">
-      <a href="https://sage.healthandtravels.com">Sage AI Planner</a> • 
-      <a href="https://newsletter.healthandtravels.com">Newsletter</a> • 
-      <a href="#safety-calc">Hydration Calculator</a>
-    </p>
-  </footer>
-
+  <!-- Google Air Quality Fetch Script -->
   <script>
-    function calculateSafety() {
-      const duration = parseFloat(document.getElementById('duration').value) || 1;
-      const adults = parseInt(document.getElementById('adults').value) || 0;
-      const kids = parseInt(document.getElementById('kids').value) || 0;
-      const temp = parseInt(document.getElementById('temp').value);
+    // Replace 'YOUR_GOOGLE_MAPS_API_KEY' with your actual key from Google Cloud Console
+    const GOOGLE_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"; 
 
-      // Hourly rates based on temperature
-      let adultRate = 0.6; // Liters / hour
-      let kidRate = 0.4;
+    const TRAIL_LOCATIONS = [
+      { id: "camelback-mountain", latitude: 33.5153, longitude: -111.9618 },
+      { id: "cathedral-rock",     latitude: 34.8213, longitude: -111.7925 },
+      { id: "humphreys-peak",    latitude: 35.3283, longitude: -111.7118 }
+    ];
 
-      if (temp > 80) {
-        adultRate = 0.85;
-        kidRate = 0.6;
-      }
-      if (temp > 95) {
-        adultRate = 1.1;
-        kidRate = 0.8;
+    async function fetchTrailAQI(latitude, longitude) {
+      if (GOOGLE_API_KEY === "YOUR_GOOGLE_MAPS_API_KEY") {
+        return { aqi: 32, category: "Good (Demo)" }; // Mock fallback if key isn't pasted yet
       }
 
-      const totalLiters = (duration * (adults * adultRate + kids * kidRate)).toFixed(1);
-      const totalGallons = (totalLiters * 0.264172).toFixed(1);
-      const totalPeople = adults + kids;
-      const totalElectrolytes = Math.max(totalPeople, Math.ceil(totalPeople * (duration / 2)));
+      const url = `https://airquality.googleapis.com/v1/currentConditions:lookup?key=${GOOGLE_API_KEY}`;
+      
+      try {
+        const response = await fetch(url, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            location: { latitude, longitude }
+          })
+        });
 
-      document.getElementById('waterRequirement').innerText = `${totalLiters} Liters`;
-      document.getElementById('waterGallons').innerText = `(~${totalGallons} Gallons Total)`;
-      document.getElementById('electrolyteCount').innerText = `${totalElectrolytes} Packets`;
+        if (!response.ok) throw new Error("API Error");
 
-      const alertBox = document.getElementById('heatAlert');
-      const cutoffElem = document.getElementById('cutoffTime');
+        const data = await response.json();
+        const indexes = data.indexes || [];
+        const mainAqi = indexes.find(idx => idx.code === "usa_epa") || indexes[0];
 
-      if (temp > 95) {
-        cutoffElem.innerText = '8:30 AM';
-        alertBox.className = 'heat-alert-box alert-red';
-        alertBox.innerHTML = '<span>⚠️ <b>Severe Heat Risk:</b> Limit outdoor trails to early morning (before 8:30 AM). Seek higher elevations or indoor water escapes.</span>';
-      } else if (temp > 80) {
-        cutoffElem.innerText = '10:00 AM';
-        alertBox.className = 'heat-alert-box alert-yellow';
-        alertBox.innerHTML = '<span>☀️ <b>Moderate Heat Risk:</b> Finish hiking by 10:00 AM. Ensure everyone carries electrolyte packs and wears sun hats.</span>';
-      } else {
-        cutoffElem.innerText = '12:30 PM';
-        alertBox.className = 'heat-alert-box alert-green';
-        alertBox.innerHTML = '<span>✅ <b>Pleasant Trail Conditions:</b> Standard water precautions apply. Enjoy the outdoors safely!</span>';
+        return {
+          aqi: mainAqi?.aqi || "N/A",
+          category: mainAqi?.category || "Unknown"
+        };
+      } catch (error) {
+        console.warn("Could not fetch Google AQI data:", error);
+        return null;
       }
     }
 
-    // Run initial calculation on page load
-    calculateSafety();
+    function getAqiClass(aqi) {
+      if (typeof aqi !== 'number') return 'aqi-loading';
+      if (aqi <= 50) return 'aqi-good';
+      if (aqi <= 100) return 'aqi-moderate';
+      if (aqi <= 150) return 'aqi-sensitive';
+      return 'aqi-unhealthy';
+    }
+
+    async function updateAllTrailsAQI() {
+      for (const trail of TRAIL_LOCATIONS) {
+        const aqiData = await fetchTrailAQI(trail.latitude, trail.longitude);
+        const element = document.getElementById(`aqi-${trail.id}`);
+        
+        if (element) {
+          if (aqiData) {
+            const badgeClass = getAqiClass(aqiData.aqi);
+            element.innerHTML = `
+              <span class="aqi-badge ${badgeClass}">
+                AQI: ${aqiData.aqi} — ${aqiData.category}
+              </span>
+            `;
+          } else {
+            element.innerHTML = `<span class="aqi-badge aqi-loading">AQI Unavailable</span>`;
+          }
+        }
+      }
+    }
+
+    document.addEventListener("DOMContentLoaded", updateAllTrailsAQI);
   </script>
+
 </body>
 </html>
