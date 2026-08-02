@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health & Travels | Family-Friendly Arizona Hikes & Real-Time Air Quality</title>
-  <meta name="description" content="Discover family and friend-friendly hiking trails across Arizona. Get real-time air quality updates, trail links, and simple outdoor health tips from Sage.">
+  <title>Health & Travels | Arizona Hikes, Air Quality & Health Insights</title>
+  <meta name="description" content="Explore family-friendly Arizona hiking trails with real-time air quality tracking, map directions, and health tips from Sage.">
 
   <!-- Favicon using exact file name in your GitHub repo -->
   <link rel="icon" type="image/png" href="Health%20ad%20Travels%20Logo%20512x512.png">
@@ -12,19 +12,19 @@
 
   <style>
     :root {
-      --sage-primary: #5B7065;      /* Accent Sage */
-      --sage-dark: #2F3E36;         /* Forest Text */
-      --sage-soft: #F1F4F2;         /* Soft Background Tint */
-      --light-bg: #FAFBF9;          /* Main Page BG */
-      --dark-text: #2D3748;         /* Body Text */
+      --sage-primary: #5B7065;      /* Warm Sage Green */
+      --sage-dark: #33433B;         /* Forest Text */
+      --sage-light: #EBF0EC;        /* Soft Tint Accent */
+      --light-bg: #F8FAF9;          /* Soft Clean Background */
+      --dark-text: #2D3748;         /* Primary Body Text */
       --white: #ffffff;
-      --blue-accent: #1D4ED8;       /* Primary Action Buttons */
+      --blue-accent: #1D4ED8;       /* Primary Action Blue */
       --blue-hover: #1E40AF;        /* Button Hover */
     }
 
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      line-height: 1.6;
+      line-height: 1.5;
       color: var(--dark-text);
       background-color: var(--light-bg);
       margin: 0;
@@ -35,7 +35,7 @@
     nav {
       background-color: var(--white);
       border-bottom: 1px solid #E2E8F0;
-      padding: 0.75rem 2rem;
+      padding: 0.6rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -45,20 +45,20 @@
     .logo-container {
       display: flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: 0.75rem;
       text-decoration: none;
     }
 
     .logo-img {
-      height: 48px;
-      width: 48px;
+      height: 42px;
+      width: 42px;
       border-radius: 50%;
       object-fit: cover;
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .site-title {
-      font-size: 1.35rem;
+      font-size: 1.25rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--sage-dark);
@@ -66,7 +66,7 @@
 
     .nav-links {
       display: flex;
-      gap: 1.5rem;
+      gap: 1.25rem;
       list-style: none;
       margin: 0;
       padding: 0;
@@ -77,6 +77,7 @@
       text-decoration: none;
       color: var(--dark-text);
       font-weight: 500;
+      font-size: 0.95rem;
       transition: color 0.2s ease;
     }
 
@@ -84,117 +85,119 @@
       color: var(--blue-accent);
     }
 
-    /* Soft Header Hero (Replaced Heavy Green Swath) */
+    /* Compact Top Header Banner */
     header {
-      background-color: var(--sage-soft);
-      border-bottom: 1px solid #E2E8F0;
-      color: var(--sage-dark);
-      padding: 3rem 1.5rem 2.5rem 1.5rem;
+      background-color: var(--sage-primary);
+      color: var(--white);
+      padding: 1.5rem 1rem;
       text-align: center;
     }
 
     header h1 {
-      margin: 0 0 0.75rem 0;
-      font-size: 2.35rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      margin: 0 0 0.25rem 0;
+      font-size: 1.85rem;
     }
 
     header p {
-      margin: 0 auto;
-      max-width: 650px;
-      font-size: 1.2rem;
-      color: #4A5568;
+      margin: 0;
+      font-size: 1.05rem;
+      opacity: 0.95;
     }
 
     main {
-      max-width: 880px;
+      max-width: 960px;
       margin: 0 auto;
-      padding: 0 1rem 3rem 1rem;
+      padding: 1.5rem 1rem 3rem 1rem;
     }
 
-    /* Above the Fold: Sage Intro Card */
+    /* ABOVE THE FOLD GRID: Side-by-Side on Laptop / Desktop */
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-top: 0.5rem;
+    }
+
+    /* Sage Hero Card */
     .sage-card {
-      background: var(--white);
-      border: 1px solid #E2E8F0;
-      border-left: 5px solid var(--sage-primary);
-      padding: 1.75rem 2rem;
-      border-radius: 8px;
-      margin-top: 2rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.02);
+      background: var(--sage-light);
+      border-left: 4px solid var(--sage-primary);
+      padding: 1.5rem;
+      border-radius: 0 8px 8px 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
     .sage-card h2 {
       margin-top: 0;
       color: var(--sage-dark);
-      font-size: 1.5rem;
+      font-size: 1.35rem;
     }
 
     .sage-card p {
-      color: #4A5568;
-      font-size: 1.05rem;
-      margin-bottom: 0.75rem;
+      margin-bottom: 1rem;
+      font-size: 0.98rem;
     }
 
     .sage-link {
-      display: inline-block;
       color: var(--blue-accent);
-      font-weight: 700;
+      font-weight: 600;
       text-decoration: none;
+      font-size: 0.95rem;
     }
 
     .sage-link:hover {
       text-decoration: underline;
     }
 
-    /* Above the Fold: Newsletter Box */
-    .newsletter-section {
+    /* Newsletter Box */
+    .newsletter-card {
       background: var(--white);
-      border-radius: 10px;
-      padding: 2.25rem 2rem;
-      margin-top: 1.5rem;
+      border-radius: 8px;
+      padding: 1.5rem;
       border: 1px solid #E2E8F0;
-      text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
 
-    .newsletter-section h2 {
+    .newsletter-card h2 {
       color: var(--sage-dark);
       margin-top: 0;
-      font-size: 1.45rem;
+      font-size: 1.35rem;
     }
 
-    .newsletter-section p {
-      margin-bottom: 1.25rem;
+    .newsletter-card p {
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
       color: #4A5568;
-      font-size: 1.05rem;
     }
 
     .newsletter-form {
       display: flex;
       gap: 0.5rem;
-      justify-content: center;
-      max-width: 480px;
-      margin: 0 auto;
     }
 
     .newsletter-form input[type="email"] {
       flex: 1;
-      padding: 0.75rem 1rem;
+      padding: 0.6rem 0.85rem;
       border: 1px solid #CBD5E1;
       border-radius: 6px;
-      font-size: 1rem;
+      font-size: 0.95rem;
     }
 
     .newsletter-form button {
       background-color: var(--blue-accent);
       color: var(--white);
       border: none;
-      padding: 0.75rem 1.5rem;
+      padding: 0.6rem 1.25rem;
       border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.2s ease;
+      white-space: nowrap;
     }
 
     .newsletter-form button:hover {
@@ -206,34 +209,34 @@
       border: 0;
       height: 1px;
       background: #E2E8F0;
-      margin: 3rem 0 2rem 0;
+      margin: 2.25rem 0 1.75rem 0;
     }
 
-    /* Below the Fold: Trail Grid */
+    /* BELOW THE FOLD: Trail Cards */
     .trails-heading-container h2 {
       color: var(--sage-dark);
-      margin-bottom: 0.35rem;
-      font-size: 1.6rem;
+      margin-bottom: 0.25rem;
+      font-size: 1.5rem;
     }
 
     .trails-heading-container p {
       margin-top: 0;
       color: #64748B;
-      font-size: 1.05rem;
+      font-size: 0.95rem;
     }
 
     .trail-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.5rem;
-      margin-top: 1.5rem;
+      gap: 1.25rem;
+      margin-top: 1.25rem;
     }
 
     .trail-card {
       background: var(--white);
-      border-radius: 10px;
-      padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.03);
+      border-radius: 8px;
+      padding: 1.25rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03);
       border: 1px solid #E2E8F0;
       display: flex;
       flex-direction: column;
@@ -243,19 +246,19 @@
     .trail-card h3 {
       margin-top: 0;
       color: var(--sage-dark);
-      font-size: 1.25rem;
+      font-size: 1.2rem;
     }
 
     .aqi-container {
-      margin: 1rem 0;
+      margin: 0.85rem 0;
     }
 
     /* AQI Badges */
     .aqi-badge {
       display: inline-block;
-      padding: 0.35rem 0.75rem;
+      padding: 0.3rem 0.65rem;
       border-radius: 20px;
-      font-size: 0.875rem;
+      font-size: 0.85rem;
       font-weight: 600;
     }
 
@@ -271,11 +274,12 @@
       background-color: var(--blue-accent);
       color: var(--white);
       text-decoration: none;
-      padding: 0.65rem 1rem;
+      padding: 0.6rem 1rem;
       border-radius: 6px;
       font-weight: 600;
       text-align: center;
-      margin-top: 1rem;
+      margin-top: 0.85rem;
+      font-size: 0.92rem;
       transition: background-color 0.2s ease;
     }
 
@@ -285,9 +289,9 @@
 
     footer {
       text-align: center;
-      padding: 2.5rem 1rem;
+      padding: 2rem 1rem;
       color: #718096;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       border-top: 1px solid #E2E8F0;
       background-color: var(--white);
     }
@@ -308,41 +312,51 @@
     </ul>
   </nav>
 
-  <!-- Clean, Soft Header Banner (No Heavy Green Swath) -->
+  <!-- Header Banner -->
   <header>
-    <h1>Arizona Outdoors, Built for Family & Friends</h1>
-    <p>Your simple guide to exploring Arizona trails together—with live air quality tracking and smart health tips so everyone enjoys the trip.</p>
+    <h1>Health & Travels</h1>
+    <p>Arizona Trail Guide, Live Air Quality, and Health Insights</p>
   </header>
 
   <main>
-    <!-- ABOVE THE FOLD 1: Sage Introduction -->
-    <section id="sage" class="sage-card">
-      <h2>Meet Sage: Smart Outdoor & Travel Advice</h2>
-      <p>Planning a day in the desert or high country with kids, family, or friends? Sage gives you practical guidance on desert heat, elevation changes, hydration, and trail prep tailored to who you're hitting the trail with.</p>
-      <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" class="sage-link">
-        Check out Sage Health & Travel Portal →
-      </a>
-    </section>
-
-    <!-- ABOVE THE FOLD 2: Newsletter Signup -->
-    <section id="newsletter" class="newsletter-section">
-      <h2>Join the Health & Travels Family</h2>
-      <p>Get weekly recommendations on top family-friendly Arizona hikes, local weather warnings, air quality updates, and quick health tips.</p>
+    <!-- ABOVE THE FOLD GRID (Side-by-Side on Laptop) -->
+    <div class="hero-grid">
       
-      <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thanks for joining us!');">
-        <input type="email" placeholder="Enter your email address" required>
-        <button type="submit">Subscribe</button>
-      </form>
-    </section>
+      <!-- Sage Card -->
+      <section id="sage" class="sage-card">
+        <div>
+          <h2>Sage Health Insights</h2>
+          <p>Discover personalized wellness advice, elevation adjustment guidance, and outdoor health tips tailored for Southwestern exploration.</p>
+        </div>
+        <div>
+          <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" class="sage-link">
+            Visit Sage Health & Travel Portal →
+          </a>
+        </div>
+      </section>
+
+      <!-- Newsletter Sign-Up Card -->
+      <section id="newsletter" class="newsletter-card">
+        <div>
+          <h2>Join Our Community</h2>
+          <p>Get weekly Arizona trail updates, air quality warnings, and health tips straight to your inbox.</p>
+        </div>
+        <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
+          <input type="email" placeholder="Enter your email" required>
+          <button type="submit">Subscribe</button>
+        </form>
+      </section>
+
+    </div>
 
     <!-- Divider Line -->
     <hr class="section-divider">
 
-    <!-- BELOW THE FOLD: Trail Guide & Live AQI -->
+    <!-- BELOW THE FOLD: Trail Guide & Live AQI Monitoring -->
     <section id="trails">
       <div class="trails-heading-container">
-        <h2>Favorite Local Trails & Real-Time Air Quality</h2>
-        <p>Check air quality levels before you pack up the car, and grab instant driving directions right to the trailhead.</p>
+        <h2>Featured Trails & Real-Time Air Quality</h2>
+        <p>Check air quality before hitting the trail and open direct Google Maps directions.</p>
       </div>
 
       <div class="trail-grid">
@@ -352,7 +366,7 @@
           <div>
             <h3>Camelback Mountain</h3>
             <p><strong>Location:</strong> Phoenix, AZ</p>
-            <p>Iconic Valley summit hike. Great for active friends and experienced hikers looking for a solid workout.</p>
+            <p>Popular, challenging summit hike offering panoramic views of the Valley.</p>
             
             <div class="aqi-container">
               <strong>Live Air Quality:</strong>
@@ -375,7 +389,7 @@
           <div>
             <h3>Cathedral Rock</h3>
             <p><strong>Location:</strong> Sedona, AZ</p>
-            <p>A fun red rock scramble with stunning views that the whole family will remember forever.</p>
+            <p>Iconic red rock scramble with scenic vistas and vortex energy access.</p>
 
             <div class="aqi-container">
               <strong>Live Air Quality:</strong>
@@ -398,7 +412,7 @@
           <div>
             <h3>Humphreys Peak</h3>
             <p><strong>Location:</strong> Flagstaff, AZ</p>
-            <p>Cool mountain air and pine forests. Perfect escape from the desert heat for high-country adventure seekers.</p>
+            <p>Hike to the highest natural point in the state of Arizona (12,637 ft).</p>
 
             <div class="aqi-container">
               <strong>Live Air Quality:</strong>
