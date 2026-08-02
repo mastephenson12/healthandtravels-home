@@ -16,7 +16,7 @@
   <link rel="manifest" href="manifest.json">
   <meta name="theme-color" content="#1047a2">
 
-  <!-- Structured Schema Data (SEO) -->
+  <!-- Enriched Structured Schema Data (Google SEO & Rich Snippets) -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -26,6 +26,19 @@
         "name": "Health & Travels",
         "url": "https://healthandtravels.com",
         "logo": "https://healthandtravels.com/Health%20ad%20Travels%20Logo%20512x512.png"
+      },
+      {
+        "@type": "TouristAttraction",
+        "name": "Bell Rock Pathway",
+        "description": "Family-friendly hard-pack hiking loop in Sedona, Arizona with restroom facilities and shade stops.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sedona",
+          "addressRegion": "AZ",
+          "addressCountry": "US"
+        },
+        "isAccessibleForFree": true,
+        "publicAccess": true
       },
       {
         "@type": "FAQPage",
@@ -436,6 +449,25 @@
       border: 1px solid var(--border-color);
     }
 
+    .maps-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 14px;
+      background-color: #1a73e8;
+      color: white;
+      text-decoration: none;
+      font-size: 0.85rem;
+      font-weight: 600;
+      border-radius: 6px;
+      margin-top: 12px;
+      transition: background-color 0.2s;
+    }
+
+    .maps-btn:hover {
+      background-color: #1557b0;
+    }
+
     /* Microclimate Escapes Section */
     .escapes-section {
       background-color: var(--bg-light);
@@ -681,10 +713,10 @@
     </div>
   </section>
 
-  <!-- Live Trail Health-Badge Sample -->
+  <!-- Live Trail Health-Badge Sample with Google Maps & AQI Layer -->
   <section class="badge-demo-section">
     <h2>🥾 Health & Safety Trail Badges</h2>
-    <p style="color: var(--text-muted); font-size: 0.95rem;">Every trail guide on Health & Travels includes instant safety data points at a glance.</p>
+    <p style="color: var(--text-muted); font-size: 0.95rem;">Every trail guide on Health & Travels includes real-time Google environmental & map data at a glance.</p>
 
     <div class="trail-card-preview">
       <div class="trail-card-header">
@@ -696,11 +728,18 @@
       </div>
 
       <div class="badges-flex">
+        <span class="trail-badge" style="background-color: #dcfce7; color: #15803d; border-color: #bbf7d0;">🍃 <b>Google AQI:</b> 22 (Good)</span>
         <span class="trail-badge">🌳 <b>Shade Score:</b> Moderate (30%)</span>
         <span class="trail-badge">🚾 <b>Restrooms:</b> Vault at Trailhead</span>
         <span class="trail-badge">📱 <b>Cell Service:</b> Full LTE</span>
         <span class="trail-badge">🐾 <b>Dog Paw-Safe:</b> Before 10 AM</span>
         <span class="trail-badge">🛒 <b>Wagon / Stroller:</b> Hard-pack (Yes)</span>
+      </div>
+
+      <div style="margin-top: 14px;">
+        <a href="https://www.google.com/maps/search/?api=1&query=Bell+Rock+Pathway+Trailhead+Sedona+AZ" target="_blank" rel="noopener" class="maps-btn">
+          📍 Open Trailhead in Google Maps
+        </a>
       </div>
     </div>
   </section>
