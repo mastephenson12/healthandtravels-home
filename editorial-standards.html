@@ -7,6 +7,15 @@
     <meta name="description" content="Read the editorial guidelines, verification protocols, safety standards, and AI policies used across Health & Travels and Sage Trip Planner.">
     <link rel="canonical" href="https://healthandtravels.com/editorial-standards">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+
+    <!-- Google Fonts Matching Ecosystem -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
     <!-- Structured Data (JSON-LD) for Editorial Policy -->
     <script type="application/ld+json">
     {
@@ -24,17 +33,22 @@
 
     <style>
         :root {
-            --primary: #1e3a8a;
-            --primary-accent: #2563eb;
-            --bg-light: #f8fafc;
-            --text-dark: #0f172a;
-            --text-muted: #475569;
-            --card-bg: #ffffff;
-            --border-color: #e2e8f0;
+            --primary: #030712;
+            --accent-teal: #00796B;
+            --accent-orange: #E65100;
+            --bg-light: #FFFFFF;
+            --text-dark: #030712;
+            --text-heading: #111827;
+            --text-muted: #1F2937;
+            --border-color: #E5E7EB;
+            --link-color: #0C4A6E;
+            --font-heading: 'Helvetica Neue', 'Arial Narrow', sans-serif;
+            --font-body: 'Lato', sans-serif;
+            --font-button: 'Inter', sans-serif;
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background-color: var(--bg-light);
+            font-family: var(--font-body);
+            background-color: #F9FAFB;
             color: var(--text-dark);
             margin: 0;
             padding: 0;
@@ -42,59 +56,125 @@
         }
         header {
             background: #ffffff;
-            border-bottom: 1px solid var(--border-color);
+            border-bottom: 2px solid var(--border-color);
             padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 0 auto;
         }
-        .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); text-decoration: none; }
-        nav a { margin-left: 20px; color: var(--text-muted); text-decoration: none; font-weight: 500; }
-        nav a:hover { color: var(--primary-accent); }
-        .container { max-width: 800px; margin: 40px auto; padding: 0 20px; }
-        h1 { color: var(--primary); font-size: 2.2rem; margin-bottom: 10px; }
-        .subtitle { font-size: 1.2rem; color: var(--text-muted); margin-bottom: 30px; }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+        .logo { 
+            font-family: var(--font-heading);
+            font-size: 1.6rem; 
+            font-weight: 900; 
+            color: var(--primary); 
+            text-decoration: none; 
+            text-transform: uppercase;
+            letter-spacing: -0.5px;
+        }
+        .logo span { color: var(--accent-orange); }
+        nav a { 
+            margin-left: 20px; 
+            color: var(--link-color); 
+            text-decoration: none; 
+            font-family: var(--font-button);
+            font-weight: 600; 
+        }
+        nav a:hover { color: var(--accent-teal); }
+        .hero {
+            background: linear-gradient(135deg, var(--accent-teal) 0%, #004D40 100%);
+            color: #ffffff;
+            padding: 50px 20px;
+            text-align: center;
+        }
+        .hero-content { max-width: 800px; margin: 0 auto; }
+        .hero h1 { 
+            font-family: var(--font-heading);
+            font-size: 2.6rem; 
+            margin-bottom: 12px; 
+            font-weight: 900; 
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .hero p { font-size: 1.2rem; opacity: 0.95; margin: 0; }
+        .container { max-width: 850px; margin: 40px auto; padding: 0 20px; }
         .policy-section {
             background: #ffffff;
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 8px;
             padding: 28px;
             margin-bottom: 24px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.02);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
         }
-        .policy-section h2 { color: var(--primary); margin-top: 0; font-size: 1.4rem; }
+        .policy-section h2 { 
+            font-family: var(--font-heading);
+            color: var(--text-heading); 
+            margin-top: 0; 
+            font-size: 1.4rem; 
+            text-transform: uppercase;
+        }
         .policy-section ul { padding-left: 20px; }
         .policy-section li { margin-bottom: 10px; }
         .source-tag {
             display: inline-block;
-            background: #f1f5f9;
+            background: #E0F2FE;
             border: 1px solid var(--border-color);
             padding: 4px 10px;
             border-radius: 6px;
+            font-family: var(--font-button);
             font-size: 0.85rem;
+            font-weight: 600;
             margin: 4px 4px 4px 0;
-            color: var(--text-muted);
+            color: var(--link-color);
         }
-        footer { text-align: center; padding: 40px 20px; border-top: 1px solid var(--border-color); color: var(--text-muted); font-size: 0.9rem; margin-top: 60px; }
+        footer { 
+            text-align: center; 
+            padding: 40px 20px; 
+            border-top: 1px solid var(--border-color); 
+            color: var(--text-muted); 
+            font-size: 0.95rem; 
+            background: #F9FAFB;
+            margin-top: 60px;
+        }
     </style>
 </head>
 <body>
 
     <header>
-        <a href="/" class="logo">Health & Travels</a>
+        <a href="/" class="logo-container">
+            <img src="/logo.jpg" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo">Health <span>&</span> Travels</span>
+        </a>
         <nav>
             <a href="/">Home</a>
             <a href="/about">About</a>
-            <a href="https://sage.healthandtravels.com">Sage Planner</a>
-            <a href="https://newsletter.healthandtravels.com">Newsletter</a>
+            <a href="/arizona">Arizona Hub</a>
+            <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer">Sage Planner</a>
+            <a href="https://newsletter.healthandtravels.com" target="_blank" rel="noopener noreferrer">Newsletter</a>
         </nav>
     </header>
 
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Editorial & Verification Standards</h1>
+            <p>How Health & Travels ensures accuracy, clinical safety, and real-world family reliability across all guides and tools.</p>
+        </div>
+    </section>
+
     <div class="container">
-        <h1>Editorial & Verification Standards</h1>
-        <p class="subtitle">How Health & Travels ensures accuracy, clinical safety, and real-world family reliability across all guides and tools.</p>
 
         <div class="policy-section">
             <h2>1. Verification & Field Research Standards</h2>
@@ -141,7 +221,7 @@
     </div>
 
     <footer>
-        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/" style="color: var(--text-muted);">Home</a> | <a href="/about" style="color: var(--text-muted);">About</a> | <a href="https://sage.healthandtravels.com" style="color: var(--text-muted);">Sage Planner</a></p>
+        <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/" style="color: var(--link-color);">Home</a> | <a href="/about" style="color: var(--link-color);">About</a> | <a href="/arizona" style="color: var(--link-color);">Arizona Hub</a> | <a href="https://sage.healthandtravels.com" style="color: var(--link-color);" target="_blank" rel="noopener noreferrer">Sage Planner</a></p>
     </footer>
 
 </body>
