@@ -6,15 +6,22 @@
   <title>Health & Travels | Arizona Hiking Guide & Air Quality Tracking</title>
   <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking, direct Google Maps navigation, and health insights.">
 
-  <!-- Styles -->
+  <!-- Favicon -->
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <!-- Fallback/Alternative PNG Favicon if you use logo.png -->
+  <link rel="icon" type="image/png" href="logo.png">
+
+  <!-- Sage Theme Styles -->
   <style>
     :root {
-      --primary: #2c5e3b;
-      --primary-dark: #1e4128;
-      --accent: #d97706;
-      --light-bg: #f4f7f5;
-      --dark-text: #222;
+      --sage-primary: #5B7065;      /* Main Sage Green */
+      --sage-dark: #33433B;         /* Dark Forest Green */
+      --sage-light: #EBF0EC;        /* Light Tint Accent */
+      --light-bg: #F7F9F8;          /* Calm Off-White Background */
+      --dark-text: #2D3748;         /* High-Contrast Body Text */
       --white: #ffffff;
+      --blue-button: #1D4ED8;       /* Exact Hex Code Blue for Newsletter Button */
+      --blue-button-hover: #1E40AF; /* Darker Blue Hover State */
     }
 
     body {
@@ -29,12 +36,12 @@
     /* Navigation Bar */
     nav {
       background-color: var(--white);
-      border-bottom: 1px solid #e2e8f0;
+      border-bottom: 1px solid #E2E8F0;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
     }
 
     .logo-container {
@@ -42,19 +49,21 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--primary);
+      color: var(--sage-primary);
     }
 
     .logo-img {
       height: 40px;
       width: auto;
       border-radius: 4px;
+      object-fit: contain;
     }
 
     .site-title {
       font-size: 1.25rem;
       font-weight: 700;
-      margin: 0;
+      letter-spacing: -0.02em;
+      color: var(--sage-dark);
     }
 
     .nav-links {
@@ -74,30 +83,31 @@
     }
 
     .nav-links a:hover {
-      color: var(--primary);
+      color: var(--sage-primary);
     }
 
     /* Header Banner */
     header {
-      background-color: var(--primary);
+      background-color: var(--sage-primary);
       color: var(--white);
-      padding: 2.5rem 1rem;
+      padding: 3rem 1rem;
       text-align: center;
     }
 
     header h1 {
       margin: 0 0 0.5rem 0;
+      font-size: 2.2rem;
     }
 
     header p {
       margin: 0;
-      font-size: 1.1rem;
-      opacity: 0.9;
+      font-size: 1.15rem;
+      opacity: 0.95;
     }
 
     main {
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 2.5rem auto;
       padding: 0 1rem;
     }
 
@@ -111,10 +121,10 @@
 
     .trail-card {
       background: var(--white);
-      border-radius: 8px;
+      border-radius: 10px;
       padding: 1.5rem;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-      border: 1px solid #e2e8f0;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
+      border: 1px solid #E2E8F0;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -122,7 +132,8 @@
 
     .trail-card h3 {
       margin-top: 0;
-      color: var(--primary);
+      color: var(--sage-dark);
+      font-size: 1.25rem;
     }
 
     .aqi-container {
@@ -134,45 +145,60 @@
       display: inline-block;
       padding: 0.35rem 0.75rem;
       border-radius: 20px;
-      font-size: 0.9rem;
+      font-size: 0.875rem;
       font-weight: 600;
     }
 
-    .aqi-loading { background-color: #e2e8f0; color: #4a5568; }
-    .aqi-good { background-color: #d1fae5; color: #065f46; }      /* 0-50 Green */
-    .aqi-moderate { background-color: #fef3c7; color: #92400e; }  /* 51-100 Yellow */
-    .aqi-sensitive { background-color: #ffedd5; color: #9a3412; } /* 101-150 Orange */
-    .aqi-unhealthy { background-color: #fee2e2; color: #991b1b; } /* 151+ Red */
+    .aqi-loading { background-color: #E2E8F0; color: #4A5568; }
+    .aqi-good { background-color: #D1FAE5; color: #065F46; }      /* 0-50 Green */
+    .aqi-moderate { background-color: #FEF3C7; color: #92400E; }  /* 51-100 Yellow */
+    .aqi-sensitive { background-color: #FFEDD5; color: #9A3412; } /* 101-150 Orange */
+    .aqi-unhealthy { background-color: #FEE2E2; color: #991B1B; } /* 151+ Red */
 
     .btn-maps {
       display: inline-block;
-      background-color: var(--primary);
+      background-color: var(--sage-primary);
       color: var(--white);
       text-decoration: none;
-      padding: 0.6rem 1rem;
-      border-radius: 5px;
+      padding: 0.65rem 1rem;
+      border-radius: 6px;
       font-weight: 500;
       text-align: center;
       margin-top: 1rem;
+      transition: background-color 0.2s ease;
     }
 
     .btn-maps:hover {
-      background-color: var(--primary-dark);
+      background-color: var(--sage-dark);
+    }
+
+    /* Sage Health Section */
+    .sage-section {
+      background: var(--sage-light);
+      border-left: 4px solid var(--sage-primary);
+      padding: 1.5rem 2rem;
+      border-radius: 0 8px 8px 0;
+      margin-top: 3rem;
+    }
+
+    .sage-section h2 {
+      margin-top: 0;
+      color: var(--sage-dark);
     }
 
     /* Newsletter Section */
     .newsletter-section {
       background: var(--white);
-      border-radius: 8px;
-      padding: 2rem;
+      border-radius: 10px;
+      padding: 2.5rem 2rem;
       margin-top: 3rem;
-      border: 1px solid #e2e8f0;
+      border: 1px solid #E2E8F0;
       text-align: center;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.04);
     }
 
     .newsletter-section h2 {
-      color: var(--primary);
+      color: var(--sage-dark);
       margin-top: 0;
     }
 
@@ -187,30 +213,31 @@
     .newsletter-form input[type="email"] {
       flex: 1;
       padding: 0.75rem 1rem;
-      border: 1px solid #cbd5e1;
-      border-radius: 5px;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
       font-size: 1rem;
     }
 
+    /* Button using exact Hex Code #1D4ED8 */
     .newsletter-form button {
-      background-color: var(--accent);
+      background-color: var(--blue-button);
       color: var(--white);
       border: none;
       padding: 0.75rem 1.5rem;
-      border-radius: 5px;
+      border-radius: 6px;
       font-weight: 600;
       cursor: pointer;
       transition: background-color 0.2s ease;
     }
 
     .newsletter-form button:hover {
-      background-color: #b45309;
+      background-color: var(--blue-button-hover);
     }
 
     footer {
       text-align: center;
-      padding: 2rem 1rem;
-      color: #64748b;
+      padding: 2.5rem 1rem;
+      color: #718096;
       font-size: 0.9rem;
     }
   </style>
@@ -290,13 +317,13 @@
   <!-- Navigation Bar with Logo and Links -->
   <nav>
     <a href="#" class="logo-container">
-      <!-- Update src to your actual logo image filename if different -->
-      <img src="logo.png" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
+      <!-- Logo Image Tag -->
+      <img src="logo.png" alt="Health & Travels Logo" class="logo-img">
       <span class="site-title">Health & Travels</span>
     </a>
     <ul class="nav-links">
       <li><a href="#trails">Trails</a></li>
-      <li><a href="#sage">Sage</a></li>
+      <li><a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer">Sage</a></li>
       <li><a href="#newsletter">Newsletter</a></li>
     </ul>
   </nav>
@@ -385,16 +412,17 @@
       </div>
     </section>
 
-    <!-- Sage Section Placeholder -->
-    <section id="sage" style="margin-top: 3rem;">
+    <!-- Sage Health Section -->
+    <section id="sage" class="sage-section">
       <h2>Sage Health Insights</h2>
-      <p>Discover personalized wellness advice, elevation tips, and environmental health guidance for Southwestern travel.</p>
+      <p>Discover personalized wellness advice, elevation adjustment guidance, and outdoor health tips tailored for Southwestern exploration.</p>
+      <p><a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--sage-dark); font-weight: 600;">Visit Sage Health & Travel Portal →</a></p>
     </section>
 
     <!-- Newsletter Sign-Up Section -->
     <section id="newsletter" class="newsletter-section">
       <h2>Subscribe to the Health & Travels Newsletter</h2>
-      <p>Get weekly Arizona trail reports, air quality alerts, and wellness tips straight to your inbox.</p>
+      <p>Get weekly Arizona trail updates, air quality warnings, and health tips straight to your inbox.</p>
       
       <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
         <input type="email" placeholder="Enter your email address" required>
