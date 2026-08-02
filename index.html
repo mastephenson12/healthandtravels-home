@@ -4,24 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Health & Travels | Arizona Hiking Guide & Air Quality Tracking</title>
-  <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking, direct Google Maps navigation, and health insights.">
+  <meta name="description" content="Explore top hiking trails in Phoenix, Sedona, and Flagstaff with live Google Air Quality Index (AQI) tracking and health insights.">
 
-  <!-- Favicon -->
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
-  <!-- Fallback/Alternative PNG Favicon if you use logo.png -->
-  <link rel="icon" type="image/png" href="logo.png">
+  <!-- Favicon using exact file name in your GitHub repo -->
+  <link rel="icon" type="image/png" href="Health%20ad%20Travels%20Logo%20512x512.png">
+  <link rel="apple-touch-icon" href="Health%20ad%20Travels%20Logo%20512x512.png">
 
-  <!-- Sage Theme Styles -->
   <style>
     :root {
       --sage-primary: #5B7065;      /* Main Sage Green */
       --sage-dark: #33433B;         /* Dark Forest Green */
       --sage-light: #EBF0EC;        /* Light Tint Accent */
-      --light-bg: #F7F9F8;          /* Calm Off-White Background */
-      --dark-text: #2D3748;         /* High-Contrast Body Text */
+      --light-bg: #F7F9F8;          /* Background */
+      --dark-text: #2D3748;         /* Body Text */
       --white: #ffffff;
-      --blue-button: #1D4ED8;       /* Exact Hex Code Blue for Newsletter Button */
-      --blue-button-hover: #1E40AF; /* Darker Blue Hover State */
+      --blue-accent: #1D4ED8;       /* Newsletter & Link Blue Accent */
+      --blue-hover: #1E40AF;        /* Hover Blue */
     }
 
     body {
@@ -37,7 +35,7 @@
     nav {
       background-color: var(--white);
       border-bottom: 1px solid #E2E8F0;
-      padding: 1rem 2rem;
+      padding: 0.75rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -49,18 +47,18 @@
       align-items: center;
       gap: 0.75rem;
       text-decoration: none;
-      color: var(--sage-primary);
     }
 
     .logo-img {
-      height: 40px;
-      width: auto;
-      border-radius: 4px;
-      object-fit: contain;
+      height: 48px;
+      width: 48px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     .site-title {
-      font-size: 1.25rem;
+      font-size: 1.3rem;
       font-weight: 700;
       letter-spacing: -0.02em;
       color: var(--sage-dark);
@@ -83,7 +81,7 @@
     }
 
     .nav-links a:hover {
-      color: var(--sage-primary);
+      color: var(--blue-accent);
     }
 
     /* Header Banner */
@@ -96,7 +94,7 @@
 
     header h1 {
       margin: 0 0 0.5rem 0;
-      font-size: 2.2rem;
+      font-size: 2.25rem;
     }
 
     header p {
@@ -155,21 +153,22 @@
     .aqi-sensitive { background-color: #FFEDD5; color: #9A3412; } /* 101-150 Orange */
     .aqi-unhealthy { background-color: #FEE2E2; color: #991B1B; } /* 151+ Red */
 
+    /* Maps Button - Royal Blue Accent */
     .btn-maps {
       display: inline-block;
-      background-color: var(--sage-primary);
+      background-color: var(--blue-accent);
       color: var(--white);
       text-decoration: none;
       padding: 0.65rem 1rem;
       border-radius: 6px;
-      font-weight: 500;
+      font-weight: 600;
       text-align: center;
       margin-top: 1rem;
       transition: background-color 0.2s ease;
     }
 
     .btn-maps:hover {
-      background-color: var(--sage-dark);
+      background-color: var(--blue-hover);
     }
 
     /* Sage Health Section */
@@ -184,6 +183,16 @@
     .sage-section h2 {
       margin-top: 0;
       color: var(--sage-dark);
+    }
+
+    .sage-link {
+      color: var(--blue-accent);
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .sage-link:hover {
+      text-decoration: underline;
     }
 
     /* Newsletter Section */
@@ -218,9 +227,9 @@
       font-size: 1rem;
     }
 
-    /* Button using exact Hex Code #1D4ED8 */
+    /* Newsletter Button: Hex #1D4ED8 */
     .newsletter-form button {
-      background-color: var(--blue-button);
+      background-color: var(--blue-accent);
       color: var(--white);
       border: none;
       padding: 0.75rem 1.5rem;
@@ -231,7 +240,7 @@
     }
 
     .newsletter-form button:hover {
-      background-color: var(--blue-button-hover);
+      background-color: var(--blue-hover);
     }
 
     footer {
@@ -241,84 +250,13 @@
       font-size: 0.9rem;
     }
   </style>
-
-  <!-- Schema.org SEO Structured Data -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": [
-      {
-        "@type": "ListItem",
-        "position": 1,
-        "item": {
-          "@type": "Place",
-          "name": "Camelback Mountain - Echo Canyon Trail",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Phoenix",
-            "addressRegion": "AZ",
-            "postalCode": "85018",
-            "addressCountry": "US"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 33.5153,
-            "longitude": -111.9618
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 2,
-        "item": {
-          "@type": "Place",
-          "name": "Cathedral Rock Trail",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Sedona",
-            "addressRegion": "AZ",
-            "postalCode": "86336",
-            "addressCountry": "US"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 34.8213,
-            "longitude": -111.7925
-          }
-        }
-      },
-      {
-        "@type": "ListItem",
-        "position": 3,
-        "item": {
-          "@type": "Place",
-          "name": "Humphreys Peak Trailhead",
-          "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Flagstaff",
-            "addressRegion": "AZ",
-            "postalCode": "86001",
-            "addressCountry": "US"
-          },
-          "geo": {
-            "@type": "GeoCoordinates",
-            "latitude": 35.3283,
-            "longitude": -111.7118
-          }
-        }
-      }
-    ]
-  }
-  </script>
 </head>
 <body>
 
-  <!-- Navigation Bar with Logo and Links -->
+  <!-- Navigation Bar -->
   <nav>
     <a href="#" class="logo-container">
-      <!-- Logo Image Tag -->
-      <img src="logo.png" alt="Health & Travels Logo" class="logo-img">
+      <img src="Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels Logo" class="logo-img">
       <span class="site-title">Health & Travels</span>
     </a>
     <ul class="nav-links">
@@ -340,7 +278,7 @@
       <h2>Featured Trails & Real-Time Air Quality</h2>
       <div class="trail-grid">
 
-        <!-- Trail 1: Phoenix -->
+        <!-- Trail 1 -->
         <div class="trail-card">
           <div>
             <h3>Camelback Mountain</h3>
@@ -363,7 +301,7 @@
           </a>
         </div>
 
-        <!-- Trail 2: Sedona -->
+        <!-- Trail 2 -->
         <div class="trail-card">
           <div>
             <h3>Cathedral Rock</h3>
@@ -386,7 +324,7 @@
           </a>
         </div>
 
-        <!-- Trail 3: Flagstaff -->
+        <!-- Trail 3 -->
         <div class="trail-card">
           <div>
             <h3>Humphreys Peak</h3>
@@ -416,7 +354,7 @@
     <section id="sage" class="sage-section">
       <h2>Sage Health Insights</h2>
       <p>Discover personalized wellness advice, elevation adjustment guidance, and outdoor health tips tailored for Southwestern exploration.</p>
-      <p><a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--sage-dark); font-weight: 600;">Visit Sage Health & Travel Portal →</a></p>
+      <p><a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" class="sage-link">Visit Sage Health & Travel Portal →</a></p>
     </section>
 
     <!-- Newsletter Sign-Up Section -->
@@ -435,7 +373,7 @@
     <p>&copy; Health & Travels. All rights reserved.</p>
   </footer>
 
-  <!-- Google Air Quality Fetch Script -->
+  <!-- AQI Fetch Script -->
   <script>
     const GOOGLE_API_KEY = "YOUR_GOOGLE_MAPS_API_KEY"; 
 
