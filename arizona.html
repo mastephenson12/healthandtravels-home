@@ -7,6 +7,10 @@
     <meta name="description" content="Explore family-friendly Arizona destination hubs. Practical guides for hiking, weekend trips, and summer escapes in Sedona, Flagstaff, Pinetop, Prescott, and Tucson.">
     <link rel="canonical" href="https://healthandtravels.com/arizona">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+
     <!-- Google Fonts Matching Beehiiv -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -61,6 +65,18 @@
             max-width: 1200px;
             margin: 0 auto;
         }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
         .logo { 
             font-family: var(--font-heading);
             font-size: 1.6rem; 
@@ -114,6 +130,9 @@
             border-radius: 8px;
             padding: 24px;
             transition: transform 0.2s;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
         .card:hover { transform: translateY(-3px); border-color: var(--accent-teal); }
         .card h3 { 
@@ -134,6 +153,7 @@
             font-weight: 700; 
             margin-bottom: 12px; 
             text-transform: uppercase;
+            align-self: flex-start;
         }
 
         .cta-box {
@@ -178,12 +198,15 @@
 <body>
 
     <header>
-        <a href="/" class="logo">Health <span>&</span> Travels</a>
+        <a href="/" class="logo-container">
+            <img src="/logo.jpg" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo">Health <span>&</span> Travels</span>
+        </a>
         <nav>
             <a href="/">Home</a>
             <a href="/about">About</a>
-            <a href="https://sage.healthandtravels.com">Sage Planner</a>
-            <a href="https://newsletter.healthandtravels.com">Newsletter</a>
+            <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer">Sage Planner</a>
+            <a href="https://newsletter.healthandtravels.com" target="_blank" rel="noopener noreferrer">Newsletter</a>
         </nav>
     </header>
 
@@ -201,52 +224,64 @@
         
         <div class="grid-3">
             <div class="card">
-                <span class="tag">Red Rock Country</span>
-                <h3>Sedona & Oak Creek</h3>
-                <p>Kid-tested alternatives to overcrowded spots like Devil's Bridge. Features early arrival windows, shade ratings, and creek splash spots.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Sedona Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">Red Rock Country</span>
+                    <h3>Sedona & Oak Creek</h3>
+                    <p>Kid-tested alternatives to overcrowded spots like Devil's Bridge. Features early arrival windows, shade ratings, and creek splash spots.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan Sedona Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
-                <span class="tag">Mogollon Rim</span>
-                <h3>Pinetop-Lakeside & Show Low</h3>
-                <p>Beat the Phoenix heat in the cool pines. Lakeside walking loops, park playgrounds, and family-friendly mountain hikes.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Pinetop Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">Mogollon Rim</span>
+                    <h3>Pinetop-Lakeside & Show Low</h3>
+                    <p>Beat the Phoenix heat in the cool pines. Lakeside walking loops, park playgrounds, and family-friendly mountain hikes.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan Pinetop Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
-                <span class="tag">High Country</span>
-                <h3>Flagstaff & Williams</h3>
-                <p>Ponderosa pine trails, high-altitude considerations, lava tubes, and family day trips near the Grand Canyon.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Flagstaff Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">High Country</span>
+                    <h3>Flagstaff & Williams</h3>
+                    <p>Ponderosa pine trails, high-altitude considerations, lava tubes, and family day trips near the Grand Canyon.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan Flagstaff Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
-                <span class="tag">Central Highlands</span>
-                <h3>Prescott & Jerome</h3>
-                <p>Watson Lake boulder walks, historic downtown squares, shaded creek hikes, and moderate driving distance from Phoenix.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Prescott Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">Central Highlands</span>
+                    <h3>Prescott & Jerome</h3>
+                    <p>Watson Lake boulder walks, historic downtown squares, shaded creek hikes, and moderate driving distance from Phoenix.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan Prescott Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
-                <span class="tag">Southern Arizona</span>
-                <h3>Tucson & Saguaro Country</h3>
-                <p>Desert trail safety, Saguaro National Park family stops, Sabino Canyon tram logistics, and winter/spring timing.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan Tucson Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">Southern Arizona</span>
+                    <h3>Tucson & Saguaro Country</h3>
+                    <p>Desert trail safety, Saguaro National Park family stops, Sabino Canyon tram logistics, and winter/spring timing.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan Tucson Trip in Sage &rarr;</a>
             </div>
 
             <div class="card">
-                <span class="tag">Colorado River</span>
-                <h3>Lake Havasu & Yuma</h3>
-                <p>Water-based family escapes, river parks, winter sun outings, and heat management guidelines for low-desert travel.</p>
-                <a href="https://sage.healthandtravels.com" style="color: var(--link-color); font-weight: 700;">Plan River Trip in Sage &rarr;</a>
+                <div>
+                    <span class="tag">Colorado River</span>
+                    <h3>Lake Havasu & Yuma</h3>
+                    <p>Water-based family escapes, river parks, winter sun outings, and heat management guidelines for low-desert travel.</p>
+                </div>
+                <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" style="color: var(--link-color); font-weight: 700; margin-top: 1rem;">Plan River Trip in Sage &rarr;</a>
             </div>
         </div>
 
         <div class="cta-box">
             <h2>Need a Custom Family Itinerary?</h2>
             <p>Filter Arizona destinations instantly by your kids' ages, shade requirements, stroller accessibility, and total drive time.</p>
-            <a href="https://sage.healthandtravels.com" class="btn">Open Sage Trip Planner</a>
+            <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" class="btn">Open Sage Trip Planner</a>
         </div>
 
     </div>
