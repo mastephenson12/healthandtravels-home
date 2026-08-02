@@ -7,6 +7,10 @@
     <meta name="description" content="Learn about Mark Stephenson, RN, founder of Health & Travels, Sage Trip Planner, and the Arizona Hikers Association. Focused on safe, kid-friendly outdoor planning.">
     <link rel="canonical" href="https://healthandtravels.com/about">
 
+    <!-- Favicon -->
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+
     <!-- Google Fonts Matching Beehiiv -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -62,6 +66,18 @@
             align-items: center;
             max-width: 1200px;
             margin: 0 auto;
+        }
+        .logo-container {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            text-decoration: none;
+        }
+        .logo-img {
+            height: 40px;
+            width: 40px;
+            border-radius: 50%;
+            object-fit: cover;
         }
         .logo { 
             font-family: var(--font-heading);
@@ -160,7 +176,10 @@
 <body>
 
     <header>
-        <a href="/" class="logo">Health <span>&</span> Travels</a>
+        <a href="/" class="logo-container">
+            <img src="/logo.jpg" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
+            <span class="logo">Health <span>&</span> Travels</span>
+        </a>
         <nav>
             <a href="/">Home</a>
             <a href="/arizona">Arizona Hub</a>
