@@ -16,6 +16,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700&family=Lato:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
 
+  <!-- Shared analytics across Health & Travels, Sage, and the newsletter -->  
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKH3PF8GEJ"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-DKH3PF8GEJ');
+  </script>
+
   <!-- Structured Data (JSON-LD) -->
   <script type="application/ld+json">
   {
@@ -335,6 +344,50 @@
       background: #F9FAFB;
       margin-top: 60px;
     }
+
+    @media (max-width: 760px) {
+      header {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+        padding: 14px 18px;
+      }
+
+      nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px 16px;
+      }
+
+      nav a {
+        margin-left: 0;
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+      }
+
+      .hero {
+        padding: 38px 18px;
+      }
+
+      .hero h1 {
+        font-size: clamp(2rem, 10vw, 2.6rem);
+      }
+
+      .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .newsletter-form {
+        flex-direction: column;
+      }
+
+      .btn,
+      .newsletter-form button {
+        min-height: 44px;
+        box-sizing: border-box;
+      }
+    }
   </style>
 </head>
 <body>
@@ -345,11 +398,11 @@
       <img src="/logo.jpg" alt="Health & Travels Logo" class="logo-img" onerror="this.style.display='none'">
       <span class="logo">Health <span>&</span> Travels</span>
     </a>
-    <nav>
-      <a href="/about">About</a>
+    <nav aria-label="Health & Travels network">
+      <a href="/" aria-current="page">Health & Travels</a>
       <a href="/arizona">Arizona Hub</a>
-      <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer">Sage Planner</a>
-      <a href="#newsletter">Newsletter</a>
+      <a href="https://sage.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=header" data-network-destination="sage">Plan with Sage</a>
+      <a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=header" data-network-destination="newsletter">Newsletter</a>
     </nav>
   </header>
 
@@ -372,7 +425,7 @@
           <p>Planning outdoor trips with family? Filter regional destinations instantly by your kids' ages, shade requirements, stroller fit, and total drive time.</p>
         </div>
         <div>
-          <a href="https://sage.healthandtravels.com" target="_blank" rel="noopener noreferrer" class="btn">
+          <a href="https://sage.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=sage_card" class="btn" data-network-destination="sage">
             Open Sage Trip Planner &rarr;
           </a>
         </div>
@@ -384,10 +437,9 @@
           <h2>Join Our Weekly Newsletter</h2>
           <p>Delivered twice weekly, each edition highlights an Arizona town or city—featuring nearby family trails, dining spots, and stay recommendations.</p>
         </div>
-        <form class="newsletter-form" action="#" method="POST" onsubmit="event.preventDefault(); alert('Thank you for subscribing!');">
-          <input type="email" placeholder="Enter your email" required>
-          <button type="submit">Subscribe</button>
-        </form>
+        <a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=newsletter_card" class="btn" data-network-destination="newsletter">
+          Read &amp; Subscribe &rarr;
+        </a>
       </section>
 
     </div>
@@ -478,7 +530,7 @@
   </main>
 
   <footer>
-    <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/about" style="color: var(--link-color);">About</a> | <a href="/arizona" style="color: var(--link-color);">Arizona Hub</a> | <a href="/editorial-standards" style="color: var(--link-color);">Standards</a> | <a href="https://sage.healthandtravels.com" style="color: var(--link-color);" target="_blank" rel="noopener noreferrer">Sage Planner</a></p>
+    <p>&copy; 2026 Health & Travels. All rights reserved. | <a href="/about" style="color: var(--link-color);">About</a> | <a href="/arizona" style="color: var(--link-color);">Arizona Hub</a> | <a href="/editorial-standards" style="color: var(--link-color);">Standards</a> | <a href="https://sage.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=footer" style="color: var(--link-color);" data-network-destination="sage">Plan with Sage</a> | <a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&utm_medium=referral&utm_campaign=brand_network&utm_content=footer" style="color: var(--link-color);" data-network-destination="newsletter">Newsletter</a></p>
   </footer>
 
   <!-- AQI Fetch Script -->
@@ -549,7 +601,21 @@
       }
     }
 
-    document.addEventListener("DOMContentLoaded", updateAllTrailsAQI);
+    document.addEventListener("DOMContentLoaded", () => {
+      updateAllTrailsAQI();
+
+      document.querySelectorAll("[data-network-destination]").forEach((link) => {
+        link.addEventListener("click", () => {
+          if (typeof gtag === "function") {
+            gtag("event", "brand_network_click", {
+              destination: link.dataset.networkDestination,
+              source_site: "healthandtravels",
+              link_url: link.href
+            });
+          }
+        });
+      });
+    });
   </script>
 
 </body>
