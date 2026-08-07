@@ -1,14 +1,15 @@
 :root {
-  --network-teal: #00796b;
-  --network-dark-teal: #004d40;
-  --network-orange: #e65100;
+  --network-teal: #5b9e96;
+  --network-dark-teal: #2f6f68;
+  --network-blue: #0d47a1;
   --network-ink: #111827;
   --network-border: #e5e7eb;
 }
 
 .network-bar {
-  background: #030712;
-  color: #fff;
+  background: #f2f8f7;
+  color: var(--network-ink);
+  border-bottom: 1px solid #dcebe8;
   font-family: var(--font-button, Inter, sans-serif);
 }
 
@@ -30,11 +31,11 @@
   text-transform: uppercase;
 }
 
-.network-bar__label { color: #a1a1aa; }
+.network-bar__label { color: #52716d; }
 .network-bar__links { display: flex; gap: 8px; }
-.network-bar a { border-radius: 7px; color: #d4d4d8; padding: 6px 10px; text-decoration: none; }
-.network-bar a:hover { background: rgba(255,255,255,.1); color: #fff; }
-.network-bar a[aria-current="page"] { background: #fff; color: #030712; }
+.network-bar a { border-radius: 7px; color: #3f625e; padding: 6px 10px; text-decoration: none; }
+.network-bar a:hover { background: #e3f0ed; color: #234d48; }
+.network-bar a[aria-current="page"] { background: #dcefeb; color: #234d48; }
 
 header.site-header {
   align-items: center;
@@ -48,12 +49,12 @@ header.site-header {
 }
 
 .site-header .logo-img { border-radius: 12px; height: 48px; width: 48px; }
-.site-header .logo-subtitle { color: var(--network-teal); display: block; font: 800 10px/1.2 var(--font-button, Inter, sans-serif); letter-spacing: .16em; margin-top: 3px; text-transform: uppercase; }
+.site-header .logo-subtitle { color: var(--network-dark-teal); display: block; font: 800 10px/1.2 var(--font-button, Inter, sans-serif); letter-spacing: .16em; margin-top: 3px; text-transform: uppercase; }
 .site-header nav { align-items: center; display: flex; flex-wrap: wrap; gap: 8px 20px; }
 .site-header nav a { color: #52525b; font: 800 12px/1 var(--font-button, Inter, sans-serif); margin: 0; text-transform: uppercase; }
-.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--network-teal); }
-.site-header .nav-cta { background: var(--network-orange); border-radius: 7px; color: #fff; padding: 11px 15px; }
-.site-header .nav-cta:hover { background: #c2410c; color: #fff; }
+.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--network-dark-teal); }
+.site-header .nav-cta { background: var(--network-blue); border-radius: 7px; color: #fff; padding: 11px 15px; }
+.site-header .nav-cta:hover { background: #0a3a85; color: #fff; }
 
 @media (max-width: 760px) {
   .network-bar__inner { justify-content: center; padding-inline: 12px; }
