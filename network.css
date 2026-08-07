@@ -1,0 +1,66 @@
+:root {
+  --network-teal: #00796b;
+  --network-dark-teal: #004d40;
+  --network-orange: #e65100;
+  --network-ink: #111827;
+  --network-border: #e5e7eb;
+}
+
+.network-bar {
+  background: #030712;
+  color: #fff;
+  font-family: var(--font-button, Inter, sans-serif);
+}
+
+.network-bar__inner {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1152px;
+  min-height: 40px;
+  padding: 6px 24px;
+}
+
+.network-bar__label,
+.network-bar a {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.network-bar__label { color: #a1a1aa; }
+.network-bar__links { display: flex; gap: 8px; }
+.network-bar a { border-radius: 7px; color: #d4d4d8; padding: 6px 10px; text-decoration: none; }
+.network-bar a:hover { background: rgba(255,255,255,.1); color: #fff; }
+.network-bar a[aria-current="page"] { background: #fff; color: #030712; }
+
+header.site-header {
+  align-items: center;
+  background: rgba(255,255,255,.97);
+  border-bottom: 1px solid var(--network-border);
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1200px;
+  padding: 12px 24px;
+}
+
+.site-header .logo-img { border-radius: 12px; height: 48px; width: 48px; }
+.site-header .logo-subtitle { color: var(--network-teal); display: block; font: 800 10px/1.2 var(--font-button, Inter, sans-serif); letter-spacing: .16em; margin-top: 3px; text-transform: uppercase; }
+.site-header nav { align-items: center; display: flex; flex-wrap: wrap; gap: 8px 20px; }
+.site-header nav a { color: #52525b; font: 800 12px/1 var(--font-button, Inter, sans-serif); margin: 0; text-transform: uppercase; }
+.site-header nav a:hover, .site-header nav a[aria-current="page"] { color: var(--network-teal); }
+.site-header .nav-cta { background: var(--network-orange); border-radius: 7px; color: #fff; padding: 11px 15px; }
+.site-header .nav-cta:hover { background: #c2410c; color: #fff; }
+
+@media (max-width: 760px) {
+  .network-bar__inner { justify-content: center; padding-inline: 12px; }
+  .network-bar__label { display: none; }
+  .network-bar__links { justify-content: center; width: 100%; }
+  .network-bar a { font-size: 10px; padding-inline: 8px; }
+  header.site-header { align-items: flex-start; flex-direction: column; gap: 12px; padding: 12px 18px; }
+  .site-header nav { gap: 4px 14px; }
+  .site-header nav a { min-height: 36px; }
+}
