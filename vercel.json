@@ -1,3 +1,37 @@
 {
-  "cleanUrls": true
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "redirects": [
+    {
+      "source": "/forms",
+      "destination": "https://newsletter.healthandtravels.com/subscribe",
+      "permanent": true
+    },
+    {
+      "source": "/forms/:path*",
+      "destination": "https://newsletter.healthandtravels.com/subscribe",
+      "permanent": true
+    },
+    {
+      "source": "/subscribe",
+      "destination": "https://newsletter.healthandtravels.com/subscribe",
+      "permanent": true
+    },
+    {
+      "source": "/archive",
+      "destination": "https://newsletter.healthandtravels.com/archive",
+      "permanent": true
+    },
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.healthandtravels.com"
+        }
+      ],
+      "destination": "https://healthandtravels.com/:path*",
+      "permanent": true
+    }
+  ]
 }
