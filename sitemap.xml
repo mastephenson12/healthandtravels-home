@@ -38,6 +38,13 @@
     <priority>0.9</priority>
   </url>
 
+  <url>
+    <loc>https://healthandtravels.com/payson-mogollon-rim-family-weekend-guide</loc>
+    <lastmod>2026-08-08</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- About Page / Editorial Credentials -->
   <url>
     <loc>https://healthandtravels.com/about</loc>
