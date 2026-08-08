@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow">
+  <title>Media Upload | Health & Travels</title>
+  <style>
+    :root{--blue:#0D47A1;--teal:#5B9E96;--ink:#111827;--muted:#4B5563;--line:#D1D5DB;--bg:#F8FAFC}
+    *{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,sans-serif}
+    main{max-width:720px;margin:auto;padding:24px 16px 60px}h1{font-size:clamp(2rem,8vw,3rem);margin:10px 0}p{line-height:1.55;color:var(--muted)}
+    form{background:#fff;border:1px solid var(--line);border-radius:14px;padding:20px;box-shadow:0 8px 28px rgba(15,23,42,.06)}
+    label{display:block;font-weight:750;margin:18px 0 7px}input,select,textarea,button{width:100%;font:inherit;border-radius:9px}input,select,textarea{border:1px solid var(--line);padding:12px;background:#fff}textarea{min-height:90px;resize:vertical}
+    input[type=file]{padding:18px;border:2px dashed var(--teal);background:#F0FDFA}.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    button{border:0;background:var(--blue);color:#fff;font-weight:800;padding:14px;margin-top:22px;cursor:pointer}button:disabled{opacity:.55}
+    .note{background:#EAF6F3;border-left:4px solid var(--teal);padding:12px 14px;border-radius:5px}.status{margin-top:18px}.item{background:#fff;border:1px solid var(--line);border-radius:10px;padding:12px;margin:10px 0}.ok{border-color:#34D399}.bad{border-color:#F87171}
+    .thumb{width:84px;height:62px;object-fit:cover;border-radius:7px;vertical-align:middle;margin-right:10px}@media(max-width:560px){.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body><main>
+  <p style="font-weight:800;color:#2F6F68;letter-spacing:.12em;text-transform:uppercase">Private media intake</p>
+  <h1>Health & Travels Photo Upload</h1>
+  <p class="note">On Android, tap <strong>Choose photos</strong> to select from your phone or Google Photos. Everything goes to the Cloudinary review inbox—it will not publish automatically.</p>
+  <form id="uploadForm">
+    <label for="mediaKey">Private upload key</label>
+    <input id="mediaKey" type="password" autocomplete="current-password" required placeholder="Your private upload key">
+
+    <label for="files">Photos</label>
+    <input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple required>
+
+    <div class="grid">
+      <div><label for="location">Location</label><input id="location" required placeholder="Bisbee, Arizona"></div>
+      <div><label for="season">Season</label><select id="season"><option>Spring</option><option>Summer</option><option>Fall</option><option>Winter</option><option selected>Year-round</option></select></div>
+    </div>
+
+    <label for="destination">Best use</label>
+    <select id="destination" required>
+      <option value="article-hero">Article hero</option>
+      <option value="article-inline">Inside an article</option>
+      <option value="homepage">Homepage feature</option>
+      <option value="trail-card">Trail or destination card</option>
+      <option value="newsletter">Newsletter</option>
+      <option value="social">Social media</option>
+      <option value="unsure" selected>Let us decide</option>
+    </select>
+
+    <div class="grid">
+      <div><label for="people">People shown</label><select id="people"><option value="family-four">Family of four</option><option value="adults">Adults</option><option value="children">Children</option><option value="group">Hiking group</option><option value="none">No people</option></select></div>
+      <div><label for="orientation">Orientation</label><select id="orientation"><option value="landscape">Landscape</option><option value="portrait">Portrait</option><option value="square">Square</option><option value="mixed">Mixed batch</option></select></div>
+    </div>
+
+    <label for="alt">What is happening in the photo?</label>
+    <textarea id="alt" required placeholder="Family overlooking Bisbee from a scenic hillside trail."></textarea>
+
+    <label for="notes">Private notes</label>
+    <textarea id="notes" placeholder="Who took it, trail name, permission details, or the story behind it."></textarea>
+
+    <label style="display:flex;gap:10px;align-items:flex-start;font-weight:600"><input id="rights" type="checkbox" required style="width:auto;margin-top:4px">I own these photos or have permission to publish them.</label>
+    <button id="submit" type="submit">Upload to review inbox</button>
+  </form>
+  <div id="status" class="status" aria-live="polite"></div>
+</main>
+<script>
+const form=document.getElementById("uploadForm"),statusBox=document.getElementById("status"),submit=document.getElementById("submit");
+const clean=(v)=>String(v||"").replace(/[|=]/g," ").trim();
+const slug=(v)=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$/g,"").slice(0,60)||"arizona-photo";
+form.addEventListener("submit",async(e)=>{
+  e.preventDefault(); statusBox.innerHTML=""; submit.disabled=true;
+  const files=[...document.getElementById("files").files], key=document.getElementById("mediaKey").value;
+  sessionStorage.setItem("ht_media_key",key);
+  const location=clean(document.getElementById("location").value), destination=clean(document.getElementById("destination").value);
+  const season=clean(document.getElementById("season").value), people=clean(document.getElementById("people").value), orientation=clean(document.getElementById("orientation").value);
+  const alt=clean(document.getElementById("alt").value), notes=clean(document.getElementById("notes").value);
+  for(let i=0;i<files.length;i++){
+    const file=files[i], row=document.createElement("div"); row.className="item"; row.textContent="Uploading "+file.name+"…"; statusBox.appendChild(row);
+    try{
+      const paramsToSign={
+        public_id:slug(location)+"-"+Date.now()+"-"+(i+1),
+        tags:[slug(location),destination,season.toLowerCase(),people,orientation].join(","),
+        context:["alt="+alt,"caption="+alt,"location="+location,"best_use="+destination,"season="+season,"people="+people,"orientation="+orientation,"notes="+notes].join("|")
+      };
+      const signed=await fetch("/api/cloudinary-sign",{method:"POST",headers:{"Content-Type":"application/json","X-Media-Key":key},body:JSON.stringify({paramsToSign})});
+      const auth=await signed.json(); if(!signed.ok) throw new Error(auth.error||"Could not authorize upload");
+      const data=new FormData(); data.append("file",file); data.append("api_key",auth.apiKey); data.append("signature",auth.signature);
+      Object.entries(auth.signedParams).forEach(([k,v])=>data.append(k,v));
+      const uploaded=await fetch("https://api.cloudinary.com/v1_1/"+encodeURIComponent(auth.cloudName)+"/image/upload",{method:"POST",body:data});
+      const result=await uploaded.json(); if(!uploaded.ok) throw new Error(result.error&&result.error.message||"Cloudinary upload failed");
+      row.className="item ok"; row.innerHTML='<img class="thumb" src="'+result.secure_url.replace("/upload/","/upload/c_fill,w_168,h_124,f_auto,q_auto/")+'" alt="">Uploaded <strong>'+file.name+'</strong><br><small>'+result.public_id+'</small>';
+    }catch(err){row.className="item bad";row.textContent=file.name+": "+err.message}
+  }
+  submit.disabled=false;
+});
+document.getElementById("mediaKey").value=sessionStorage.getItem("ht_media_key")||"";
+</script></body></html>
