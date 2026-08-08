@@ -1,8 +1,6 @@
 User-agent: *
 Allow: /
 
-# Sitemaps across the Health & Travels network
+# Canonical sitemap for healthandtravels.com.
+# Each subdomain publishes its own robots.txt and sitemap.
 Sitemap: https://healthandtravels.com/sitemap.xml
-Sitemap: https://newsletter.healthandtravels.com/sitemap.xml
-Sitemap: https://sage.healthandtravels.com/sitemap.xml
-Sitemap: https://freedom.healthandtravels.com/sitemap.xml
