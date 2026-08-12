@@ -38,11 +38,6 @@
       "permanent": true
     },
     {
-      "source": "/archive",
-      "destination": "https://newsletter.healthandtravels.com/archive",
-      "permanent": true
-    },
-    {
       "source": "/:path*",
       "has": [
         {
@@ -80,6 +75,12 @@
           "value": "no-store"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/archive",
+      "destination": "/api/archive-redirect"
     }
   ]
 }
