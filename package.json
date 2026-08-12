@@ -1,0 +1,7 @@
+{
+  "private": true,
+  "scripts": {
+    "cloudinary:inbox": "node scripts/upload-cloudinary-inbox.mjs",
+    "cloudinary:catalog": "node scripts/sync-cloudinary-catalog.mjs"
+  }
+}
