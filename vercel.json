@@ -89,6 +89,26 @@
   ],
   "rewrites": [
     {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "query",
+          "key": "404"
+        }
+      ],
+      "destination": "/api/legacy-gone"
+    },
+    {
+      "source": "/archive",
+      "has": [
+        {
+          "type": "query",
+          "key": "toast"
+        }
+      ],
+      "destination": "/api/legacy-gone"
+    },
+    {
       "source": "/archive",
       "destination": "/api/archive-redirect"
     }
