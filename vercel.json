@@ -38,6 +38,16 @@
       "permanent": true
     },
     {
+      "source": "/publications",
+      "destination": "https://newsletter.healthandtravels.com",
+      "permanent": true
+    },
+    {
+      "source": "/upgrade",
+      "destination": "https://newsletter.healthandtravels.com/subscribe",
+      "permanent": true
+    },
+    {
       "source": "/:path*",
       "has": [
         {
