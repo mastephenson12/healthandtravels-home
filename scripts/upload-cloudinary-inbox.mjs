@@ -4,7 +4,7 @@ import path from 'node:path';
 
 const shouldUpload = process.argv.includes('--confirm');
 const inboxDirectory = path.resolve('photo-inbox');
-const rootFolder = (process.env.CLOUDINARY_FOLDER || 'health-and-travels').replace(/^\\/+|\\/+$/g, '');
+const rootFolder = (process.env.CLOUDINARY_FOLDER || 'health-and-travels').replace(/^\/+|\/+$/g, '');
 const supportedExtensions = new Set(['.avif', '.heic', '.heif', '.jpg', '.jpeg', '.png', '.webp']);
 
 function credentials() {
