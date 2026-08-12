@@ -18,6 +18,26 @@
       "permanent": true
     },
     {
+      "source": "/p/:path*",
+      "destination": "https://newsletter.healthandtravels.com/p/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/t/:path*",
+      "destination": "https://newsletter.healthandtravels.com/t/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/authors",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
+      "source": "/authors/:path*",
+      "destination": "/about",
+      "permanent": true
+    },
+    {
       "source": "/archive",
       "destination": "https://newsletter.healthandtravels.com/archive",
       "permanent": true
