@@ -2,7 +2,7 @@ import { mkdir, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 
 const outputPath = path.resolve('data/cloudinary-images.json');
-const prefix = (process.env.CLOUDINARY_FOLDER || 'health-and-travels').replace(/^\\/+|\\/+$/g, '');
+const prefix = (process.env.CLOUDINARY_FOLDER || 'health-and-travels').replace(/^\/+|\/+$/g, '');
 function credentials() {
   if (process.env.CLOUDINARY_URL) {
     const url = new URL(process.env.CLOUDINARY_URL);
