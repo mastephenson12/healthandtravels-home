@@ -5,50 +5,37 @@
     {
       "source": "/forms",
       "destination": "https://newsletter.healthandtravels.com/subscribe",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/forms/:path*",
       "destination": "https://newsletter.healthandtravels.com/subscribe",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/subscribe",
       "destination": "https://newsletter.healthandtravels.com/subscribe",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/p/:path*",
       "destination": "https://newsletter.healthandtravels.com/p/:path*",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/t/:path*",
       "destination": "https://newsletter.healthandtravels.com/t/:path*",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/authors",
       "destination": "/about",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/authors/:path*",
       "destination": "/about",
-      "permanent": true,
-      "preserveQueryParams": false
-    },
-    {
-      "source": "/archive",
-      "destination": "https://newsletter.healthandtravels.com/archive",
-      "permanent": true,
-      "preserveQueryParams": false
+      "permanent": true
     },
     {
       "source": "/:path*",
@@ -88,6 +75,12 @@
           "value": "no-store"
         }
       ]
+    }
+  ],
+  "rewrites": [
+    {
+      "source": "/archive",
+      "destination": "/api/archive-redirect"
     }
   ]
 }
