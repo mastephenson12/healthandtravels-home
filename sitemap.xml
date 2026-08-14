@@ -101,6 +101,14 @@
     <priority>0.9</priority>
   </url>
 
+  <!-- Spanish Destination Guides -->
+  <url>
+    <loc>https://healthandtravels.com/es/sedona-con-ninos</loc>
+    <lastmod>2026-08-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- About Page / Editorial Credentials -->
   <url>
     <loc>https://healthandtravels.com/about</loc>
