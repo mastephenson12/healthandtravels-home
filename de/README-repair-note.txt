@@ -1,1 +1,0 @@
-Repair branch rebuilt from current main to replace stale German Grand Canyon PR #34.
