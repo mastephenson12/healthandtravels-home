@@ -22,7 +22,7 @@
   <p class="note">On Android, tap <strong>Choose photos</strong> to select from your phone or Google Photos. Everything goes to the Cloudinary review inbox—it will not publish automatically.</p>
   <form id="uploadForm">
     <label for="mediaKey">Private upload key</label>
-    <input id="mediaKey" type="password" autocomplete="current-password" required placeholder="Your private upload key">
+    <input id="mediaKey" type="password" autocomplete="off" required placeholder="Your private upload key">
 
     <label for="files">Photos</label>
     <input id="files" type="file" accept="image/jpeg,image/png,image/webp,image/heic,image/heif" multiple required>
@@ -66,7 +66,6 @@ const slug=(v)=>clean(v).toLowerCase().replace(/[^a-z0-9]+/g,"-").replace(/^-|-$
 form.addEventListener("submit",async(e)=>{
   e.preventDefault(); statusBox.innerHTML=""; submit.disabled=true;
   const files=[...document.getElementById("files").files], key=document.getElementById("mediaKey").value;
-  sessionStorage.setItem("ht_media_key",key);
   const location=clean(document.getElementById("location").value), destination=clean(document.getElementById("destination").value);
   const season=clean(document.getElementById("season").value), people=clean(document.getElementById("people").value), orientation=clean(document.getElementById("orientation").value);
   const alt=clean(document.getElementById("alt").value), notes=clean(document.getElementById("notes").value);
@@ -87,7 +86,7 @@ form.addEventListener("submit",async(e)=>{
       row.className="item ok"; row.innerHTML='<img class="thumb" src="'+result.secure_url.replace("/upload/","/upload/c_fill,w_168,h_124,f_auto,q_auto/")+'" alt="">Uploaded <strong>'+file.name+'</strong><br><small>'+result.public_id+'</small>';
     }catch(err){row.className="item bad";row.textContent=file.name+": "+err.message}
   }
+  document.getElementById("mediaKey").value="";
   submit.disabled=false;
 });
-document.getElementById("mediaKey").value=sessionStorage.getItem("ht_media_key")||"";
 </script></body></html>
