@@ -118,7 +118,7 @@
 
     function sageUrl(d,prefs){
       const group=groupSettings(prefs.group); const p=new URLSearchParams();
-      p.set('plan','ready'); p.set('location',d.slug); p.set('kids',group.kids); p.set('activity',prefs.activity); p.set('length',prefs.length); p.set('season',prefs.season); p.set('ages',group.ages); p.set('shade',String(prefs.shade)); p.set('bathrooms',String(prefs.bathrooms)); p.set('stroller',String(prefs.stroller)); p.set('drive',String(prefs.drive)); p.set('utm_source','healthandtravels'); p.set('utm_medium','planner'); p.set('utm_campaign','plan_arizona_adventure'); p.set('utm_content',d.slug);
+      p.set('plan','ready'); p.set('location',d.slug); p.set('kids',group.kids); p.set('activity',prefs.activity); p.set('length',prefs.length); p.set('season',prefs.season); p.set('ages',group.ages); p.set('shade',String(prefs.shade)); p.set('bathrooms',String(prefs.bathrooms)); p.set('stroller',String(prefs.stroller)); p.set('drive',String(prefs.drive)); p.set('source','health-travels-matcher'); p.set('utm_source','healthandtravels'); p.set('utm_medium','planner'); p.set('utm_campaign','plan_arizona_adventure'); p.set('utm_content',d.slug);
       return 'https://sage.healthandtravels.com/trip-builder?'+p.toString();
     }
 
