@@ -45,18 +45,21 @@ a { color: #0c4a6e; }
 footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; padding: 36px 20px; text-align: center; }
 
 /* Adventure Ready system: shared destination decision UI */
-.article-body .fact-grid {
+.article-body .fact-grid,
+.article-body .trip-snapshot {
   background: linear-gradient(145deg, #f6fbfa, #ffffff) !important;
   border: 1px solid var(--article-border) !important;
   border-radius: 16px !important;
   box-shadow: 0 12px 34px rgba(24, 35, 33, .06);
+  display: grid;
   gap: 0 !important;
   grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
   margin: 30px 0 34px !important;
   overflow: hidden;
   padding: 0 !important;
 }
-.article-body .fact-grid::before {
+.article-body .fact-grid::before,
+.article-body .trip-snapshot::before {
   background: var(--article-teal-dark);
   color: #fff;
   content: "ADVENTURE SNAPSHOT";
@@ -65,7 +68,8 @@ footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; pad
   letter-spacing: .13em;
   padding: 14px 18px;
 }
-.article-body .fact-grid > div {
+.article-body .fact-grid > div,
+.article-body .trip-snapshot > div {
   background: transparent !important;
   border: 0 !important;
   border-bottom: 1px solid var(--article-border) !important;
@@ -73,14 +77,34 @@ footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; pad
   min-height: 94px;
   padding: 18px !important;
 }
-.article-body .fact-grid > div:nth-child(odd) { border-right: 1px solid var(--article-border) !important; }
-.article-body .fact-grid > div strong {
+.article-body .fact-grid > div:nth-child(odd),
+.article-body .trip-snapshot > div:nth-child(odd) { border-right: 1px solid var(--article-border) !important; }
+.article-body .fact-grid > div strong,
+.article-body .trip-snapshot > div strong {
   color: var(--article-teal-dark);
   font: 800 .78rem/1.25 Inter, sans-serif !important;
   letter-spacing: .05em;
   margin-bottom: 7px !important;
   text-transform: uppercase;
 }
+
+.article-body .decision-grid {
+  background: linear-gradient(145deg, #f8fbff, #fff);
+  border: 1px solid #d8e4f2;
+  border-radius: 16px;
+  gap: 12px !important;
+  padding: 14px;
+}
+.article-body .decision-grid::before {
+  color: var(--article-blue);
+  content: "ADVENTURE READY · CHOOSE YOUR FAMILY FIT";
+  font: 800 12px/1.2 Inter, sans-serif;
+  grid-column: 1 / -1;
+  letter-spacing: .1em;
+  padding: 5px 4px 8px;
+}
+.article-body .decision-card { background: #fff; box-shadow: 0 5px 16px rgba(13,71,161,.05); }
+
 .article-body .trip-actions {
   background: #f8fbff;
   border: 1px solid #d8e4f2;
@@ -102,10 +126,7 @@ footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; pad
 }
 .article-body .trip-action:first-child h2,
 .article-body .trip-action:first-child p { color: #fff !important; }
-.article-body .trip-action:first-child .btn {
-  background: #fff;
-  color: var(--article-blue) !important;
-}
+.article-body .trip-action:first-child .btn { background: #fff; color: var(--article-blue) !important; }
 .article-body .trip-action:first-child h2::before {
   content: "Build this trip\A";
   display: block;
@@ -116,9 +137,7 @@ footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; pad
   text-transform: uppercase;
   white-space: pre;
 }
-.article-body .quick-answer {
-  border-left: 5px solid var(--article-teal-dark);
-}
+.article-body .quick-answer { border-left: 5px solid var(--article-teal-dark); }
 .article-body .quick-answer h2::before {
   color: var(--article-teal-dark);
   content: "GOOD TO KNOW  •  ";
@@ -135,7 +154,10 @@ footer { background: #f9fafb; border-top: 1px solid #e5e7eb; color: #52605d; pad
   .article-hero { padding-top: 42px; }
   .article-layout { padding-top: 30px; }
   .comparison { display: block; overflow-x: auto; }
-  .article-body .fact-grid { grid-template-columns: 1fr !important; }
-  .article-body .fact-grid > div:nth-child(odd) { border-right: 0 !important; }
-  .article-body .fact-grid > div { min-height: 0; }
+  .article-body .fact-grid,
+  .article-body .trip-snapshot { grid-template-columns: 1fr !important; }
+  .article-body .fact-grid > div:nth-child(odd),
+  .article-body .trip-snapshot > div:nth-child(odd) { border-right: 0 !important; }
+  .article-body .fact-grid > div,
+  .article-body .trip-snapshot > div { min-height: 0; }
 }
