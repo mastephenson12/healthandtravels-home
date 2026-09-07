@@ -29,6 +29,20 @@
     footer{margin-top:42px;padding:34px 24px;border-top:1px solid var(--line);background:var(--sand);color:var(--muted);text-align:center;font-size:.93rem}footer a{color:var(--blue);text-decoration:none}
     @media(max-width:850px){.site-header{align-items:flex-start;flex-direction:column}.finder-grid,.result-grid,.path-grid{grid-template-columns:1fr}.newsletter{grid-template-columns:1fr}.result-meta{grid-template-columns:1fr 1fr}}
     @media(max-width:560px){.network-inner{padding:9px 18px}.site-header{padding:12px 18px}.brand img{width:44px;height:44px}nav{gap:10px 16px}.hero-inner{padding:48px 18px 34px}.finder-wrap{padding:0 14px 40px}.finder{margin-top:22px}.finder-head,.finder-body{padding:20px}.result-meta{grid-template-columns:1fr}.button{width:100%}main{padding:42px 18px 18px}.newsletter{padding:24px}}
+
+    .featured-guides{max-width:1120px;margin:0 auto;padding:12px 24px 36px}
+    .guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+    .guide-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+    .guide-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
+    .guide-card-body{padding:22px;display:flex;flex-direction:column;flex:1}
+    .guide-card h3{margin:0 0 10px;font-size:1.3rem;line-height:1.2}
+    .guide-card h3 a{color:var(--ink);text-decoration:none}
+    .guide-card p{margin:0 0 18px;color:var(--muted)}
+    .guide-card .guide-link{margin-top:auto;color:var(--blue);font-weight:800}
+    .guide-support{margin:22px 0 0;text-align:center;color:var(--muted)}
+    .guide-support a{color:var(--blue);font-weight:800}
+    a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
+    @media(max-width:850px){.guide-grid{grid-template-columns:1fr}.featured-guides{max-width:650px}}
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4312797998139679" crossorigin="anonymous"></script>
 </head>
@@ -37,7 +51,7 @@
 
   <header class="site-header">
     <a href="/" class="brand" aria-label="Health and Travels home"><img src="https://raw.githubusercontent.com/mastephenson12/sage-suite-hub/main/assets/Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels logo"><span><span class="brand-name">Health &amp; Travels</span><span class="brand-subtitle">Arizona family adventures</span></span></a>
-    <nav aria-label="Primary navigation"><a href="/arizona">Explore Arizona</a><a href="/arizona-family-hiking-safety-guide">Trail Safety</a><a href="/about">About</a><a href="https://newsletter.healthandtravels.com/">Newsletter</a><a class="nav-cta" href="#adventure-finder">Find an Adventure</a></nav>
+    <nav aria-label="Primary navigation"><a href="#featured-guides">Read the Guides</a><a href="/arizona">Explore Arizona</a><a href="/arizona-family-hiking-safety-guide">Trail Safety</a><a href="/about">About</a><a href="https://newsletter.healthandtravels.com/">Newsletter</a><a class="nav-cta" href="#adventure-finder">Find an Adventure</a></nav>
   </header>
 
   <section class="hero">
@@ -46,6 +60,17 @@
       <h1>Find Your Next Arizona Family Adventure</h1>
       <p class="hero-copy">Tell us who’s going, how much time you have, how far you want to drive, and what sounds fun. We’ll narrow Arizona down to three adventures worth considering.</p>
     </div>
+
+    <section class="featured-guides" id="featured-guides" aria-labelledby="featured-title">
+      <div class="section-heading"><p class="eyebrow">Start with a complete guide</p><h2 id="featured-title">Arizona adventures, with the details that matter</h2><p>Explore original field photos and practical advice from Health &amp; Travels. Choose an outing that fits your group before building your itinerary.</p></div>
+      <div class="guide-grid">
+        <article class="guide-card"><img src="/images/papago-hole-in-the-rock-family-trail.webp" width="800" height="600" alt="Families on the Hole-in-the-Rock formation at Papago Park" loading="lazy"><div class="guide-card-body"><h3><a href="/papago-park-with-kids">Papago Park with kids</a></h3><p>See the terrain in our original photos, compare the outing for different ages, and plan around heat, uneven footing and nearby Phoenix Zoo.</p><a class="guide-link" href="/papago-park-with-kids">Read the Papago guide →</a></div></article>
+        <article class="guide-card"><img src="/images/wet-beaver-creek-red-rock-canyon.webp" width="800" height="600" alt="Red sandstone walls and Wet Beaver Creek in a green canyon" loading="lazy"><div class="guide-card-body"><h3><a href="/the-crack-wet-beaver-creek-hike">The Crack at Wet Beaver Creek</a></h3><p>A rocky seven-mile round trip deserves a realistic plan. Preview the trail photos and read about parking, water, turnaround time and swimming safety.</p><a class="guide-link" href="/the-crack-wet-beaver-creek-hike">Read the Wet Beaver Creek guide →</a></div></article>
+        <article class="guide-card"><img src="/images/estrella-mountain-regional-park-entrance.webp" width="800" height="600" alt="Entrance monument at Estrella Mountain Regional Park" loading="lazy"><div class="guide-card-body"><h3><a href="/estrella-mountain-regional-park-family-guide">Estrella Mountain Regional Park</a></h3><p>Explore a West Valley outing through original park photos, with cool-season planning advice and links for checking current conditions.</p><a class="guide-link" href="/estrella-mountain-regional-park-family-guide">Read the Estrella Mountain guide →</a></div></article>
+      </div>
+      <p class="guide-support">Before you head out: <a href="/arizona-family-hiking-safety-guide">read our family hiking safety guide</a>. Looking elsewhere? <a href="/arizona">Browse all Arizona guides</a>.</p>
+    </section>
+
     <div class="finder-wrap" id="adventure-finder">
       <div class="finder">
         <div class="finder-head"><h2>What kind of day are you looking for?</h2><p>Four quick choices. No account required. No twelve-page personality quiz because civilization has suffered enough.</p></div>
@@ -82,7 +107,7 @@
     <section class="newsletter"><div><h2>Make the next weekend easier.</h2><p>Get practical Arizona adventure ideas for families, including places to explore, seasonal safety reminders, and trip-planning help.</p></div><a class="button button-primary" href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=cta&amp;utm_campaign=adventure_finder">Join the Newsletter</a></section>
   </main>
 
-  <footer>© Health &amp; Travels · <a href="/about">About</a> · <a href="/editorial-standards">Editorial Standards</a> · <a href="/arizona-family-hiking-safety-guide">Arizona Trail Safety</a></footer>
+  <footer>© Health &amp; Travels · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy</a> · <a href="/terms-of-use">Terms</a> · <a href="/affiliate-disclosure">Affiliate Disclosure</a> · <a href="/editorial-standards">Editorial Standards</a> · <a href="/arizona-family-hiking-safety-guide">Arizona Trail Safety</a></footer>
 
   <script>
     const adventures = [
