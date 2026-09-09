@@ -134,8 +134,32 @@
     }
 
     function sageUrl(a,prefs){
-      const q=new URLSearchParams({utm_source:'healthandtravels',utm_medium:'adventure_finder',utm_campaign:'homepage_match',destination:a.name,group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity});
-      return 'https://sage.healthandtravels.com/plan?'+q.toString();
+      const locations={
+        'Papago Park':'papago-park',
+        'Estrella Mountain Regional Park':'estrella-mountain',
+        'Boyce Thompson Arboretum':'boyce-thompson-arboretum',
+        'Tonto Natural Bridge State Park':'tonto-natural-bridge',
+        'Woods Canyon Lake':'woods-canyon-lake',
+        'Bell Rock Pathway':'sedona',
+        'Jerome':'jerome',
+        'Out of Africa Wildlife Park':'camp-verde',
+        'Riparian Preserve at Water Ranch':'gilbert'
+      };
+      const lengths={short:'half-day',half:'half-day',full:'full-day',weekend:'weekend'};
+      const activities={hiking:'hike',water:'relax',scenic:'explore',wildlife:'explore',town:'explore',cooler:'explore'};
+      const q=new URLSearchParams({
+        plan:'ready',
+        location:locations[a.name]||'arizona',
+        kids:prefs.group==='adults'?'no':'yes',
+        activity:activities[prefs.activity]||'explore',
+        length:lengths[prefs.time]||'full-day',
+        drive:prefs.drive,
+        source:'health-travels-matcher',
+        utm_source:'healthandtravels',
+        utm_medium:'adventure_finder',
+        utm_campaign:'homepage_match'
+      });
+      return 'https://sage.healthandtravels.com/trip-builder?'+q.toString();
     }
 
     function card(a,prefs,index){
@@ -159,6 +183,11 @@
       document.getElementById('results').classList.add('active');
       document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
       if(typeof gtag==='function') gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity});
+    });
+
+    document.getElementById('resultGrid').addEventListener('click',function(e){
+      const link=e.target.closest('[data-sage-match]');
+      if(link&&typeof gtag==='function') gtag('event','planner_to_sage',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage'});
     });
   </script>
 </body>
