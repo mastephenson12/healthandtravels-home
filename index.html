@@ -73,7 +73,7 @@
 
     <div class="finder-wrap" id="adventure-finder">
       <div class="finder">
-        <div class="finder-head"><h2>What kind of day are you looking for?</h2><p>Four quick choices. No account required. No twelve-page personality quiz because civilization has suffered enough.</p></div>
+        <div class="finder-head"><h2>What kind of day are you looking for?</h2><p>Five quick choices. No account required. No twelve-page personality quiz because civilization has suffered enough.</p></div>
         <div class="finder-body">
           <form id="finderForm">
             <div class="finder-grid">
@@ -81,6 +81,7 @@
               <div class="field"><label for="time">How much time do you have?</label><select id="time" required><option value="short">2–3 hours</option><option value="half">Half day</option><option value="full" selected>Full day</option><option value="weekend">Weekend</option></select></div>
               <div class="field"><label for="drive">How far will you drive?</label><select id="drive" required><option value="30">About 30 minutes</option><option value="60">About 60 minutes</option><option value="90" selected>About 90 minutes</option><option value="120">2 hours or more</option></select></div>
               <div class="field"><label for="activity">What sounds good?</label><select id="activity" required><option value="hiking">Hiking</option><option value="water">Water</option><option value="scenic">Scenic drive / views</option><option value="wildlife">Wildlife</option><option value="town">Small town</option><option value="cooler">Cooler weather</option></select></div>
+              <div class="field"><label for="dietary">Any food needs?</label><select id="dietary"><option value="">No special request</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Gluten-free">Gluten-free</option><option value="Dairy-free">Dairy-free</option><option value="Nut allergy">Nut allergy</option><option value="Multiple needs">Multiple needs</option></select></div>
             </div>
             <div class="finder-action"><button class="button button-primary" type="submit">Show Me My Adventures</button><p class="small-note">Drive-time choices are broad planning filters, not live navigation estimates.</p></div>
           </form>
@@ -147,18 +148,26 @@
       };
       const lengths={short:'half-day',half:'half-day',full:'full-day',weekend:'weekend'};
       const activities={hiking:'hike',water:'relax',scenic:'explore',wildlife:'explore',town:'explore',cooler:'explore'};
+      const month=new Date().getMonth();
+      const season=month>=2&&month<=4?'spring':month>=5&&month<=8?'summer':month>=9&&month<=10?'fall':'winter';
       const q=new URLSearchParams({
         plan:'ready',
         location:locations[a.name]||'arizona',
         kids:prefs.group==='adults'?'no':'yes',
         activity:activities[prefs.activity]||'explore',
         length:lengths[prefs.time]||'full-day',
+        season,
+        ages:prefs.group==='kids'?'elementary':prefs.group==='mixed'?'mixed':'mixed',
+        shade:prefs.group==='adults'?'false':'true',
+        bathrooms:prefs.group==='adults'?'false':'true',
+        stroller:'false',
         drive:prefs.drive,
         source:'health-travels-matcher',
         utm_source:'healthandtravels',
         utm_medium:'adventure_finder',
         utm_campaign:'homepage_match'
       });
+      if(prefs.dietary) q.set('needs',prefs.dietary);
       return 'https://sage.healthandtravels.com/trip-builder?'+q.toString();
     }
 
@@ -169,20 +178,20 @@
           <ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul>
           <p class="result-copy">${a.why}</p>
           <div class="safety">☀️ ${a.season}</div>
-          <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Build in Sage</a><a class="button button-secondary" href="/arizona">Browse Guides</a></div>
+          <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Build My Family Day Plan</a><a class="button button-secondary" href="/arizona">Browse Guides</a></div>
         </div>
       </article>`;
     }
 
     document.getElementById('finderForm').addEventListener('submit',function(e){
       e.preventDefault();
-      const prefs={group:document.getElementById('group').value,time:document.getElementById('time').value,drive:document.getElementById('drive').value,activity:document.getElementById('activity').value};
+      const prefs={group:document.getElementById('group').value,time:document.getElementById('time').value,drive:document.getElementById('drive').value,activity:document.getElementById('activity').value,dietary:document.getElementById('dietary').value};
       const ranked=[...adventures].sort((a,b)=>scoreAdventure(b,prefs)-scoreAdventure(a,prefs)).slice(0,3);
       document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
       document.getElementById('resultsSummary').textContent='Based on your time, drive range, group, and activity choice.';
       document.getElementById('results').classList.add('active');
       document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-      if(typeof gtag==='function') gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity});
+      if(typeof gtag==='function') gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity,dietary_needs:prefs.dietary||'none'});
     });
 
     document.getElementById('resultGrid').addEventListener('click',function(e){
