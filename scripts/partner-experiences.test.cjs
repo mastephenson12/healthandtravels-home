@@ -1,0 +1,6 @@
+const {test}=require('node:test'),assert=require('node:assert/strict');const {approvedExperiences}=require('./partner-experiences.cjs');
+const now=new Date('2026-09-12');
+const record={id:'test',status:'approved',name:'Test experience',partnerName:'Test partner',area:'Phoenix',description:'Test only',duration:'1 hour',cost:'Confirm with operator',familyFit:'Adults',accessibility:'Level entrance',bathrooms:'On site',seasonality:'Confirm conditions',bookingUrl:'https://example.com',reviewedBy:'Reviewer',reviewedAt:'2026-09-01',reviewDue:'2026-10-01',disclosure:'No commercial arrangement',sources:['https://example.com/details']};
+test('only current approved records reach the export',()=>{assert.equal(approvedExperiences({version:1,experiences:[record,{...record,id:'expired',reviewDue:'2026-09-10'},{id:'draft',status:'draft'}]},now).length,1)});
+test('incomplete approvals fail closed',()=>assert.throws(()=>approvedExperiences({version:1,experiences:[{...record,sources:[]}]},now)));
+test('unsafe URLs and duplicate IDs fail closed',()=>{assert.throws(()=>approvedExperiences({version:1,experiences:[{...record,bookingUrl:'javascript:alert(1)'}]},now));assert.throws(()=>approvedExperiences({version:1,experiences:[record,record]},now));});
