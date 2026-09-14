@@ -54,7 +54,7 @@
   <div class="network-bar"><div class="network-bar__inner"><span>Health &amp; Travels Network</span><div class="network-bar__links"><a href="/">Stories</a><a href="https://sage.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=navigation&amp;utm_campaign=plan_entry">Plan with Sage</a><a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=navigation&amp;utm_campaign=plan_entry">Newsletter</a></div></div></div>
   <header class="site-header">
     <a class="brand" href="/"><img src="/Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels logo"><span><span class="brand-name">Health &amp; Travels</span><span class="brand-subtitle">Arizona family adventures</span></span></a>
-    <nav class="site-nav" aria-label="Primary navigation"><a href="/arizona">Explore Arizona</a><a href="/best-family-friendly-outdoor-adventures-arizona">Outdoor Ideas</a><a href="/arizona-family-adventure-planning-guide">Planning Guide</a><a href="/about">About</a></nav>
+    <nav class="site-nav" aria-label="Primary navigation"><a href="/arizona">Explore Arizona</a><a href="/best-family-friendly-outdoor-adventures-arizona">Outdoor Ideas</a><a href="/arizona-family-adventure-planning-guide">Planning Guide</a><a href="/about">About</a><a href="/my-arizona-adventure">My Adventure (<span data-adventure-count>0</span>)</a></nav>
   </header>
 
   <section class="hero"><div class="hero-inner"><p class="eyebrow">Arizona adventure matcher</p><h1>Plan Your Arizona Adventure</h1><p>Tell us who is going, how much time you have, what sounds fun, and what practical details matter. We will give you three strong Arizona matches and pass your choices directly into Sage.</p></div></section>
@@ -124,7 +124,7 @@
 
     function renderResults(matches,prefs){
       const top=matches[0];
-      document.getElementById('results').innerHTML=`<div class="match-summary"><strong>Your strongest starting point:</strong> ${top.name}. We ranked destinations using your activity, time, season, drive preference and practical needs.</div><div class="matches">${matches.map((m,i)=>`<article class="match-card"><div class="match-top"><span class="rank">${i===0?'Best match':`Match ${i+1}`}</span><span class="score">${m.score} fit points</span></div><h3>${m.name}</h3><p><strong>${m.region}.</strong> ${m.summary}</p><ul class="why">${m.reasons.map(r=>`<li>${r}</li>`).join('')}</ul><div class="actions"><a class="button button-secondary" href="${sageUrl(m,prefs)}" target="_blank" rel="noopener noreferrer" data-sage="${m.slug}">Build This Trip in Sage</a><a class="guide-link" href="${m.guide}">Read Health &amp; Travels guide →</a></div></article>`).join('')}</div>`;
+      document.getElementById('results').innerHTML=`<div class="match-summary"><strong>Your strongest starting point:</strong> ${top.name}. We ranked destinations using your activity, time, season, drive preference and practical needs.</div><div class="matches">${matches.map((m,i)=>`<article class="match-card"><div class="match-top"><span class="rank">${i===0?'Best match':`Match ${i+1}`}</span><span class="score">${m.score} fit points</span></div><h3>${m.name}</h3><p><strong>${m.region}.</strong> ${m.summary}</p><ul class="why">${m.reasons.map(r=>`<li>${r}</li>`).join('')}</ul><div class="actions"><button class="button button-primary" type="button" data-adventure-save data-slug="${m.slug}" data-name="${m.name}" data-region="${m.region}" data-drive="${m.drive} minutes from your base" data-shade="${m.shade>=4?'Good':m.shade>=2?'Some':'Limited'}" data-bathrooms="${m.bathrooms>=4?'Generally available':'Verify at each stop'}" data-kid-fit="${m.stroller>=3?'Very good':'Good'}" data-guide="${m.guide}">Save to My Adventure</button><a class="button button-secondary" href="${sageUrl(m,prefs)}" target="_blank" rel="noopener noreferrer" data-sage="${m.slug}">Build This Trip in Sage</a><a class="guide-link" href="${m.guide}">Read Health &amp; Travels guide →</a></div></article>`).join('')}</div>`;
       document.querySelectorAll('[data-sage]').forEach(link=>link.addEventListener('click',()=>{if(typeof gtag==='function')gtag('event','planner_to_sage',{destination:link.dataset.sage,source_site:'healthandtravels'});}));
     }
 
@@ -137,5 +137,6 @@
       document.querySelector('.results-panel').scrollIntoView({behavior:'smooth',block:'start'});
     });
   </script>
+  <script src="/adventure-board.js"></script>
 </body>
 </html>
