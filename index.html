@@ -248,10 +248,7 @@
 
     document.getElementById('resultGrid').addEventListener('click',function(e){
       const link=e.target.closest('[data-sage-match]');
-      if(link&&typeof gtag==='function') {
-        gtag('event','planner_to_sage',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage'});
-        gtag('event','adventure_funnel_step',{funnel_name:'adventure_to_email',funnel_step:2,funnel_step_name:'sage_opened',destination:link.dataset.sageMatch});
-      }
+      if(link&&typeof gtag==='function') gtag('event','planner_to_sage',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage'});
     });
   </script>
 </body>
