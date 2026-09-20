@@ -221,7 +221,10 @@
       document.getElementById('resultsSummary').textContent='Based on your time, drive range, group, and activity choice.';
       document.getElementById('results').classList.add('active');
       document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-      if(typeof gtag==='function') gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity,dietary_needs:prefs.dietary||'none'});
+      if(typeof gtag==='function') {
+        gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity,dietary_needs:prefs.dietary||'none'});
+        gtag('event','adventure_funnel_step',{funnel_name:'adventure_to_email',funnel_step:1,funnel_step_name:'finder_completed',group:prefs.group,activity:prefs.activity});
+      }
     });
 
     document.getElementById('saveShortlist').addEventListener('click',function(){
