@@ -18,6 +18,46 @@
       "permanent": true
     },
     {
+      "source": "/p/discovering-flagstaff-arizona",
+      "destination": "/flagstaff-with-kids-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/discover-flagstaff-arizona",
+      "destination": "/flagstaff-with-kids-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/wild-hearts-pine-air-in-payson-arizona",
+      "destination": "/payson-mogollon-rim-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/discovering-payson-arizona",
+      "destination": "/payson-mogollon-rim-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/discovering-gila-bend-arizona",
+      "destination": "/gila-bend-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/gila-bend-arizona",
+      "destination": "/gila-bend-family-weekend-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/sedona-will-ruin-you-for-other-places",
+      "destination": "/sedona-with-kids-family-trip-guide",
+      "permanent": true
+    },
+    {
+      "source": "/p/discover-yuma-arizona",
+      "destination": "/one-perfect-family-day-in-yuma",
+      "permanent": true
+    },
+    {
       "source": "/p/:path*",
       "destination": "https://newsletter.healthandtravels.com/p/:path*",
       "permanent": true
