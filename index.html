@@ -44,6 +44,7 @@
     .guide-support a{color:var(--blue);font-weight:800}
     a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
     @media(max-width:850px){.guide-grid{grid-template-columns:1fr}.featured-guides{max-width:650px}}
+    #clearShortlist[hidden]{display:none}
   </style>
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4312797998139679" crossorigin="anonymous"></script>
 </head>
@@ -94,7 +95,7 @@
             <aside class="save-plan" aria-labelledby="save-plan-title">
               <div class="save-plan-grid">
                 <div><h3 id="save-plan-title">Keep your three matches</h3><p>Save this shortlist on your device, email it to yourself, or get the free Starter Pack for future Arizona family adventures.</p></div>
-                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="button button-primary" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
+                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><button class="button button-secondary" id="clearShortlist" type="button" hidden>Clear Saved Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="button button-primary" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
               </div>
               <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
               <small>“Email My Shortlist” opens your email app; Health &amp; Travels does not receive the address. Newsletter signup is handled separately by Beehiiv. See our <a href="/privacy-policy">privacy policy</a>.</small>
@@ -232,12 +233,49 @@
       if(!currentShortlist) return;
       try{
         localStorage.setItem('healthTravelsShortlist',JSON.stringify(currentShortlist));
-        document.getElementById('saveStatus').textContent='Saved on this device. You can also email a copy or continue with Sage above.';
+        document.getElementById('clearShortlist').hidden=false;
+        document.getElementById('saveStatus').textContent='Saved on this device. Return to this homepage to pick up your shortlist, or continue with Sage above.';
         if(typeof gtag==='function') gtag('event','adventure_shortlist_save',{storage:'local'});
       }catch(error){
         document.getElementById('saveStatus').textContent='Your browser blocked local saving. Use “Email My Shortlist” to keep a copy.';
       }
     });
+
+    function restoreShortlist(){
+      try{
+        const saved=JSON.parse(localStorage.getItem('healthTravelsShortlist')||'null');
+        if(!saved||!saved.preferences||!Array.isArray(saved.destinations)) return;
+        const prefs=saved.preferences;
+        const fields=['group','time','drive','activity','dietary'];
+        if(!fields.every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]))) return;
+        // Render only known destinations and rebuild links from current planner settings.
+        const ranked=saved.destinations.map(item=>item&&adventures.find(a=>a.name===item.name));
+        if(ranked.length!==3||ranked.some(a=>!a)||new Set(ranked).size!==3) return;
+        fields.forEach(id=>{document.getElementById(id).value=prefs[id];});
+        document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
+        updateSaveOptions(ranked,prefs);
+        document.getElementById('resultsSummary').textContent='Your saved choices are back. Check current conditions before you go, or change the choices above to find new matches.';
+        document.getElementById('results').classList.add('active');
+        document.getElementById('clearShortlist').hidden=false;
+        document.getElementById('saveStatus').textContent='Restored from this browser. Continue with Sage from any match above.';
+      }catch(error){ /* Unavailable storage or an unreadable save leaves the finder ready. */ }
+    }
+
+    document.getElementById('clearShortlist').addEventListener('click',function(){
+      try{
+        localStorage.removeItem('healthTravelsShortlist');
+        currentShortlist=null;
+        document.getElementById('finderForm').reset();
+        document.getElementById('resultGrid').innerHTML='';
+        document.getElementById('results').classList.remove('active');
+        document.getElementById('clearShortlist').hidden=true;
+        document.getElementById('group').focus();
+      }catch(error){
+        document.getElementById('saveStatus').textContent='Your browser blocked clearing the save. You can still choose new matches above.';
+      }
+    });
+
+    restoreShortlist();
 
     document.getElementById('emailShortlist').addEventListener('click',function(){
       if(typeof gtag==='function') gtag('event','adventure_shortlist_email',{method:'mailto'});
