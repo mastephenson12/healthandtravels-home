@@ -1,294 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Health & Travels | Find Your Next Arizona Family Adventure</title>
-  <meta name="description" content="Find an Arizona family adventure based on who is going, how much time you have, how far you want to drive, and what sounds fun. Then build the trip with Sage.">
-  <link rel="canonical" href="https://healthandtravels.com/">
-  <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mastephenson12/sage-suite-hub/main/assets/Health%20ad%20Travels%20Logo%20512x512.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@600;700;800;900&family=Lato:wght@400;700&display=swap" rel="stylesheet">
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-DKH3PF8GEJ"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-DKH3PF8GEJ');
-  </script>
-  <style>
-    :root{--ink:#111827;--muted:#4b5563;--blue:#0D47A1;--blue-dark:#083575;--teal:#2f6f68;--teal-soft:#eef8f5;--sand:#fbfaf7;--line:#e5e7eb;--white:#fff;--orange:#b45309;--font-heading:'Inter',sans-serif;--font-body:'Lato',sans-serif}
-    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--ink);background:#fff;font-family:var(--font-body);line-height:1.6}a{color:inherit}
-    .network-bar{background:#0f172a;color:#fff;font-family:var(--font-heading);font-size:.74rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase}.network-inner{max-width:1180px;margin:auto;padding:9px 24px;display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap}.network-links{display:flex;gap:18px;flex-wrap:wrap}.network-bar a{text-decoration:none;opacity:.92}
-    .site-header{max-width:1180px;margin:auto;padding:14px 24px;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:12px;text-decoration:none}.brand img{width:48px;height:48px;border-radius:12px}.brand-name{font:900 1.15rem/1 var(--font-heading);letter-spacing:-.04em;text-transform:uppercase}.brand-subtitle{display:block;margin-top:5px;color:#0f766e;font:900 .62rem/1.1 var(--font-heading);letter-spacing:.16em;text-transform:uppercase}nav{display:flex;align-items:center;gap:20px;flex-wrap:wrap;font:800 .78rem var(--font-heading)}nav a{text-decoration:none}.nav-cta{padding:10px 15px;border-radius:9px;background:var(--blue);color:#fff}
-    .hero{background:linear-gradient(135deg,#edf7f3 0%,#eef4fc 100%);border-top:1px solid #f3f4f6;border-bottom:1px solid var(--line)}.hero-inner{max-width:1000px;margin:auto;padding:64px 24px 46px;text-align:center}.eyebrow{margin:0 0 12px;color:var(--teal);font:900 .78rem var(--font-heading);letter-spacing:.16em;text-transform:uppercase}h1,h2,h3{font-family:var(--font-heading)}h1{margin:0 auto;max-width:900px;font-size:clamp(2.45rem,7vw,4.8rem);line-height:.98;letter-spacing:-.055em;font-weight:900}.hero-copy{max-width:760px;margin:20px auto 0;color:#374151;font-size:clamp(1.05rem,2.1vw,1.28rem)}
-    .finder-wrap{max-width:1080px;margin:-2px auto 0;padding:0 24px 52px}.finder{margin-top:32px;border:1px solid #cbd5e1;border-radius:22px;background:#fff;box-shadow:0 22px 55px rgba(15,23,42,.10);overflow:hidden;text-align:left}.finder-head{padding:26px 28px 20px;border-bottom:1px solid var(--line);background:#fff}.finder-head h2{margin:0;font-size:clamp(1.55rem,4vw,2.2rem);letter-spacing:-.035em}.finder-head p{margin:8px 0 0;color:var(--muted)}.finder-body{padding:26px 28px 30px}.finder-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}.field label{display:block;margin-bottom:8px;font:800 .82rem var(--font-heading)}select{width:100%;min-height:48px;padding:10px 12px;border:1px solid #cbd5e1;border-radius:10px;background:#fff;color:var(--ink);font:700 1rem var(--font-body)}select:focus{outline:3px solid rgba(13,71,161,.14);border-color:var(--blue)}.finder-action{margin-top:24px}.button{display:inline-flex;align-items:center;justify-content:center;min-height:48px;padding:12px 19px;border:0;border-radius:10px;font:900 .8rem var(--font-heading);letter-spacing:.04em;text-decoration:none;text-transform:uppercase;cursor:pointer}.button-primary{background:var(--blue);color:#fff}.button-primary:hover{background:var(--blue-dark)}.button-secondary{background:#fff;color:var(--blue);border:1px solid #b8c6da}.small-note{margin:10px 0 0;color:#64748b;font-size:.9rem}
-    .results{display:none;margin-top:28px}.results.active{display:block}.results-head{display:flex;align-items:end;justify-content:space-between;gap:18px;flex-wrap:wrap;margin-bottom:14px}.results-head h3{margin:0;font-size:1.45rem}.results-head p{margin:4px 0 0;color:var(--muted)}.result-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.result-card{display:flex;flex-direction:column;border:1px solid var(--line);border-radius:16px;overflow:hidden;background:#fff;box-shadow:0 8px 24px rgba(15,23,42,.05)}.result-top{padding:20px 20px 14px;background:linear-gradient(135deg,#f7fbfa,#f7f9fd)}.result-kicker{color:var(--teal);font:900 .7rem var(--font-heading);letter-spacing:.12em;text-transform:uppercase}.result-card h3{margin:5px 0 3px;font-size:1.28rem;line-height:1.15}.result-location{color:var(--muted);font-size:.92rem}.result-body{display:flex;flex:1;flex-direction:column;padding:18px 20px 20px}.result-meta{display:grid;grid-template-columns:1fr 1fr;gap:8px 12px;margin:0 0 14px;padding:0;list-style:none;font-size:.91rem}.result-meta strong{font-family:var(--font-heading)}.result-copy{margin:0 0 16px;color:#4b5563}.safety{margin:auto 0 14px;padding:10px 12px;border-radius:10px;background:#fff7ed;color:#92400e;font-size:.86rem}.result-actions{display:flex;gap:8px;flex-wrap:wrap}.result-actions .button{flex:1;min-width:130px;padding:10px 12px;font-size:.72rem}
-    .save-plan{margin-top:20px;padding:24px;border:1px solid #b8d9d2;border-radius:16px;background:var(--teal-soft)}.save-plan-grid{display:grid;grid-template-columns:1fr auto;gap:22px;align-items:center}.save-plan h3{margin:0 0 6px;font-size:1.35rem}.save-plan p{margin:0;color:#36544f}.save-plan-actions{display:flex;gap:10px;flex-wrap:wrap}.save-status{margin-top:10px!important;color:#0f766e!important;font-weight:700}.save-plan small{display:block;margin-top:10px;color:#526b67}.save-plan small a{color:var(--blue)}
-    main{max-width:1120px;margin:auto;padding:54px 24px 18px}.section-heading{max-width:760px;margin:0 auto 24px;text-align:center}.section-heading h2{margin:0;font-size:clamp(1.9rem,4vw,2.7rem);letter-spacing:-.04em;line-height:1.05}.section-heading p{margin:10px 0 0;color:var(--muted);font-size:1.05rem}.path-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-bottom:54px}.path-card{padding:26px;border:1px solid var(--line);border-radius:16px;background:#fff}.path-number{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%;background:var(--teal-soft);color:var(--teal);font:900 .9rem var(--font-heading)}.path-card h3{margin:14px 0 8px}.path-card p{margin:0 0 16px;color:var(--muted)}.path-card a{color:var(--blue);font-weight:800;text-decoration:none}.newsletter{margin:8px 0 58px;padding:34px;border-radius:18px;background:#0f172a;color:#fff;display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center}.newsletter h2{margin:0 0 8px;color:#fff;font-size:2rem}.newsletter p{margin:0;color:#d1d5db;max-width:720px}
-    footer{margin-top:42px;padding:34px 24px;border-top:1px solid var(--line);background:var(--sand);color:var(--muted);text-align:center;font-size:.93rem}footer a{color:var(--blue);text-decoration:none}
-    @media(max-width:850px){.site-header{align-items:flex-start;flex-direction:column}.finder-grid,.result-grid,.path-grid{grid-template-columns:1fr}.newsletter,.save-plan-grid{grid-template-columns:1fr}.result-meta{grid-template-columns:1fr 1fr}}
-    @media(max-width:560px){.network-inner{padding:9px 18px}.site-header{padding:12px 18px}.brand img{width:44px;height:44px}nav{gap:10px 16px}.hero-inner{padding:48px 18px 34px}.finder-wrap{padding:0 14px 40px}.finder{margin-top:22px}.finder-head,.finder-body{padding:20px}.result-meta{grid-template-columns:1fr}.button{width:100%}main{padding:42px 18px 18px}.newsletter{padding:24px}}
-
-    .featured-guides{max-width:1120px;margin:0 auto;padding:12px 24px 36px}
-    .guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
-    .guide-card{min-width:0;background:#fff;border:1px solid var(--line);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
-    .guide-card img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover}
-    .guide-card-body{padding:22px;display:flex;flex-direction:column;flex:1}
-    .guide-card h3{margin:0 0 10px;font-size:1.3rem;line-height:1.2}
-    .guide-card h3 a{color:var(--ink);text-decoration:none}
-    .guide-card p{margin:0 0 18px;color:var(--muted)}
-    .guide-card .guide-link{margin-top:auto;color:var(--blue);font-weight:800}
-    .guide-support{margin:22px 0 0;text-align:center;color:var(--muted)}
-    .guide-support a{color:var(--blue);font-weight:800}
-    a:focus-visible{outline:3px solid var(--blue);outline-offset:4px}
-    @media(max-width:850px){.guide-grid{grid-template-columns:1fr}.featured-guides{max-width:650px}}
-    #clearShortlist[hidden]{display:none}
-  </style>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4312797998139679" crossorigin="anonymous"></script>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Health &amp; Travels | Find Your Next Arizona Family Adventure</title>
+<meta name="description" content="Find an Arizona adventure that fits your family, starting point and time. Compare three ideas, build your day and save your plan with Health & Travels.">
+<link rel="canonical" href="https://healthandtravels.com/"><link rel="icon" href="/Health%20ad%20Travels%20Logo%20512x512.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="/journey.css">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKH3PF8GEJ"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments)}gtag('js',new Date());gtag('config','G-DKH3PF8GEJ');</script>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4312797998139679" crossorigin="anonymous"></script><script src="/journey.js" defer></script>
 </head>
-<body>
-  <div class="network-bar"><div class="network-inner"><span>Health &amp; Travels Network</span><div class="network-links"><a href="/arizona">Explore Arizona</a><a href="https://sage.healthandtravels.com/plan?utm_source=healthandtravels&amp;utm_medium=navigation&amp;utm_campaign=adventure_finder">Plan with Sage</a><a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=navigation&amp;utm_campaign=adventure_finder">Newsletter</a><a href="https://join.arizonahikersassociation.org/join?utm_source=healthandtravels&amp;utm_medium=navigation&amp;utm_campaign=aha_membership">Join AHA</a></div></div></div>
-
-  <header class="site-header">
-    <a href="/" class="brand" aria-label="Health and Travels home"><img src="https://raw.githubusercontent.com/mastephenson12/sage-suite-hub/main/assets/Health%20ad%20Travels%20Logo%20512x512.png" alt="Health & Travels logo"><span><span class="brand-name">Health &amp; Travels</span><span class="brand-subtitle">Arizona family adventures</span></span></a>
-    <nav aria-label="Primary navigation"><a href="/arizona-adventures-with-kids">Start Here</a><a href="/arizona">Explore Arizona</a><a href="/arizona-family-hiking-safety-guide">Trail Safety</a><a href="/about">About</a><a href="https://newsletter.healthandtravels.com/">Newsletter</a><a class="nav-cta" href="#adventure-finder">Find an Adventure</a></nav>
-  </header>
-
-  <section class="hero">
-    <div class="hero-inner">
-      <p class="eyebrow">Arizona made easier for families</p>
-      <h1>Find Your Next Arizona Family Adventure</h1>
-      <p class="hero-copy">Tell us who’s going, how much time you have, how far you want to drive, and what sounds fun. We’ll narrow Arizona down to three adventures worth considering.</p>
-    </div>
-
-    <section class="featured-guides" id="featured-guides" aria-labelledby="featured-title">
-      <div class="section-heading"><p class="eyebrow">Start with a complete guide</p><h2 id="featured-title">Arizona adventures, with the details that matter</h2><p>Explore original field photos and practical advice from Health &amp; Travels. Choose an outing that fits your group before building your itinerary.</p></div>
-      <p class="guide-support"><strong>Not sure where to begin?</strong> Use the <a href="/arizona-adventures-with-kids">Arizona Family Adventure Hub</a> to choose by age, season, drive time, shade, bathrooms and trip style.</p>
-      <div class="guide-grid">
-        <article class="guide-card"><img src="/images/papago-hole-in-the-rock-family-trail.webp" width="800" height="600" alt="Families on the Hole-in-the-Rock formation at Papago Park" loading="lazy"><div class="guide-card-body"><h3><a href="/papago-park-with-kids">Papago Park with kids</a></h3><p>See the terrain in our original photos, compare the outing for different ages, and plan around heat, uneven footing and nearby Phoenix Zoo.</p><a class="guide-link" href="/papago-park-with-kids">Read the Papago guide →</a></div></article>
-        <article class="guide-card"><img src="/images/wet-beaver-creek-red-rock-canyon.webp" width="800" height="600" alt="Red sandstone walls and Wet Beaver Creek in a green canyon" loading="lazy"><div class="guide-card-body"><h3><a href="/the-crack-wet-beaver-creek-hike">The Crack at Wet Beaver Creek</a></h3><p>A rocky seven-mile round trip deserves a realistic plan. Preview the trail photos and read about parking, water, turnaround time and swimming safety.</p><a class="guide-link" href="/the-crack-wet-beaver-creek-hike">Read the Wet Beaver Creek guide →</a></div></article>
-        <article class="guide-card"><img src="/images/estrella-mountain-regional-park-entrance.webp" width="800" height="600" alt="Entrance monument at Estrella Mountain Regional Park" loading="lazy"><div class="guide-card-body"><h3><a href="/estrella-mountain-regional-park-family-guide">Estrella Mountain Regional Park</a></h3><p>Explore a West Valley outing through original park photos, with cool-season planning advice and links for checking current conditions.</p><a class="guide-link" href="/estrella-mountain-regional-park-family-guide">Read the Estrella Mountain guide →</a></div></article>
-      </div>
-      <p class="guide-support">Before you head out: <a href="/arizona-family-hiking-safety-guide">read our family hiking safety guide</a>. Looking elsewhere? <a href="/arizona">Browse all Arizona guides</a>.</p>
-    </section>
-
-    <div class="finder-wrap" id="adventure-finder">
-      <div class="finder">
-        <div class="finder-head"><h2>What kind of day are you looking for?</h2><p>Five quick choices. No account required. No twelve-page personality quiz because civilization has suffered enough.</p></div>
-        <div class="finder-body">
-          <form id="finderForm">
-            <div class="finder-grid">
-              <div class="field"><label for="group">Who’s going?</label><select id="group" required><option value="kids">Family with kids</option><option value="adults">Adults</option><option value="mixed">Mixed group</option></select></div>
-              <div class="field"><label for="time">How much time do you have?</label><select id="time" required><option value="short">2–3 hours</option><option value="half">Half day</option><option value="full" selected>Full day</option><option value="weekend">Weekend</option></select></div>
-              <div class="field"><label for="drive">How far will you drive?</label><select id="drive" required><option value="30">About 30 minutes</option><option value="60">About 60 minutes</option><option value="90" selected>About 90 minutes</option><option value="120">2 hours or more</option></select></div>
-              <div class="field"><label for="activity">What sounds good?</label><select id="activity" required><option value="hiking">Hiking</option><option value="water">Water</option><option value="scenic">Scenic drive / views</option><option value="wildlife">Wildlife</option><option value="town">Small town</option><option value="cooler">Cooler weather</option></select></div>
-              <div class="field"><label for="dietary">Any food needs?</label><select id="dietary"><option value="">No special request</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Gluten-free">Gluten-free</option><option value="Dairy-free">Dairy-free</option><option value="Nut allergy">Nut allergy</option><option value="Multiple needs">Multiple needs</option></select></div>
-            </div>
-            <div class="finder-action"><button class="button button-primary" type="submit">Show Me My Adventures</button><p class="small-note">Drive-time choices are broad planning filters, not live navigation estimates.</p></div>
-          </form>
-
-          <section class="results" id="results" aria-live="polite">
-            <div class="results-head"><div><h3>Your Arizona shortlist</h3><p id="resultsSummary"></p></div></div>
-            <div class="result-grid" id="resultGrid"></div>
-            <aside class="save-plan" aria-labelledby="save-plan-title">
-              <div class="save-plan-grid">
-                <div><h3 id="save-plan-title">Keep your three matches</h3><p>Save this shortlist on your device, email it to yourself, or get the free Starter Pack for future Arizona family adventures.</p></div>
-                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><button class="button button-secondary" id="clearShortlist" type="button" hidden>Clear Saved Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="button button-primary" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
-              </div>
-              <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
-              <small>“Email My Shortlist” opens your email app; Health &amp; Travels does not receive the address. Newsletter signup is handled separately by Beehiiv. See our <a href="/privacy-policy">privacy policy</a>.</small>
-            </aside>
-          </section>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <main>
-    <section>
-      <div class="section-heading"><p class="eyebrow">From idea to trail</p><h2>Health & Travels helps you choose. Sage helps you build it.</h2><p>The goal is not to give you 700 tabs to research. It is to move your family from “we should do something” to an actual Arizona plan.</p></div>
-      <div class="path-grid">
-        <article class="path-card"><span class="path-number">1</span><h3>Find the right adventure</h3><p>Use the finder above or browse our Arizona destination and safety guides.</p><a href="/arizona">Explore Arizona →</a></article>
-        <article class="path-card"><span class="path-number">2</span><h3>Build it with Sage</h3><p>Turn the destination into a more complete day plan with practical family details.</p><a href="https://sage.healthandtravels.com/plan?utm_source=healthandtravels&amp;utm_medium=homepage&amp;utm_campaign=adventure_finder">Open Sage →</a></article>
-        <article class="path-card"><span class="path-number">3</span><h3>Keep exploring</h3><p>Get Arizona adventure ideas, seasonal reminders, and new guides through the newsletter and AHA.</p><a href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=homepage&amp;utm_campaign=adventure_finder">Get the newsletter →</a></article>
-      </div>
-    </section>
-
-    <section style="margin:8px 0 28px;padding:30px;border:1px solid #b8d9d2;border-radius:18px;background:linear-gradient(135deg,#eef8f5,#eef4fc);display:grid;grid-template-columns:1fr auto;gap:24px;align-items:center">
-      <div><p class="eyebrow" style="text-align:left;margin-bottom:7px">Free early access</p><h2 style="margin:0 0 8px;font-size:2rem">Put your Arizona adventures in your pocket.</h2><p style="margin:0;color:#4b5563;max-width:720px">Meet the Arizona Adventure Pass: a future Apple Wallet and Google Wallet companion for timely family adventure ideas and fast access to Sage.</p></div>
-      <a class="button button-primary" href="/arizona-adventure-pass?utm_source=healthandtravels&utm_medium=homepage&utm_campaign=wallet_early_access">Preview the Pass</a>
-    </section>
-
-    <section class="newsletter"><div><h2>Make the next weekend easier.</h2><p>Get practical Arizona adventure ideas for families, including places to explore, seasonal safety reminders, and trip-planning help.</p></div><a class="button button-primary" href="https://newsletter.healthandtravels.com/?utm_source=healthandtravels&amp;utm_medium=cta&amp;utm_campaign=adventure_finder">Join the Newsletter</a></section>
-  </main>
-
-  <footer>© Health &amp; Travels · <a href="/about">About</a> · <a href="/contact">Contact</a> · <a href="/privacy-policy">Privacy</a> · <a href="/terms-of-use">Terms</a> · <a href="/affiliate-disclosure">Affiliate Disclosure</a> · <a href="/editorial-standards">Editorial Standards</a> · <a href="/arizona-family-hiking-safety-guide">Arizona Trail Safety</a></footer>
-
-  <script>
-    const adventures = [
-      {name:'Papago Park',area:'Phoenix',activities:['hiking','scenic'],groups:['kids','adults','mixed'],times:['short','half'],drive:30,difficulty:'Easy–moderate',bathrooms:'Nearby',shade:'Limited',kid:'Good',season:'Best in cooler hours during hot months.',why:'Short trails, desert scenery, and an easy way to fit an outdoor stop into a busy day.'},
-      {name:'Estrella Mountain Regional Park',area:'Goodyear',activities:['hiking','scenic'],groups:['kids','adults','mixed'],times:['short','half','full'],drive:60,difficulty:'Easy–moderate',bathrooms:'Yes',shade:'Limited',kid:'Good',season:'Use extra heat caution in warm weather.',why:'West Valley desert trails with enough variety for a short outing or a longer family day.'},
-      {name:'Boyce Thompson Arboretum',area:'Superior',activities:['hiking','scenic','cooler'],groups:['kids','adults','mixed'],times:['half','full'],drive:90,difficulty:'Easy–moderate',bathrooms:'Yes',shade:'Some',kid:'Very good',season:'Check seasonal hours and heat conditions.',why:'A family-friendly mix of walking paths, desert plants, shade pockets, and scenery.'},
-      {name:'Tonto Natural Bridge State Park',area:'Payson area',activities:['hiking','scenic','cooler'],groups:['kids','adults','mixed'],times:['full'],drive:120,difficulty:'Moderate',bathrooms:'Yes',shade:'Some',kid:'Good with supervision',season:'Trail conditions can change after storms.',why:'A dramatic natural bridge and cooler high-country setting that feels very different from Phoenix.'},
-      {name:'Woods Canyon Lake',area:'Mogollon Rim',activities:['water','cooler','scenic'],groups:['kids','adults','mixed'],times:['full','weekend'],drive:120,difficulty:'Easy–moderate',bathrooms:'Available seasonally',shade:'Good',kid:'Very good',season:'Mountain weather changes quickly; check road and seasonal access.',why:'Pines, lake views, picnic potential, and cooler temperatures make this a strong family escape.'},
-      {name:'Bell Rock Pathway',area:'Sedona',activities:['hiking','scenic'],groups:['kids','adults','mixed'],times:['half','full','weekend'],drive:120,difficulty:'Easy–moderate',bathrooms:'Trailhead area',shade:'Limited',kid:'Good',season:'Start early for heat and parking.',why:'Classic red-rock scenery with flexible distance options for families and mixed groups.'},
-      {name:'Jerome',area:'Verde Valley',activities:['town','scenic'],groups:['kids','adults','mixed'],times:['full','weekend'],drive:120,difficulty:'Easy walking',bathrooms:'Yes',shade:'Varies',kid:'Good',season:'Check weather before mountain driving.',why:'Historic streets, views, food stops, and an easy pairing with other Verde Valley adventures.'},
-      {name:'Out of Africa Wildlife Park',area:'Camp Verde',activities:['wildlife'],groups:['kids','adults','mixed'],times:['full'],drive:120,difficulty:'Easy walking',bathrooms:'Yes',shade:'Some',kid:'Very good',season:'Warm-weather sun protection matters.',why:'A full-day wildlife option when the group wants an adventure without a trail-centered day.'},
-      {name:'Riparian Preserve at Water Ranch',area:'Gilbert',activities:['wildlife','hiking'],groups:['kids','adults','mixed'],times:['short','half'],drive:60,difficulty:'Easy',bathrooms:'Nearby',shade:'Some',kid:'Very good',season:'Early morning is excellent for wildlife and warmer months.',why:'Easy paths and birding make this one of the simplest nature outings for families.'}
-    ];
-
-    function scoreAdventure(a, prefs){
-      let score=0;
-      if(a.activities.includes(prefs.activity)) score+=6;
-      if(a.groups.includes(prefs.group)) score+=3;
-      if(a.times.includes(prefs.time)) score+=3;
-      const selectedDrive=Number(prefs.drive);
-      if(a.drive<=selectedDrive) score+=4; else if(a.drive<=selectedDrive+30) score+=1; else score-=3;
-      if(prefs.group==='kids' && /Very good|Good/.test(a.kid)) score+=2;
-      return score;
-    }
-
-    function sageUrl(a,prefs){
-      const locations={
-        'Papago Park':'papago-park',
-        'Estrella Mountain Regional Park':'estrella-mountain',
-        'Boyce Thompson Arboretum':'boyce-thompson-arboretum',
-        'Tonto Natural Bridge State Park':'tonto-natural-bridge',
-        'Woods Canyon Lake':'woods-canyon-lake',
-        'Bell Rock Pathway':'sedona',
-        'Jerome':'jerome',
-        'Out of Africa Wildlife Park':'camp-verde',
-        'Riparian Preserve at Water Ranch':'gilbert'
-      };
-      const lengths={short:'half-day',half:'half-day',full:'full-day',weekend:'weekend'};
-      const activities={hiking:'hike',water:'relax',scenic:'explore',wildlife:'explore',town:'explore',cooler:'explore'};
-      const month=new Date().getMonth();
-      const season=month>=2&&month<=4?'spring':month>=5&&month<=8?'summer':month>=9&&month<=10?'fall':'winter';
-      const q=new URLSearchParams({
-        plan:'ready',
-        location:locations[a.name]||'arizona',
-        kids:prefs.group==='adults'?'no':'yes',
-        activity:activities[prefs.activity]||'explore',
-        length:lengths[prefs.time]||'full-day',
-        season,
-        ages:prefs.group==='kids'?'elementary':prefs.group==='mixed'?'mixed':'mixed',
-        shade:prefs.group==='adults'?'false':'true',
-        bathrooms:prefs.group==='adults'?'false':'true',
-        stroller:'false',
-        drive:prefs.drive,
-        source:'health-travels-matcher',
-        utm_source:'healthandtravels',
-        utm_medium:'adventure_finder',
-        utm_campaign:'homepage_match'
-      });
-      if(prefs.dietary) q.set('needs',prefs.dietary);
-      return 'https://sage.healthandtravels.com/trip-builder?'+q.toString();
-    }
-
-    function card(a,prefs,index){
-      return `<article class="result-card">
-        <div class="result-top"><div class="result-kicker">Match ${index+1}</div><h3>${a.name}</h3><div class="result-location">📍 ${a.area}</div></div>
-        <div class="result-body">
-          <ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul>
-          <p class="result-copy">${a.why}</p>
-          <div class="safety">☀️ ${a.season}</div>
-          <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Build My Family Day Plan</a><a class="button button-secondary" href="/arizona">Browse Guides</a></div>
-        </div>
-      </article>`;
-    }
-
-    let currentShortlist=null;
-
-    function shortlistText(ranked,prefs){
-      const preferenceLabels={kids:'Family with kids',adults:'Adults',mixed:'Mixed group',short:'2–3 hours',half:'Half day',full:'Full day',weekend:'Weekend',hiking:'Hiking',water:'Water',scenic:'Scenic drive / views',wildlife:'Wildlife',town:'Small town',cooler:'Cooler weather'};
-      const lines=ranked.map((a,index)=>`${index+1}. ${a.name} (${a.area})\n   ${a.why}\n   Build this trip with Sage: ${sageUrl(a,prefs)}`);
-      return `My Health & Travels Arizona shortlist\n\nGroup: ${preferenceLabels[prefs.group]||prefs.group}\nTime: ${preferenceLabels[prefs.time]||prefs.time}\nActivity: ${preferenceLabels[prefs.activity]||prefs.activity}\nDrive range: about ${prefs.drive} minutes${prefs.dietary?`\nFood needs: ${prefs.dietary}`:''}\n\n${lines.join('\n\n')}\n\nFind another adventure: https://healthandtravels.com/#adventure-finder`;
-    }
-
-    function updateSaveOptions(ranked,prefs){
-      const text=shortlistText(ranked,prefs);
-      currentShortlist={savedAt:new Date().toISOString(),preferences:prefs,destinations:ranked.map(a=>({name:a.name,area:a.area,sageUrl:sageUrl(a,prefs)}))};
-      document.getElementById('emailShortlist').href='mailto:?subject='+encodeURIComponent('My Arizona family adventure shortlist')+'&body='+encodeURIComponent(text);
-      document.getElementById('saveStatus').textContent='';
-    }
-
-    document.getElementById('finderForm').addEventListener('submit',function(e){
-      e.preventDefault();
-      const prefs={group:document.getElementById('group').value,time:document.getElementById('time').value,drive:document.getElementById('drive').value,activity:document.getElementById('activity').value,dietary:document.getElementById('dietary').value};
-      const ranked=[...adventures].sort((a,b)=>scoreAdventure(b,prefs)-scoreAdventure(a,prefs)).slice(0,3);
-      document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
-      updateSaveOptions(ranked,prefs);
-      document.getElementById('resultsSummary').textContent='Based on your time, drive range, group, and activity choice.';
-      document.getElementById('results').classList.add('active');
-      document.getElementById('results').scrollIntoView({behavior:'smooth',block:'start'});
-      if(typeof gtag==='function') {
-        gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity,dietary_needs:prefs.dietary||'none'});
-        gtag('event','adventure_funnel_step',{funnel_name:'adventure_to_email',funnel_step:1,funnel_step_name:'finder_completed',group:prefs.group,activity:prefs.activity});
-      }
-    });
-
-    document.getElementById('saveShortlist').addEventListener('click',function(){
-      if(!currentShortlist) return;
-      try{
-        localStorage.setItem('healthTravelsShortlist',JSON.stringify(currentShortlist));
-        document.getElementById('clearShortlist').hidden=false;
-        document.getElementById('saveStatus').textContent='Saved on this device. Return to this homepage to pick up your shortlist, or continue with Sage above.';
-        if(typeof gtag==='function') gtag('event','adventure_shortlist_save',{storage:'local'});
-      }catch(error){
-        document.getElementById('saveStatus').textContent='Your browser blocked local saving. Use “Email My Shortlist” to keep a copy.';
-      }
-    });
-
-    function restoreShortlist(){
-      try{
-        const saved=JSON.parse(localStorage.getItem('healthTravelsShortlist')||'null');
-        if(!saved||!saved.preferences||!Array.isArray(saved.destinations)) return;
-        const prefs=saved.preferences;
-        const fields=['group','time','drive','activity','dietary'];
-        if(!fields.every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]))) return;
-        // Render only known destinations and rebuild links from current planner settings.
-        const ranked=saved.destinations.map(item=>item&&adventures.find(a=>a.name===item.name));
-        if(ranked.length!==3||ranked.some(a=>!a)||new Set(ranked).size!==3) return;
-        fields.forEach(id=>{document.getElementById(id).value=prefs[id];});
-        document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
-        updateSaveOptions(ranked,prefs);
-        document.getElementById('resultsSummary').textContent='Your saved choices are back. Check current conditions before you go, or change the choices above to find new matches.';
-        document.getElementById('results').classList.add('active');
-        document.getElementById('clearShortlist').hidden=false;
-        document.getElementById('saveStatus').textContent='Restored from this browser. Continue with Sage from any match above.';
-      }catch(error){ /* Unavailable storage or an unreadable save leaves the finder ready. */ }
-    }
-
-    document.getElementById('clearShortlist').addEventListener('click',function(){
-      try{
-        localStorage.removeItem('healthTravelsShortlist');
-        currentShortlist=null;
-        document.getElementById('finderForm').reset();
-        document.getElementById('resultGrid').innerHTML='';
-        document.getElementById('results').classList.remove('active');
-        document.getElementById('clearShortlist').hidden=true;
-        document.getElementById('group').focus();
-      }catch(error){
-        document.getElementById('saveStatus').textContent='Your browser blocked clearing the save. You can still choose new matches above.';
-      }
-    });
-
-    restoreShortlist();
-
-    document.getElementById('emailShortlist').addEventListener('click',function(){
-      if(typeof gtag==='function') gtag('event','adventure_shortlist_email',{method:'mailto'});
-    });
-
-    document.getElementById('starterPackLink').addEventListener('click',function(){
-      if(typeof gtag==='function') gtag('event','starter_pack_click',{source:'adventure_finder_results'});
-    });
-
-    document.getElementById('resultGrid').addEventListener('click',function(e){
-      const link=e.target.closest('[data-sage-match]');
-      if(link&&typeof gtag==='function') gtag('event','planner_to_sage',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage'});
-    });
-  </script>
-</body>
-</html>
+<body class="journey">
+<a class="skip-link" href="#main">Skip to trip planner</a>
+<header class="journey-header"><a class="journey-brand" href="/" aria-label="Health and Travels home"><img src="/Health%20ad%20Travels%20Logo%20512x512.png" width="42" height="42" alt=""><span>Health &amp; Travels<small>Arizona, together.</small></span></a><nav class="journey-nav" aria-label="Main navigation"><a href="/arizona">Explore</a><a href="#adventure-finder">Plan a Trip</a><a href="https://sage.healthandtravels.com/my-trips">Saved Trips</a></nav></header>
+<main id="main" class="journey-main">
+<section class="journey-intro" aria-labelledby="page-title"><div>
+<p class="journey-eyebrow">Less planning. More Arizona.</p><h1 id="page-title">A good day out.<br>Made for your family.</h1><p class="journey-lead">Find a place that fits your people, your time, and the kind of day you need.</p>
+<form id="adventure-finder" class="journey-form" action="https://sage.healthandtravels.com/plan" method="get" aria-label="Find an Arizona adventure">
+<input type="hidden" name="results" value="1"><input type="hidden" name="source" value="health-travels-home"><input type="hidden" name="utm_source" value="healthandtravels"><input type="hidden" name="utm_medium" value="planner"><input type="hidden" name="utm_campaign" value="unified_adventure">
+<div class="journey-fields">
+<div class="journey-field"><label for="origin">Starting from</label><select id="origin" name="origin"><option value="phoenix">Phoenix metro</option><option value="tucson">Tucson</option><option value="flagstaff">Flagstaff / Northern Arizona</option><option value="sedona">Sedona / Verde Valley</option><option value="prescott">Prescott</option></select></div>
+<div class="journey-field"><label for="group">Who's coming?</label><select id="group" name="group"><option value="young-family">Family with young kids</option><option value="older-family">Family with older kids</option><option value="mixed-family">Family with mixed ages</option><option value="couple">Couple</option><option value="friends">Friends / small group</option><option value="adults">Adults or grandparents</option></select></div>
+<div class="journey-field"><label for="length">Time for the whole outing</label><select id="length" name="length"><option value="half-day">2–4 hours</option><option value="full-day" selected>Day trip</option><option value="weekend">Weekend</option></select></div>
+<div class="journey-field"><label for="interest">In the mood for</label><select id="interest" name="interest"><option value="scenic">Scenic views</option><option value="hike">Hiking</option><option value="water">Water or lakes</option><option value="wildlife">Nature &amp; wildlife</option><option value="town">Small towns</option><option value="surprise">Surprise me</option></select></div>
+<div class="journey-field wide"><label for="priority">What matters most?</label><select id="priority" name="priority"><option value="bathrooms">Bathrooms</option><option value="shade">Shade</option><option value="easy">Easy walking</option><option value="cooler">Cooler weather</option><option value="short-drive">A short drive</option></select></div>
+</div>
+<details><summary>Season and drive limit</summary><div class="journey-fields"><div class="journey-field"><label for="season">When are you going?</label><select id="season" name="season"><option value="current">This season</option><option value="spring">Spring</option><option value="summer">Summer</option><option value="fall">Fall</option><option value="winter">Winter</option></select></div><div class="journey-field"><label for="drive">Maximum drive, one way</label><select id="drive" name="drive"><option value="auto">Fit it to my outing</option><option value="30">30 minutes</option><option value="60">1 hour</option><option value="90">1½ hours</option><option value="120">2 hours</option><option value="180">3 hours</option><option value="240">4 hours</option></select></div></div></details>
+<button class="journey-button" type="submit">Find my adventures <span aria-hidden="true">→</span></button><p class="journey-note">Up to three matches. No account needed. Planning powered by Sage.</p></form>
+<p id="legacy-shortlist" class="journey-note" hidden><a href="/saved-shortlist">Open your previously saved shortlist →</a></p></div>
+<figure class="journey-photo"><img src="/images/papago-hole-in-the-rock-family-trail.webp" width="800" height="600" alt="Families exploring the red sandstone formation at Papago Park" fetchpriority="high"><figcaption><span>Phoenix · A short desert outing</span><strong>Little explorers.<br>Big Arizona.</strong>Original field photography by Mark Stephenson.<br><a href="/papago-park-with-kids">Get to know Papago Park →</a></figcaption></figure></section>
+<div class="journey-steps" aria-label="How planning works"><span><strong>01</strong> Find your fit</span><span><strong>02</strong> Build your day</span><span><strong>03</strong> Save it &amp; head out</span></div>
+<section class="journey-section" aria-labelledby="explore-title"><div class="journey-section-head"><div><p class="journey-eyebrow">Explore at your own pace</p><h2 id="explore-title">Know the place before you go.</h2></div><a href="/arizona">All Arizona guides →</a></div><div class="journey-grid">
+<article class="journey-card"><img src="/images/papago-hole-in-the-rock-family-trail.webp" width="800" height="600" alt="Hole-in-the-Rock at Papago Park" loading="lazy"><div class="journey-card-body"><p class="journey-tags">Phoenix · Short outing</p><h3>Papago Park</h3><p>A quick view with uneven rock and limited shade. Check the family fit before you climb.</p><a class="text-link" href="/papago-park-with-kids">Explore Papago →</a></div></article>
+<article class="journey-card"><img src="/images/estrella-mountain-regional-park-entrance.webp" width="800" height="600" alt="Entrance to Estrella Mountain Regional Park" loading="lazy"><div class="journey-card-body"><p class="journey-tags">West Valley · Desert day</p><h3>Estrella Mountain</h3><p>Choose a manageable cool-season walk, with room to slow down and enjoy the desert.</p><a class="text-link" href="/estrella-mountain-regional-park-family-guide">Explore Estrella →</a></div></article>
+<article class="journey-card"><img src="/images/wet-beaver-creek-red-rock-canyon.webp" width="800" height="600" alt="Wet Beaver Creek between red sandstone canyon walls" loading="lazy"><div class="journey-card-body"><p class="journey-tags">Verde Valley · Longer hike</p><h3>Wet Beaver Creek</h3><p>A demanding seven-mile round trip. Read about the terrain, water and turnaround plan.</p><a class="text-link" href="/the-crack-wet-beaver-creek-hike">Read the field guide →</a></div></article>
+</div></section>
+<section class="journey-trust" aria-label="About our guides"><div><p class="journey-eyebrow">From our family to yours</p><h2>The details that make a day work.</h2><p>Original photography and practical guides by Mark Stephenson, an Arizona father and registered nurse. Look for shade, bathrooms, realistic routes and a way to change plans.</p></div><div><h3>Confidence comes from knowing.</h3><p>Read the <a href="/arizona-family-hiking-safety-guide">family hiking safety guide</a> and check official weather and park notices before leaving. Our <a href="/editorial-standards">editorial standards</a> explain how we review information.</p></div></section>
+</main>
+<footer class="journey-footer"><strong>Health &amp; Travels</strong> · Arizona family adventures<nav aria-label="Footer"><a href="/about">About</a><a href="/contact">Contact</a><a href="/arizona-adventures-with-kids">Family adventure hub</a><a href="/my-arizona-adventure">Saved places</a><a href="https://newsletter.healthandtravels.com/">Weekly ideas</a><a href="/privacy-policy">Privacy</a><a href="/terms-of-use">Terms</a><a href="/affiliate-disclosure">Affiliate disclosure</a></nav><details><summary>More from Health &amp; Travels</summary><nav aria-label="More resources"><a href="/arizona-adventure-pass">Adventure Pass early access</a><a href="https://join.arizonahikersassociation.org/join">Arizona Hikers Association</a><a href="/arizona-family-day-hike-checklist">Day-hike checklist</a></nav></details></footer>
+</body></html>
