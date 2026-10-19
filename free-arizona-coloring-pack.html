@@ -238,6 +238,21 @@
       .cta-band .btn-outline { background: transparent; color: #fff; border-color: rgba(255,255,255,0.65); }
       .cta-band .btn-outline:hover { background: rgba(255,255,255,0.12); }
 
+      /* ---------- Newsletter band ---------- */
+      .newsletter-band {
+        margin: 32px 0 0;
+        background: var(--sage-soft);
+        border: 1px solid var(--line);
+        border-radius: 22px;
+        padding: 40px 36px;
+        text-align: center;
+      }
+      .newsletter-band h2 { font-size: clamp(1.6rem, 4vw, 2.2rem); font-weight: 800; margin-bottom: 12px; }
+      .newsletter-band p { max-width: 600px; margin: 0 auto 24px; color: var(--ink-soft); }
+      .newsletter-band .btn-newsletter { background: var(--sage); color: #fff; box-shadow: var(--shadow); }
+      .newsletter-band .btn-newsletter:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
+      .newsletter-band .nl-note { margin: 18px auto 0; font-size: 0.92rem; font-weight: 700; color: var(--ink); }
+
       footer {
         text-align: center;
         padding: 44px 20px 52px;
@@ -252,6 +267,7 @@
         .page-card .preview img, .page-card.portrait .preview img { height: auto; max-height: 420px; }
         .hero { padding: 42px 0 38px; }
         .cta-band { padding: 36px 22px; }
+        .newsletter-band { padding: 34px 22px; }
       }
       @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
@@ -389,6 +405,16 @@
             <a class="btn btn-primary" href="https://healthandtravels.com" target="_blank" rel="noopener">Plan Your Arizona Adventure</a>
             <a class="btn btn-outline" href="#pages">Grab the Pages First</a>
           </div>
+        </div>
+
+        <div class="newsletter-band">
+          <h2>Want more Arizona family adventures?</h2>
+          <p>Join the Health &amp; Travels newsletter and get weekend-ready Arizona family ideas in your inbox &mdash; new hikes, festivals, scenic drives, and fresh printables like this pack.</p>
+          <a class="btn btn-newsletter" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&utm_medium=coloring_pack&utm_campaign=newsletter_signup" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+            Join the Newsletter
+          </a>
+          <p class="nl-note">Totally optional &mdash; the coloring pages above stay free either way. No signup needed to print or download.</p>
         </div>
       </section>
     </main>
