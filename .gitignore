@@ -3,3 +3,9 @@ node_modules/
 .env.*
 !.env.example
 photo-inbox/
+dist/
+.vercel/
+*.pem
+*.key
+*.p12
+*.pfx
