@@ -1,6 +1,11 @@
 const test=require('node:test'),assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
 const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-const script=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/gi)].find(m=>m[1].includes('const adventures ='))[1];
+// Read the known inline finder fixture; this is not an HTML sanitizer.
+const marker=html.indexOf('const adventures =');
+const start=html.lastIndexOf('<script>',marker);
+const end=html.indexOf('</script>',marker);
+assert.ok(marker>=0&&start>=0&&end>marker,'finder script fixture is present');
+const script=html.slice(start+'<script>'.length,end);
 const initial={origin:'phoenix',group:'toddlers',time:'half',drive:'90',activity:'hiking',dietary:'',shade:true,bathrooms:true,stroller:true};
 function browser(storage={}){
  const options={origin:['','phoenix','tucson','flagstaff','sedona','prescott'],group:['','toddlers','elementary','teens','mixed','adults'],time:['short','half','full','weekend'],drive:['30','60','90','120'],activity:['hiking','scenic','water','wildlife','town','cooler'],dietary:['','Vegetarian','Gluten-free']};
@@ -59,3 +64,4 @@ test('zero-match preferences restore with a reachable clear control',()=>{
  assert.equal(back.get('clearShortlist').hidden,false);assert.equal(back.get('.save-plan').hidden,true);
  assert.ok(html.indexOf('id="clearShortlist"')<html.indexOf('<details class="save-plan">'));
 });
+
