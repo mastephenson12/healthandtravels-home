@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-const script=[...html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/gi)].find(m=>m[1].includes('const adventures ='))[1];
+const script=[...html.matchAll(/<script\b[^>]*>([\s\S]*?)<\/script\s*>/gi)].find(m=>m[1].includes('const adventures ='))[1];
 const context=vm.createContext({URLSearchParams,Date});
 vm.runInContext(script.split("document.getElementById('finderForm').addEventListener")[0],context);
 const api=vm.runInContext('({adventures,rankAdventures,driveMinutes,sageUrl,card})',context);
