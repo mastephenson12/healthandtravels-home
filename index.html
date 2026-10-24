@@ -70,6 +70,7 @@
     .finder-wrap{scroll-margin-top:16px}.comfort-options{margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:12px}.comfort-options summary,.save-plan summary,.more-options>summary{font-family:var(--font-button);font-weight:700;cursor:pointer;min-height:44px;align-content:center}.comfort-checks{display:grid;gap:12px;margin:16px 0}.comfort-checks label{display:flex;align-items:center;gap:10px;min-height:44px}.comfort-checks input{width:20px;height:20px;accent-color:var(--blue)}.result-actions{align-items:center}.result-actions .guide-link{min-height:44px;padding:10px 0}.save-plan-grid{margin-top:16px}.shortlist-extra{width:100%;color:var(--blue);padding:10px 0;min-height:44px}.more-options{padding:20px;border:1px solid var(--line);border-radius:16px}.more-options>summary{color:var(--blue)}.skip-link{position:absolute;top:-100px;left:12px;z-index:20;padding:12px;background:#fff;color:var(--blue)}.skip-link:focus{top:8px}
     .route-details summary{cursor:pointer;min-height:44px;align-content:center;font-weight:700}.route-details{margin-top:12px}
     .match-reasons{padding-left:20px;margin:8px 0 16px}.match-reasons li{margin:6px 0}.fit-heading{font-size:1rem;margin:16px 0 6px}.tradeoff-list{padding-left:20px;margin:8px 0}.compare-link{display:inline-block;min-height:44px;padding:10px 0;color:var(--blue);font-weight:700}.result-card{scroll-margin-top:20px}.result-card:target{outline:3px solid var(--blue);outline-offset:4px}.return-note{margin-top:12px}.return-note button{min-height:44px;padding:8px 12px;margin-left:8px} [hidden]{display:none!important}
+    .finder-recovery{margin:20px 0;padding:20px;border:1px solid var(--line);border-radius:14px;background:var(--teal-soft)}.recovery-options{display:flex;flex-wrap:wrap;gap:12px;margin-top:16px}.recovery-options button{white-space:normal;text-align:left;min-height:48px;max-width:100%}.recovery-options small{display:block;font-weight:400;margin-top:5px}.finder-recovery h4{margin-top:0}
     #shortlist-heading:focus{outline:3px solid var(--blue);outline-offset:4px}
     @media(max-width:850px){.hero-layout{grid-template-columns:1fr}.hero-snapshot{display:none}.site-header{flex-direction:row;flex-wrap:wrap;align-items:center}.site-header nav{width:100%;justify-content:space-between}}
     @media(max-width:560px){.network-inner{padding:7px 18px}.network-inner>span:last-child{display:none}.site-header{padding:10px 18px 4px}.brand img{width:36px;height:36px}.site-header nav{font-size:.72rem;gap:2px 10px}.hero-inner{padding:24px 18px 8px}.hero-copy{margin-top:16px}.hero-actions{margin-top:18px}.after-journey{padding:0 14px 24px}.hero-actions .button{min-width:0}.featured-guides{padding:0 18px 28px}}
@@ -125,7 +126,7 @@
           <p class="small-note return-note" id="returnNotice" hidden></p><button class="button button-secondary" id="clearShortlist" type="button" hidden>Clear Remembered Choices</button>
           <section class="results" id="results" aria-live="polite">
             <div class="results-head"><div><h3 tabindex="-1" id="shortlist-heading">Choose an outing to plan</h3><p id="resultsSummary"></p></div></div>
-            <div class="result-grid" id="resultGrid"></div><p id="empty-results-links" hidden><a href="/arizona">Browse Arizona guides</a> or <a data-sage-direct href="https://sage.healthandtravels.com/trip-builder?source=health-travels-homepage&amp;utm_source=healthandtravels&amp;utm_medium=empty_shortlist&amp;utm_campaign=homepage_match">choose a destination in Sage</a>.</p>
+            <div class="result-grid" id="resultGrid"></div><section class="finder-recovery" id="finderRecovery" aria-labelledby="recoveryHeading" hidden><h4 id="recoveryHeading">A small change could open up your options</h4><p id="recoveryIntro">Choose one change below. Your other answers, including comfort and food needs, stay the same.</p><div class="recovery-options" id="recoveryOptions"></div><p class="small-note" id="recoveryStatus" role="status"></p></section><p id="empty-results-links" hidden><a href="/arizona">Browse Arizona guides</a> or <a data-sage-direct href="https://sage.healthandtravels.com/trip-builder?source=health-travels-homepage&amp;utm_source=healthandtravels&amp;utm_medium=empty_shortlist&amp;utm_campaign=homepage_match">choose a destination in Sage</a>.</p>
             <details class="save-plan"><summary>Keep this shortlist for later</summary>
               <div class="save-plan-grid">
                 <div><h3 id="save-plan-title">Keep your shortlist</h3><p>Save these ideas on your device or email the shortlist to yourself. You can save the complete day plan in Sage after choosing an outing.</p></div>
@@ -207,6 +208,32 @@
     function rankAdventures(prefs){
       return adventures.filter(a=>{const drive=driveMinutes(a,prefs.origin);return drive!==null&&drive<=Number(prefs.drive)&&minimumTime(a)<=timeOrder[prefs.time]&&a.activities.includes(prefs.activity);})
         .sort((a,b)=>scoreAdventure(b,prefs)-scoreAdventure(a,prefs)).slice(0,3);
+    }
+    function recoveryOptions(prefs){
+      if(rankAdventures(prefs).length)return [];
+      const candidates=[];
+      const add=(field,value,label)=>{
+        const count=rankAdventures({...prefs,[field]:value}).length;
+        if(count)candidates.push({field,value,label,count});
+        return count>0;
+      };
+      const activityOptions=['hiking','water','scenic','wildlife','town','cooler'].filter(value=>value!==prefs.activity)
+        .map(value=>({value,count:rankAdventures({...prefs,activity:value}).length})).filter(item=>item.count)
+        .sort((a,b)=>b.count-a.count);
+      if(activityOptions.length){const value=activityOptions[0].value;add('activity',value,'Try '+activityLabels[value].toLowerCase());}
+      for(const value of ['30','60','90','120'])if(Number(value)>Number(prefs.drive)&&add('drive',value,'Allow up to '+value+' minutes one way'))break;
+      const timeLabels={short:'2–3 hours',half:'a half day',full:'a full day',weekend:'a weekend'};
+      for(const value of ['short','half','full','weekend'])if(timeOrder[value]>timeOrder[prefs.time]&&add('time',value,'Allow '+timeLabels[value]))break;
+      return candidates;
+    }
+    function renderRecovery(prefs){
+      const container=document.getElementById('finderRecovery');
+      container.hidden=rankAdventures(prefs).length>0;
+      const options=container.hidden?[]:recoveryOptions(prefs);
+      document.getElementById('recoveryHeading').textContent=options.length?'A small change could open up your options':'Explore beyond this shortlist';
+      document.getElementById('recoveryIntro').textContent=options.length?'Choose one change below. Your other answers, including comfort and food needs, stay the same.':'Your answers are still kept. Browse the guides or update the finder above.';
+      document.getElementById('recoveryOptions').innerHTML=options.map(option=>`<button type="button" class="button button-secondary" data-recovery-field="${option.field}" data-recovery-value="${option.value}"><span>${option.label}<small>${option.count} ${option.count===1?'outing':'outings'} to compare</small></span></button>`).join('');
+      document.getElementById('recoveryStatus').textContent=options.length?'These are catalog matches, not confirmed facility or weather checks.':'No single activity, drive or time change finds an outing in this small catalog. Browse the guides below, or edit more than one choice above.';
     }
     function readPreferences(){
       const prefs=Object.fromEntries(['origin','group','time','drive','activity','dietary'].map(id=>[id,document.getElementById(id).value]));
@@ -338,6 +365,7 @@
       const ranked=rankAdventures(prefs);
       document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
       updateSaveOptions(ranked,prefs);
+      renderRecovery(prefs);
       const remembered=rememberVisit();
       const notice=document.getElementById('returnNotice');
       notice.hidden=false;
@@ -345,7 +373,7 @@
       document.getElementById('clearShortlist').hidden=false;
       document.querySelector('.save-plan').hidden=ranked.length===0;
       document.getElementById('empty-results-links').hidden=ranked.length!==0;
-      document.getElementById('resultsSummary').textContent=ranked.length?`${ranked.length} ${ranked.length===1?'idea':'ideas'} for your activity and time, within your drive range from ${originLabels[prefs.origin]}. Sage will carry your answers forward for review. Season starts with the current month; confirm your travel date there.`:'No outings in this small catalog fit those choices. Try more time, a longer drive range or a different activity. You can also browse the guides or open Sage if you already have a destination.';
+      document.getElementById('resultsSummary').textContent=ranked.length?`${ranked.length} ${ranked.length===1?'idea':'ideas'} for your activity and time, within your drive range from ${originLabels[prefs.origin]}. Sage will carry your answers forward for review. Season starts with the current month; confirm your travel date there.`:`No outings match your current activity, time and drive limit from ${originLabels[prefs.origin]} in this small catalog.`;
       document.getElementById('results').classList.add('active');
       document.getElementById('shortlist-heading').focus({preventScroll:true});
       document.getElementById('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
@@ -353,6 +381,16 @@
         gtag('event','adventure_finder_submit',{group:prefs.group,time:prefs.time,drive:prefs.drive,activity:prefs.activity,origin:prefs.origin});
         gtag('event','adventure_funnel_step',{funnel_name:'adventure_to_email',funnel_step:1,funnel_step_name:'finder_completed',group:prefs.group,activity:prefs.activity});
       }
+    });
+
+    document.getElementById('recoveryOptions').addEventListener('click',function(event){
+      const button=event.target.closest('[data-recovery-field]');
+      if(!button)return;
+      // Recheck against the current form, so an old suggestion cannot change new answers.
+      const option=recoveryOptions(readPreferences()).find(item=>item.field===button.dataset.recoveryField&&item.value===button.dataset.recoveryValue);
+      if(!option){document.getElementById('recoveryStatus').textContent='Your answers changed. Select Show My Outings to refresh these options.';return;}
+      document.getElementById(option.field).value=option.value;
+      document.getElementById('finderForm').requestSubmit();
     });
 
     document.getElementById('saveShortlist').addEventListener('click',function(){
@@ -391,6 +429,7 @@
         ['shade','bathrooms','stroller'].forEach(id=>{document.getElementById(id).checked=prefs[id];});
         document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
         updateSaveOptions(ranked,prefs);
+        renderRecovery(prefs);
         document.getElementById('resultsSummary').textContent=ranked.length?'Welcome back. These matches use your last submitted choices and the current catalog. Check conditions before leaving.':'Your last choices are back. No outings in this catalog fit those limits. Adjust the choices above or browse the guides.';
         document.getElementById('returnNotice').hidden=false;
         document.getElementById('returnNotice').textContent='Your choices were restored on this browser. Use Clear Remembered Choices to start again.';
