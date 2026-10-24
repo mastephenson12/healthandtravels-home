@@ -68,6 +68,8 @@
     .hero-inner{padding:36px 24px 12px}.hero-layout{grid-template-columns:minmax(0,1fr) 300px;gap:32px}h1{font-size:clamp(2.7rem,5.7vw,4.6rem);max-width:680px}.hero-copy{font-size:1.1rem}.direct-plan{margin:14px 0 0;font-size:.95rem}.direct-plan a,.guide-link{color:var(--blue);font-weight:700}.direct-plan a{display:inline-block;min-height:44px;padding:10px 0}
     .journey-steps{margin:0;padding-left:18px}.journey-steps li{display:list-item;padding:8px 0;border:0}.journey-steps strong,.journey-steps span{display:block}.journey-steps span{font-size:.92rem}
     .finder-wrap{scroll-margin-top:16px}.comfort-options{margin-top:24px;padding:16px;border:1px solid var(--line);border-radius:12px}.comfort-options summary,.save-plan summary,.more-options>summary{font-family:var(--font-button);font-weight:700;cursor:pointer;min-height:44px;align-content:center}.comfort-checks{display:grid;gap:12px;margin:16px 0}.comfort-checks label{display:flex;align-items:center;gap:10px;min-height:44px}.comfort-checks input{width:20px;height:20px;accent-color:var(--blue)}.result-actions{align-items:center}.result-actions .guide-link{min-height:44px;padding:10px 0}.save-plan-grid{margin-top:16px}.shortlist-extra{width:100%;color:var(--blue);padding:10px 0;min-height:44px}.more-options{padding:20px;border:1px solid var(--line);border-radius:16px}.more-options>summary{color:var(--blue)}.skip-link{position:absolute;top:-100px;left:12px;z-index:20;padding:12px;background:#fff;color:var(--blue)}.skip-link:focus{top:8px}
+    .route-details summary{cursor:pointer;min-height:44px;align-content:center;font-weight:700}.route-details{margin-top:12px}
+    .match-reasons{padding-left:20px;margin:8px 0 16px}.match-reasons li{margin:6px 0}.fit-heading{font-size:1rem;margin:16px 0 6px}.tradeoff-list{padding-left:20px;margin:8px 0}.compare-link{display:inline-block;min-height:44px;padding:10px 0;color:var(--blue);font-weight:700}.result-card{scroll-margin-top:20px}.result-card:target{outline:3px solid var(--blue);outline-offset:4px}.return-note{margin-top:12px}.return-note button{min-height:44px;padding:8px 12px;margin-left:8px} [hidden]{display:none!important}
     #shortlist-heading:focus{outline:3px solid var(--blue);outline-offset:4px}
     @media(max-width:850px){.hero-layout{grid-template-columns:1fr}.hero-snapshot{display:none}.site-header{flex-direction:row;flex-wrap:wrap;align-items:center}.site-header nav{width:100%;justify-content:space-between}}
     @media(max-width:560px){.network-inner{padding:7px 18px}.network-inner>span:last-child{display:none}.site-header{padding:10px 18px 4px}.brand img{width:36px;height:36px}.site-header nav{font-size:.72rem;gap:2px 10px}.hero-inner{padding:24px 18px 8px}.hero-copy{margin-top:16px}.hero-actions{margin-top:18px}.after-journey{padding:0 14px 24px}.hero-actions .button{min-width:0}.featured-guides{padding:0 18px 28px}}
@@ -116,17 +118,18 @@
               <div class="field"><label for="activity">What sounds good?</label><select id="activity" required><option value="hiking">Hiking</option><option value="water">Water</option><option value="scenic">Scenic drive / views</option><option value="wildlife">Wildlife</option><option value="town">Small town</option><option value="cooler">Cooler weather</option></select></div>
             </div>
             <details class="comfort-options"><summary>Comfort &amp; food needs (optional)</summary><p class="small-note">Select what matters. We’ll flag tradeoffs; availability is not guaranteed.</p><div class="comfort-checks"><label><input id="shade" type="checkbox"> Prioritize shade</label><label><input id="bathrooms" type="checkbox"> Bathrooms matter</label><label><input id="stroller" type="checkbox"> Stroller / step-free access matters</label></div>              <div class="field"><label for="dietary">Any food needs?</label><select id="dietary"><option value="">No special request</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Gluten-free">Gluten-free</option><option value="Dairy-free">Dairy-free</option><option value="Nut allergy">Nut allergy</option><option value="Multiple needs">Multiple needs</option></select></div></details>
-            <div class="finder-action"><button class="button button-primary" type="submit">Show My Outings</button><p class="small-note">Drive times are broad estimates from your selected area, not live navigation. Review current access and facilities before leaving.</p></div>
+            <div class="finder-action"><button class="button button-primary" type="submit">Show My Outings</button><p class="small-note">Drive times are broad estimates, not live navigation. Submitted choices stay in this tab so you can return from Sage. Save the shortlist to keep it on this device between visits. Review current access before leaving.</p></div>
             <noscript><p>To use the finder, enable JavaScript. You can also <a href="/arizona">browse Arizona guides</a> or <a href="https://sage.healthandtravels.com/trip-builder">open Sage</a>.</p></noscript>
           </form>
 
+          <p class="small-note return-note" id="returnNotice" hidden></p><button class="button button-secondary" id="clearShortlist" type="button" hidden>Clear Remembered Choices</button>
           <section class="results" id="results" aria-live="polite">
             <div class="results-head"><div><h3 tabindex="-1" id="shortlist-heading">Choose an outing to plan</h3><p id="resultsSummary"></p></div></div>
             <div class="result-grid" id="resultGrid"></div><p id="empty-results-links" hidden><a href="/arizona">Browse Arizona guides</a> or <a data-sage-direct href="https://sage.healthandtravels.com/trip-builder?source=health-travels-homepage&amp;utm_source=healthandtravels&amp;utm_medium=empty_shortlist&amp;utm_campaign=homepage_match">choose a destination in Sage</a>.</p>
             <details class="save-plan"><summary>Keep this shortlist for later</summary>
               <div class="save-plan-grid">
                 <div><h3 id="save-plan-title">Keep your shortlist</h3><p>Save these ideas on your device or email the shortlist to yourself. You can save the complete day plan in Sage after choosing an outing.</p></div>
-                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><button class="button button-secondary" id="clearShortlist" type="button" hidden>Clear Saved Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="shortlist-extra" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
+                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="shortlist-extra" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
               </div>
               <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
               <small>“Email My Shortlist” opens your email app; Health &amp; Travels does not receive the address. Newsletter signup is handled separately by Beehiiv. See our <a href="/privacy-policy">privacy policy</a>.</small>
@@ -211,6 +214,24 @@
       return prefs;
     }
 
+    const activityLabels={hiking:'Hiking',water:'Water and lake scenery',scenic:'Scenic views',wildlife:'Wildlife',town:'Town exploring',cooler:'Cooler-weather setting'};
+    function shadeLevel(a){return a.shade==='Good'?2:a.shade==='Some'?1:0;}
+    function matchDetails(a,prefs){
+      const reasons=[activityLabels[prefs.activity],driveMinutes(a,prefs.origin)+' min estimated one way from '+originLabels[prefs.origin],timeFit(a,prefs.time)];
+      const tradeoffs=[];
+      if(prefs.shade) tradeoffs.push(shadeLevel(a)===0?'Shade is limited or variable. Choose another outing if continuous shade is essential.':a.shade==='Some'?'Some shade is listed; expect exposed stretches and confirm the route.':'Shade is listed, but continuous shade is not verified. Check your route and weather.');
+      if(prefs.bathrooms) tradeoffs.push(a.bathrooms==='Yes'?'Bathrooms are listed; confirm opening hours and access before leaving.':'Bathrooms: '+a.bathrooms+'. Confirm an open restroom before choosing this outing.');
+      if(prefs.stroller) tradeoffs.push('Step-free access is not verified here; confirm the specific route before planning.');
+      if(prefs.group==='toddlers' && /moderate/i.test(a.difficulty)) tradeoffs.push('Toddlers: check footing and choose a short turnaround. Route suitability is not verified.');
+      if(!a.times.includes(prefs.time)) tradeoffs.push(timeFit(a,prefs.time)+'.');
+      return {reasons,tradeoffs};
+    }
+    function shadeAlternative(a,prefs,ranked){
+      if(!prefs.shade||shadeLevel(a)>0)return null;
+      return ranked.find(other=>other!==a&&shadeLevel(other)>shadeLevel(a))||null;
+    }
+    function cardId(a){return 'outing-'+adventures.indexOf(a);}
+
     function scoreAdventure(a, prefs){
       let score=0;
       if(a.activities.includes(prefs.activity)) score+=6;
@@ -219,7 +240,8 @@
       const selectedDrive=Number(prefs.drive);
       if(driveMinutes(a,prefs.origin)<=selectedDrive) score+=4;
       if(prefs.group!=='adults' && /Very good|Good/.test(a.kid)) score+=2;
-      if(prefs.shade && /Good|Some/.test(a.shade)) score+=2;
+      if(prefs.shade) score+=shadeLevel(a)*3;
+      if(prefs.bathrooms && a.bathrooms==='Yes') score+=2;
       return score;
     }
 
@@ -268,13 +290,17 @@
       "Bell Rock Pathway": "/sedona-with-kids-family-trip-guide"
 };
 
-    function card(a,prefs,index){
-      return `<article class="result-card">
+    function card(a,prefs,index,ranked=rankAdventures(prefs)){
+      const details=matchDetails(a,prefs);
+      const alternative=shadeAlternative(a,prefs,ranked);
+      return `<article class="result-card" id="${cardId(a)}" tabindex="-1">
         <div class="result-top"><div class="result-kicker">Match ${index+1}</div><h3>${a.name}</h3><div class="result-location">📍 ${a.area}</div></div>
         <div class="result-body">
-          <ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul>
-          <p class="result-copy">${a.why}</p><p class="small-note">${driveMinutes(a,prefs.origin)} min from ${originLabels[prefs.origin]} · ${timeFit(a,prefs.time)}</p>
-          <div class="safety">${a.season}${a.conditionsUrl?` <a href="${a.conditionsUrl}" target="_blank" rel="noopener">Current park alert ↗</a>`:""}${prefs.stroller?" Step-free access is not verified here; confirm the specific route before planning.":""}</div>
+          <p class="result-copy">${a.why}</p><h4 class="fit-heading">Why it made your shortlist</h4><p class="small-note">${details.reasons.join(' · ')}</p>
+          ${details.tradeoffs.length?`<h4 class="fit-heading">Before you choose</h4><ul class="tradeoff-list">${details.tradeoffs.map(note=>`<li>${note}</li>`).join('')}</ul>`:''}
+          ${alternative?`<a class="compare-link" href="#${cardId(alternative)}" data-compare="${cardId(alternative)}">Want more shade? Compare ${alternative.name} →</a><p class="small-note">Same activity, within your drive and time limits. Continuous shade is not verified.</p>`:prefs.shade&&shadeLevel(a)===0?'<p class="small-note">No more-shaded option is in this shortlist. Try another activity or drive range above; we have kept your limits.</p>':''}
+          <details class="route-details"><summary>Route and facility summary</summary><ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul></details>
+          <div class="safety">${a.season}${a.conditionsUrl?` <a href="${a.conditionsUrl}" target="_blank" rel="noopener">Current park alert ↗</a>`:""}</div>
           <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Plan This Outing</a><a class="guide-link" href="${destinationGuides[a.name] || '/arizona'}">${destinationGuides[a.name] ? 'Read Family Guide' : 'Browse Guides'}</a></div>
         </div>
       </article>`;
@@ -284,7 +310,7 @@
 
     function shortlistText(ranked,prefs){
       const preferenceLabels={toddlers:'Toddlers / preschoolers',elementary:'Elementary-age kids',teens:'Tweens / teens',adults:'Adults',mixed:'Mixed ages',short:'2–3 hours',half:'Half day',full:'Full day',weekend:'Weekend',hiking:'Hiking',water:'Water',scenic:'Scenic drive / views',wildlife:'Wildlife',town:'Small town',cooler:'Cooler weather'};
-      const lines=ranked.map((a,index)=>`${index+1}. ${a.name} (${a.area})\n   ${a.why}\n   Build this trip with Sage: ${sageUrl(a,prefs)}`);
+      const lines=ranked.map((a,index)=>`${index+1}. ${a.name} (${a.area})\n   ${a.why}\n   Why it fits: ${matchDetails(a,prefs).reasons.join('; ')}\n   Before choosing: ${[...matchDetails(a,prefs).tradeoffs,a.season].join(' ')}\n   Build this trip with Sage: ${sageUrl(a,prefs)}`);
       return `My Health & Travels Arizona shortlist\n\nGroup: ${preferenceLabels[prefs.group]||prefs.group}\nTime: ${preferenceLabels[prefs.time]||prefs.time}\nActivity: ${preferenceLabels[prefs.activity]||prefs.activity}\nStarting area: ${originLabels[prefs.origin]}\nDrive range: up to ${prefs.drive} minutes${prefs.shade?'\nPrioritize shade':''}${prefs.bathrooms?'\nBathrooms matter':''}${prefs.stroller?'\nStep-free access matters':''}${prefs.dietary?`\nFood needs: ${prefs.dietary}`:''}\n\n${lines.join('\n\n')}\n\nFind another adventure: https://healthandtravels.com/#adventure-finder`;
     }
 
@@ -295,12 +321,28 @@
       document.getElementById('saveStatus').textContent='';
     }
 
+    function rememberVisit(){
+      try{sessionStorage.setItem('healthTravelsVisit',JSON.stringify(currentShortlist));return true;}catch{return false;}
+    }
+    function clearRememberedChoices(){
+      // Attempt both stores even if one is unavailable.
+      let cleared=true;
+      for(const [store,key] of [['localStorage','healthTravelsShortlist'],['sessionStorage','healthTravelsVisit']]){
+        try{window[store].removeItem(key);}catch{cleared=false;}
+      }
+      return cleared;
+    }
     document.getElementById('finderForm').addEventListener('submit',function(e){
       e.preventDefault();
       const prefs=readPreferences();
       const ranked=rankAdventures(prefs);
       document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
       updateSaveOptions(ranked,prefs);
+      const remembered=rememberVisit();
+      const notice=document.getElementById('returnNotice');
+      notice.hidden=false;
+      notice.textContent=remembered?'Your submitted choices are remembered in this tab for your return from Sage. Use Clear Remembered Choices to remove them.':'This browser could not remember your choices. You can still plan an outing or email the shortlist.';
+      document.getElementById('clearShortlist').hidden=false;
       document.querySelector('.save-plan').hidden=ranked.length===0;
       document.getElementById('empty-results-links').hidden=ranked.length!==0;
       document.getElementById('resultsSummary').textContent=ranked.length?`${ranked.length} ${ranked.length===1?'idea':'ideas'} for your activity and time, within your drive range from ${originLabels[prefs.origin]}. Sage will carry your answers forward for review. Season starts with the current month; confirm your travel date there.`:'No outings in this small catalog fit those choices. Try more time, a longer drive range or a different activity. You can also browse the guides or open Sage if you already have a destination.';
@@ -325,9 +367,18 @@
       }
     });
 
+    function validSavedChoices(saved){
+      if(!saved||saved.version!==2||!saved.preferences||!Array.isArray(saved.destinations))return false;
+      const prefs=saved.preferences;
+      return ['shade','bathrooms','stroller'].every(key=>typeof prefs[key]==='boolean')&&['origin','group','time','drive','activity','dietary'].every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]&&(!['origin','group'].includes(id)||option.value!=='')));
+    }
     function restoreShortlist(){
       try{
-        const saved=JSON.parse(localStorage.getItem('healthTravelsShortlist')||'null');
+        let saved=null;
+        // An unavailable or corrupt tab store must not block an explicit device save.
+        for(const [store,key] of [['sessionStorage','healthTravelsVisit'],['localStorage','healthTravelsShortlist']]){
+          try{const candidate=JSON.parse(window[store].getItem(key)||'null');if(validSavedChoices(candidate)){saved=candidate;break;}}catch{}
+        }
         if(!saved||!saved.preferences||!Array.isArray(saved.destinations)) return;
         const prefs=saved.preferences;
         const fields=['origin','group','time','drive','activity','dietary'];
@@ -335,14 +386,16 @@
         if(!fields.every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]))) return;
         // Render only known destinations and rebuild links from current planner settings.
         const ranked=rankAdventures(prefs);
-        if(!ranked.length||ranked.length>3||ranked.some(a=>!a)||new Set(ranked).size!==ranked.length) return;
+        if(ranked.length>3||ranked.some(a=>!a)||new Set(ranked).size!==ranked.length) return;
         fields.forEach(id=>{document.getElementById(id).value=prefs[id];});
         ['shade','bathrooms','stroller'].forEach(id=>{document.getElementById(id).checked=prefs[id];});
         document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
         updateSaveOptions(ranked,prefs);
-        document.getElementById('resultsSummary').textContent='Your saved choices are back. Check current conditions before you go, or change the choices above to find new matches.';
-        document.querySelector('.save-plan').hidden=false;
-        document.getElementById('empty-results-links').hidden=true;
+        document.getElementById('resultsSummary').textContent=ranked.length?'Welcome back. These matches use your last submitted choices and the current catalog. Check conditions before leaving.':'Your last choices are back. No outings in this catalog fit those limits. Adjust the choices above or browse the guides.';
+        document.getElementById('returnNotice').hidden=false;
+        document.getElementById('returnNotice').textContent='Your choices were restored on this browser. Use Clear Remembered Choices to start again.';
+        document.querySelector('.save-plan').hidden=ranked.length===0;
+        document.getElementById('empty-results-links').hidden=ranked.length!==0;
         document.getElementById('results').classList.add('active');
         document.getElementById('clearShortlist').hidden=false;
         document.getElementById('saveStatus').textContent='Restored from this browser. Continue with Sage from any match above.';
@@ -351,15 +404,17 @@
 
     document.getElementById('clearShortlist').addEventListener('click',function(){
       try{
-        localStorage.removeItem('healthTravelsShortlist');
+        if(!clearRememberedChoices())throw new Error('Storage unavailable');
         currentShortlist=null;
         document.getElementById('finderForm').reset();
+        document.getElementById('returnNotice').hidden=true;
         document.getElementById('resultGrid').innerHTML='';
         document.getElementById('results').classList.remove('active');
         document.getElementById('clearShortlist').hidden=true;
         document.getElementById('origin').focus();
       }catch(error){
-        document.getElementById('saveStatus').textContent='Your browser blocked clearing the save. You can still choose new matches above.';
+        document.getElementById('returnNotice').hidden=false;
+        document.getElementById('returnNotice').textContent='Your browser could not clear all remembered choices. Use your browser’s site-data controls to remove them. You can still choose new matches above.';
       }
     });
 
@@ -377,7 +432,10 @@
     });
 
     document.getElementById('resultGrid').addEventListener('click',function(e){
+      const compare=e.target.closest('[data-compare]');
+      if(compare){document.getElementById(compare.dataset.compare).focus({preventScroll:true});return;}
       const link=e.target.closest('[data-sage-match]');
+      if(link) rememberVisit();
       if(link&&typeof gtag==='function') {
         gtag('event','sage_cta_click',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage',placement:'finder_result'});
         gtag('event','planner_to_sage',{destination:link.dataset.sageMatch,source_site:'healthandtravels',source_page:'homepage'});
