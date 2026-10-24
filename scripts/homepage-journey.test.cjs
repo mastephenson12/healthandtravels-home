@@ -3,7 +3,7 @@ const assert=require('node:assert/strict');
 const fs=require('node:fs');
 const vm=require('node:vm');
 const html=fs.readFileSync(require('node:path').join(__dirname,'../index.html'),'utf8');
-const script=[...html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/g)].find(m=>m[1].includes('const adventures ='))[1];
+const script=[...html.matchAll(/<script(?: [^>]*)?>([\s\S]*?)<\/script>/gi)].find(m=>m[1].includes('const adventures ='))[1];
 const context=vm.createContext({URLSearchParams,Date});
 vm.runInContext(script.split("document.getElementById('finderForm').addEventListener")[0],context);
 const api=vm.runInContext('({adventures,rankAdventures,driveMinutes,sageUrl,card})',context);
@@ -60,4 +60,18 @@ test('Estrella no longer promises regular bathrooms or a full-day outing',()=>{
  assert.equal(a.times.includes('full'),false);
  assert.match(api.card(a,prefs,0),/Current park alert/);
  assert.match(a.why,/October 24, 2026/);
+});
+
+test('short visits never receive a full-day outing labeled as a shorter stop',()=>{
+ const short={...prefs,time:'short',drive:'120',activity:'water'};
+ assert.equal(api.rankAdventures(short).length,0);
+ const lake=api.adventures.find(a=>a.name==='Woods Canyon Lake');
+ assert.match(api.card(lake,short,0),/Needs more time than you selected/);
+ assert.doesNotMatch(api.card(lake,short,0),/Shorter stop/);
+});
+
+test('activity choices are not padded with unrelated outings',()=>{
+ for(const activity of ['water','wildlife','town','cooler'])for(const time of ['short','half','full','weekend']){
+  for(const a of api.rankAdventures({...prefs,activity,time,drive:'120'}))assert.ok(a.activities.includes(activity));
+ }
 });

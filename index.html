@@ -195,8 +195,14 @@
     // Same broad area estimates as Sage tripOrigins.ts. Unknown routes stay unknown.
     const originDrives={"tucson":{"Papago Park":115,"Estrella Mountain Regional Park":125,"Boyce Thompson Arboretum":85,"Tonto Natural Bridge State Park":200,"Bell Rock Pathway":220},"flagstaff":{"Papago Park":145,"Estrella Mountain Regional Park":170,"Boyce Thompson Arboretum":180,"Tonto Natural Bridge State Park":110,"Bell Rock Pathway":50},"sedona":{"Papago Park":120,"Estrella Mountain Regional Park":145,"Boyce Thompson Arboretum":155,"Tonto Natural Bridge State Park":90,"Bell Rock Pathway":15},"prescott":{"Papago Park":105,"Estrella Mountain Regional Park":110,"Boyce Thompson Arboretum":145,"Tonto Natural Bridge State Park":90,"Bell Rock Pathway":80}};
     function driveMinutes(adventure,origin){return origin==='phoenix'?adventure.drive:originDrives[origin]?.[adventure.name]??null;}
+    const timeOrder={short:0,half:1,full:2,weekend:3};
+    function minimumTime(adventure){return Math.min(...adventure.times.map(time=>timeOrder[time]));}
+    function timeFit(adventure,time){
+      if(adventure.times.includes(time)) return 'Fits your time choice';
+      return minimumTime(adventure)>timeOrder[time]?'Needs more time than you selected':'Shorter stop; plan the rest of your day separately';
+    }
     function rankAdventures(prefs){
-      return adventures.filter(a=>{const drive=driveMinutes(a,prefs.origin);return drive!==null&&drive<=Number(prefs.drive);})
+      return adventures.filter(a=>{const drive=driveMinutes(a,prefs.origin);return drive!==null&&drive<=Number(prefs.drive)&&minimumTime(a)<=timeOrder[prefs.time]&&a.activities.includes(prefs.activity);})
         .sort((a,b)=>scoreAdventure(b,prefs)-scoreAdventure(a,prefs)).slice(0,3);
     }
     function readPreferences(){
@@ -267,7 +273,7 @@
         <div class="result-top"><div class="result-kicker">Match ${index+1}</div><h3>${a.name}</h3><div class="result-location">📍 ${a.area}</div></div>
         <div class="result-body">
           <ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul>
-          <p class="result-copy">${a.why}</p><p class="small-note">${driveMinutes(a,prefs.origin)} min from ${originLabels[prefs.origin]} · ${a.times.includes(prefs.time)?"Fits your time choice":"Shorter stop; plan the rest of your day separately"}</p>
+          <p class="result-copy">${a.why}</p><p class="small-note">${driveMinutes(a,prefs.origin)} min from ${originLabels[prefs.origin]} · ${timeFit(a,prefs.time)}</p>
           <div class="safety">${a.season}${a.conditionsUrl?` <a href="${a.conditionsUrl}" target="_blank" rel="noopener">Current park alert ↗</a>`:""}${prefs.stroller?" Step-free access is not verified here; confirm the specific route before planning.":""}</div>
           <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Plan This Outing</a><a class="guide-link" href="${destinationGuides[a.name] || '/arizona'}">${destinationGuides[a.name] ? 'Read Family Guide' : 'Browse Guides'}</a></div>
         </div>
@@ -297,7 +303,7 @@
       updateSaveOptions(ranked,prefs);
       document.querySelector('.save-plan').hidden=ranked.length===0;
       document.getElementById('empty-results-links').hidden=ranked.length!==0;
-      document.getElementById('resultsSummary').textContent=ranked.length?`${ranked.length} ${ranked.length===1?'idea':'ideas'} within your drive range from ${originLabels[prefs.origin]}. Sage will carry your answers forward for review. Season starts with the current month; confirm your travel date there.`:'No outings in this small catalog fit that drive limit from your starting area. Try a longer drive range, browse the guides, or open Sage if you already have a destination.';
+      document.getElementById('resultsSummary').textContent=ranked.length?`${ranked.length} ${ranked.length===1?'idea':'ideas'} for your activity and time, within your drive range from ${originLabels[prefs.origin]}. Sage will carry your answers forward for review. Season starts with the current month; confirm your travel date there.`:'No outings in this small catalog fit those choices. Try more time, a longer drive range or a different activity. You can also browse the guides or open Sage if you already have a destination.';
       document.getElementById('results').classList.add('active');
       document.getElementById('shortlist-heading').focus({preventScroll:true});
       document.getElementById('results').scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});
