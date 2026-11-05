@@ -51,6 +51,38 @@
     for (const input of active.querySelectorAll('[data-item]')) input.checked = false;
     persist();
   });
+  document.getElementById('download-checklist').addEventListener('click', () => {
+    const message = document.getElementById('download-status');
+    let url;
+    let link;
+    try {
+      const title = active.querySelector('h2').textContent;
+      const lines = ['Health & Travels — ' + title, '', active.querySelector('.panel-heading > p:last-child').textContent, ''];
+      for (const group of active.querySelectorAll('fieldset')) {
+        lines.push(group.querySelector('legend').textContent);
+        for (const input of group.querySelectorAll('[data-item]')) {
+          lines.push(`${input.checked ? '[x]' : '[ ]'} ${input.closest('label').textContent.trim()}`);
+        }
+        lines.push('');
+      }
+      lines.push(active.querySelector('.notice').textContent.trim(), '',
+        'Adapt this starter list for your family and conditions. Check current official alerts before leaving.',
+        'This is a snapshot; later checkmarks do not update this file.',
+        `https://healthandtravels.com/plan-and-pack#${active.id}`);
+      url = URL.createObjectURL(new Blob([lines.join('\n') + '\n'], { type: 'text/plain;charset=utf-8' }));
+      link = document.createElement('a');
+      link.href = url;
+      link.download = `health-and-travels-${active.id}-checklist.txt`;
+      document.body.appendChild(link);
+      link.click();
+      message.textContent = 'Your checklist download was requested. Check Downloads or save the opened text in your Files app. Open it once before leaving to confirm it is available offline.';
+    } catch {
+      message.textContent = 'This browser could not download the checklist. Use Print / save PDF to keep a copy instead.';
+    } finally {
+      if (link) link.remove();
+      if (url) window.setTimeout(() => URL.revokeObjectURL(url), 60000);
+    }
+  });
   document.getElementById('print-checklist').addEventListener('click', () => window.print());
   window.addEventListener('hashchange', () => {
     const id = location.hash.slice(1);
