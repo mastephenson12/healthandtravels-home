@@ -4,7 +4,13 @@
 Create and publish a useful Health & Travels newsletter that brings readers back to Arizona content, Sage, and Arizona Hikers Association without turning the email into a carnival of competing calls to action.
 
 ## Trigger
-A scheduled Monday/Friday newsletter or a special safety/seasonal send is due.
+The weekly Monday newsletter is due. Publish one regular Health & Travels newsletter per week, on Mondays (Arizona time). Do not schedule a recurring Friday edition.
+
+Canonical subscriber promise: “One free newsletter every Monday with Arizona family adventure ideas and practical planning tips.”
+
+Keep requested Starter Pack delivery and transactional itinerary emails separate from this editorial schedule. Any exceptional safety send requires a separate editorial decision.
+
+Before publishing, check the publication description, website signup pages, forms, welcome emails, templates, social bios, and queued posts for outdated Monday/Friday or twice-weekly promises.
 
 ## Owner
 Health & Travels Content/Newsletter Operator.
