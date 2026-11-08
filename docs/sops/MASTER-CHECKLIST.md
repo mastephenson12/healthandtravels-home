@@ -102,3 +102,37 @@ Use this page as the recurring control panel for the ecosystem.
 
 ## Rule
 If the checklist repeatedly uncovers the same problem, fix the system or update the SOP. Repeated heroics are just undocumented process failure wearing a cape.
+
+
+---
+
+## Change Completion Gate (required for every improvement)
+
+**Status vocabulary**
+- **Not started**: no work performed.
+- **Changed in source**: saved in GitHub or the relevant app; public experience not yet confirmed.
+- **Live verified**: public page or actual end-to-end flow checked after deployment; record the URL, date, and test result.
+- **Blocked / needs owner access**: cannot independently inspect or complete a step; record exactly what access or action is missing.
+- **Failed verification**: check failed; keep the issue open and record the next repair.
+
+**For each change, record:** date (Arizona time), area, original problem, changed file or setting, commit/record URL, live URL, verification method and result, remaining related surfaces, owner, next action. Never say “done,” “fixed,” or “live” based only on a code change or an indexed search snippet.
+
+**Four-step closeout**
+1. **Build:** make the smallest useful change.
+2. **Verify:** inspect the actual visitor experience and test the primary CTA on desktop/mobile where relevant.
+3. **Sweep:** search related pages, templates, forms, automated emails, social profiles and scheduled content for contradictory promises.
+4. **Document:** update the operations dashboard with verified evidence and any remaining blocker.
+
+### Newsletter cadence consistency sweep — 2026-11-08
+
+Canonical promise: **One free newsletter every Monday with Arizona family adventure ideas and practical planning tips.**
+
+| Surface | Current evidence | Status | Next action |
+|---|---|---|---|
+| Website About page source (`about.html`) | Says “free Monday newsletter” and “one free newsletter every Monday” | Source checked; live visit not recorded in this sweep | Confirm public About page after deploy and signup CTA |
+| Newsletter SOP (`SOP-009-beehiiv-newsletter.md`) | Specifies one Monday edition, no recurring Friday edition | Source checked | Keep in sync with Beehiiv |
+| Beehiiv publication description and signup page | Not inspected with authenticated Beehiiv access | Blocked / needs owner access | Check displayed cadence and signup |
+| Beehiiv welcome sequence, automations, templates, scheduled posts | Not inspected with authenticated Beehiiv access | Blocked / needs owner access | Search for Monday/Friday, twice-weekly, Tuesday/Friday, and similar legacy promises |
+| Website-wide pages and social bios | Not exhaustively audited | Not started | Search relevant surfaces; change only verified contradictions |
+
+**Evidence rule:** Search-engine results can be stale. Recheck current source and the live page before declaring an inconsistency. Never treat unchecked Beehiiv settings as confirmed correct.
