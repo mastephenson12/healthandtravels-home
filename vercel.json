@@ -3,6 +3,21 @@
   "trailingSlash": false,
   "redirects": [
     {
+      "source": "/t/Santorini,-Greece",
+      "destination": "https://newsletter.healthandtravels.com/t/santorini-greece",
+      "permanent": true
+    },
+    {
+      "source": "/woods-canyon-lake-family-guide",
+      "destination": "/woods-canyon-lake-with-kids",
+      "permanent": true
+    },
+    {
+      "source": "/woods-canyon-lake-family-guide.html",
+      "destination": "/woods-canyon-lake-with-kids",
+      "permanent": true
+    },
+    {
       "source": "/forms",
       "destination": "https://newsletter.healthandtravels.com/subscribe",
       "permanent": true
