@@ -18,33 +18,83 @@
 
     <!-- Structured Data (JSON-LD) -->
     <script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
     {
-      "@context": "https://schema.org",
       "@type": "AboutPage",
+      "@id": "https://healthandtravels.com/about#webpage",
+      "url": "https://healthandtravels.com/about",
+      "name": "About Health & Travels and Mark Stephenson, RN",
+      "isPartOf": {
+        "@id": "https://healthandtravels.com/#website"
+      },
       "mainEntity": {
-        "@type": "Person",
-        "@id": "https://healthandtravels.com/about#mark-stephenson",
-        "name": "Mark Stephenson",
-        "jobTitle": "Founder, Editor, Registered Nurse (RN)",
-        "knowsAbout": ["Arizona Hiking", "Family Travel", "Heat Safety", "Wilderness Safety"],
-        "sameAs": [
-          "https://github.com/mastephenson12"
-        ]
-      }
+        "@id": "https://healthandtravels.com/#organization"
+      },
+      "about": [
+        {
+          "@id": "https://healthandtravels.com/#organization"
+        },
+        {
+          "@id": "https://healthandtravels.com/about#mark-stephenson"
+        }
+      ]
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://healthandtravels.com/#organization",
+      "name": "Health & Travels",
+      "url": "https://healthandtravels.com/",
+      "description": "Arizona family adventure guides, practical trip-planning tools, and a free Monday newsletter.",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "https://healthandtravels.com/Health%20ad%20Travels%20Logo%20512x512.png",
+        "width": 512,
+        "height": 512
+      },
+      "founder": {
+        "@id": "https://healthandtravels.com/about#mark-stephenson"
+      },
+      "publishingPrinciples": "https://healthandtravels.com/editorial-standards",
+      "sameAs": [
+        "https://www.pinterest.com/healthandtravels/"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://healthandtravels.com/about#mark-stephenson",
+      "name": "Mark Stephenson",
+      "url": "https://healthandtravels.com/about",
+      "jobTitle": "Founder, Editor, Registered Nurse (RN)",
+      "description": "Arizona father, registered nurse, and founder and editor of Health & Travels.",
+      "knowsAbout": [
+        "Arizona family travel",
+        "Family hiking",
+        "Outdoor trip planning"
+      ],
+      "worksFor": {
+        "@id": "https://healthandtravels.com/#organization"
+      },
+      "sameAs": [
+        "https://github.com/mastephenson12"
+      ]
     }
-    </script>
+  ]
+}
+</script>
 
     <style>
         :root {
             --primary: #030712;
-            --accent-teal: #5B9E96;
-            --accent-orange: #0D47A1;
+            --accent-teal: #B8D9D2;
+            --accent-orange: #00695C;
             --bg-light: #FFFFFF;
             --text-dark: #030712;
-            --text-heading: #111827;
+            --text-heading: #1F2937;
             --text-muted: #1F2937;
             --border-color: #E5E7EB;
-            --link-color: #0C4A6E;
+            --link-color: #00695C;
             --font-heading: 'Helvetica Neue', 'Arial Narrow', sans-serif;
             --font-body: 'Lato', sans-serif;
             --font-button: 'Inter', sans-serif;
@@ -98,7 +148,7 @@
         }
         nav a:hover { color: var(--accent-teal); }
         .hero {
-            background: linear-gradient(135deg, #EFF8F6 0%, #DDEFEA 100%);
+            background: linear-gradient(135deg, #EEF8F5 0%, #DDEFEA 100%);
             color: var(--text-heading);
             padding: 50px 20px;
             text-align: center;
@@ -197,9 +247,16 @@
 
     <div class="container">
 
+
+        <section aria-labelledby="what-is-health-and-travels">
+            <h2 class="section-title" id="what-is-health-and-travels">What is Health &amp; Travels?</h2>
+            <p>Health &amp; Travels is an Arizona family adventure publication founded and edited by Mark Stephenson, RN. We publish destination guides, original field photographs, seasonal planning advice and practical tools for choosing outings with children.</p>
+            <p>The <a href="/arizona">Arizona guide directory</a> is our place to explore destinations. <a href="https://sage.healthandtravels.com/">Sage</a> is our companion trip-planning tool. The <a href="https://newsletter.healthandtravels.com/subscribe">free Monday newsletter</a> brings new adventure ideas to your inbox.</p>
+        </section>
+
         <div class="author-box">
             <span class="badge">Founder & Editor</span>
-            <h2>Mark Stephenson, RN</h2>
+            <h2 id="mark-stephenson">Mark Stephenson, RN</h2>
             <p>I am an Arizona father, Registered Nurse (RN), and long-time outdoor enthusiast. I created Health & Travels because traditional travel guides frequently skip the exact practical details families need to stay safe—like accurate heat risks, shade availability, bathroom locations, water refills, and realistic kid stamina limits.</p>
             
             <p>Combining my clinical background in health and safety with years of hands-on Arizona trail experience, my goal is to give parents straightforward, reliable information so they can explore Arizona with confidence.</p>
