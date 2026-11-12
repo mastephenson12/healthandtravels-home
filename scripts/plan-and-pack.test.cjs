@@ -8,13 +8,13 @@ const html = fs.readFileSync(path.join(root, 'plan-and-pack.html'), 'utf8');
 const script = fs.readFileSync(path.join(root, 'plan-and-pack.js'), 'utf8');
 
 // A small DOM fixture exercises the browser-only checklist state without a service or database.
-function page(initial = '{}', blocked = false, hash = '', downloadBlocked = false) {
+function page(initial = '{}', blocked = false, hash = '', downloadBlocked = false, shareAction) {
   const element = (extra = {}) => ({hidden:false,dataset:{},events:{},textContent:'',attrs:{},
     addEventListener(event, fn) { this.events[event] = fn; },
     setAttribute(key, value) { this.attrs[key] = value; },
     removeAttribute(key) { delete this.attrs[key]; },
     focus() {}, scrollIntoView() {}, ...extra});
-  const controls = Object.fromEntries(['download-checklist','download-status','storage-status','packing-progress','reset-checklist','print-checklist','checklist-tools'].map(id => [id, element()]));
+  const controls = Object.fromEntries(['share-checklist','download-checklist','download-status','storage-status','packing-progress','reset-checklist','print-checklist','checklist-tools'].map(id => [id, element()]));
   const panels = [...html.matchAll(/<section class="trip-panel" id="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)].map(([,id,markup]) => {
     const inputs = [...markup.matchAll(/data-item="([^"]+)"/g)].map(([,item]) => element({dataset:{item},checked:false}));
     const heading = element({textContent: markup.match(/<h2[^>]*>([^<]+)<\/h2>/)[1]});
@@ -37,7 +37,7 @@ function page(initial = '{}', blocked = false, hash = '', downloadBlocked = fals
     querySelectorAll:selector => ({'.trip-panel':panels,'[data-outing]':links,'[data-item]':inputs})[selector]};
   const location = {hash};
   const window = element({print(){printed++;},setTimeout(fn){fn();}});
-  vm.runInNewContext(script,{document,location,window,Blob,URL:{createObjectURL(blob){if(downloadBlocked)throw Error('blocked');downloaded=blob;return 'blob:test';},revokeObjectURL(){revoked=true;}},history:{replaceState(_a,_b,value){location.hash=value;}},
+  vm.runInNewContext(script,{navigator: shareAction ? {share:shareAction} : {},document,location,window,Blob,URL:{createObjectURL(blob){if(downloadBlocked)throw Error('blocked');downloaded=blob;return 'blob:test';},revokeObjectURL(){revoked=true;}},history:{replaceState(_a,_b,value){location.hash=value;}},
     localStorage:{getItem(){if(blocked)throw Error('blocked');return stored;},setItem(_key,value){if(blocked)throw Error('blocked');stored=value;}}});
   const choose = id => links.find(link=>link.dataset.outing===id).events.click({preventDefault(){}});
   const check = item => {const input=inputs.find(input=>input.dataset.item===item);input.checked=true;input.events.change();};
@@ -96,4 +96,28 @@ test('download failure offers the PDF fallback without losing checkmarks', () =>
   p.controls['download-checklist'].events.click();
   assert.match(p.controls['download-status'].textContent,/Print \/ save PDF/);
   assert.match(p.controls['packing-progress'].textContent,/1 of 13/);
+});
+
+
+test('mobile sharing sends the selected list with checkmarks and its guidance', async () => {
+  let shared;
+  const p=page('{}',false,'',false,async data=>{shared=data;});
+  p.choose('camping');p.check('camp-tent');
+  await p.controls['share-checklist'].events.click();
+  assert.equal(shared.title,'First camping weekend');
+  assert.match(shared.text,/\[x\] Test the tent/);
+  assert.doesNotMatch(shared.text,/Carry water for everyone/);
+  assert.match(shared.text,/Important trip guidance/);
+  assert.match(shared.text,/snapshot/);
+  assert.equal(p.controls['share-checklist'].disabled,false);
+});
+test('share cancellation and failures preserve progress and offer a fallback', async () => {
+  for (const name of ['AbortError','NotAllowedError']) {
+    const p=page('{}',false,'',false,async()=>{throw Object.assign(Error(),{name});});
+    p.check('hike-water');
+    await p.controls['share-checklist'].events.click();
+    assert.match(p.controls['packing-progress'].textContent,/1 of 13/);
+    assert.match(p.controls['download-status'].textContent,name==='AbortError'?/canceled/:/Download checklist/);
+    assert.equal(p.controls['share-checklist'].disabled,false);
+  }
 });
