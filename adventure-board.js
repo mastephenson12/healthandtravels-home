@@ -113,6 +113,7 @@
     saveDestination(destinationFromButton(button));
     updateButtons();
     if (typeof window.gtag === 'function') window.gtag('event', 'adventure_saved', {destination:button.dataset.slug, source_page:window.location.pathname});
+    try { if (has(button.dataset.slug)) document.dispatchEvent(new CustomEvent('site:measurement', {detail: {action: 'outing_saved'}})); } catch (_) { /* Measurement must not interrupt saving. */ }
   });
 
   window.addEventListener('storage', updateButtons);
