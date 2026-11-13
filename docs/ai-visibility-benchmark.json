@@ -1,0 +1,60 @@
+{
+  "site": "healthandtravels",
+  "created": "2026-11-13",
+  "status": "Not yet measured",
+  "instructions": "Run identical unbranded prompts in a fresh conversation with web/search enabled on each platform. Log each run separately; do not interpret one response as universal visibility.",
+  "prompts": [
+    {
+      "id": "healthandtravels-01",
+      "prompt": "Where can I find practical Arizona family outing guides?"
+    },
+    {
+      "id": "healthandtravels-02",
+      "prompt": "Is Papago Park suitable for kids and strollers?"
+    },
+    {
+      "id": "healthandtravels-03",
+      "prompt": "What short walks are available at Papago Park?"
+    },
+    {
+      "id": "healthandtravels-04",
+      "prompt": "How can I plan an Arizona day trip around bathrooms and shade?"
+    },
+    {
+      "id": "healthandtravels-05",
+      "prompt": "What should families know before visiting Estrella Mountain Regional Park?"
+    },
+    {
+      "id": "healthandtravels-06",
+      "prompt": "How can I plan a family day trip from Phoenix?"
+    },
+    {
+      "id": "healthandtravels-07",
+      "prompt": "What should I pack for an Arizona family day hike?"
+    },
+    {
+      "id": "healthandtravels-08",
+      "prompt": "How can I find a backup plan for an Arizona family outing?"
+    }
+  ],
+  "platforms": [
+    "ChatGPT",
+    "Perplexity",
+    "Gemini",
+    "Copilot"
+  ],
+  "result_fields": [
+    "run_date",
+    "platform",
+    "model_or_mode",
+    "search_enabled",
+    "locale",
+    "prompt_id",
+    "brand_mentioned",
+    "site_cited",
+    "cited_url",
+    "response_evidence",
+    "notes"
+  ],
+  "runs": []
+}
