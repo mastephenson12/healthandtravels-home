@@ -186,7 +186,7 @@
             <details class="save-plan"><summary>Keep this shortlist for later</summary>
               <div class="save-plan-grid">
                 <div><h3 id="save-plan-title">Keep your shortlist</h3><p>Save these ideas on your device or email the shortlist to yourself. You can save the complete day plan in Sage after choosing an outing.</p></div>
-                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="shortlist-extra" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
+                <div class="save-plan-actions"><button class="button button-secondary" id="saveShortlist" type="button">Save My Shortlist</button><button class="button button-secondary" id="shareShortlist" type="button">Share My Shortlist</button><button class="button button-secondary" id="copyShortlist" type="button">Copy My Shortlist</button><a class="button button-secondary" id="emailShortlist" href="#">Email My Shortlist</a><a class="shortlist-extra" id="starterPackLink" href="https://newsletter.healthandtravels.com/subscribe?utm_source=healthandtravels&amp;utm_medium=adventure_finder&amp;utm_campaign=shortlist_save&amp;utm_content=starter_pack">Get the Free Starter Pack</a></div>
               </div>
               <p class="save-status" id="saveStatus" role="status" aria-live="polite"></p>
               <small>“Email My Shortlist” opens your email app; Health &amp; Travels does not receive the address. Newsletter signup is handled separately by Beehiiv. See our <a href="/privacy-policy">privacy policy</a>.</small>
@@ -435,7 +435,39 @@
       }
     });
 
-    function validSavedChoices(saved){
+    function currentShortlistText(){
+      if(!currentShortlist) return '';
+      const prefs=currentShortlist.preferences;
+      return shortlistText(rankAdventures(prefs),prefs);
+    }
+
+    document.getElementById('shareShortlist').hidden=typeof navigator.share!=='function';
+    document.getElementById('shareShortlist').addEventListener('click',async function(){
+      const text=currentShortlistText();
+      if(!text) return;
+      try{
+        await navigator.share({title:'Our Arizona adventure shortlist',text});
+        document.getElementById('saveStatus').textContent='Shortlist shared.';
+        if(typeof gtag==='function') gtag('event','adventure_shortlist_share',{method:'native'});
+      }catch(error){
+        if(error.name==='AbortError') return;
+        document.getElementById('saveStatus').textContent='Sharing is unavailable. Try Copy My Shortlist or Email My Shortlist.';
+      }
+    });
+
+    document.getElementById('copyShortlist').addEventListener('click',async function(){
+      const text=currentShortlistText();
+      if(!text) return;
+      try{
+        await navigator.clipboard.writeText(text);
+        document.getElementById('saveStatus').textContent='Copied. Paste your shortlist into a text or message to plan together.';
+        if(typeof gtag==='function') gtag('event','adventure_shortlist_share',{method:'clipboard'});
+      }catch(error){
+        document.getElementById('saveStatus').textContent='Copying is unavailable in this browser. Use Email My Shortlist to keep or send a copy.';
+      }
+    });
+
+
       if(!saved||saved.version!==2||!saved.preferences||!Array.isArray(saved.destinations))return false;
       const prefs=saved.preferences;
       return ['shade','bathrooms','stroller'].every(key=>typeof prefs[key]==='boolean')&&['origin','group','time','drive','activity','dietary'].every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]&&(!['origin','group'].includes(id)||option.value!=='')));
