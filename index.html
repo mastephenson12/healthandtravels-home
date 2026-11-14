@@ -468,6 +468,7 @@
     });
 
 
+    function validSavedChoices(saved){
       if(!saved||saved.version!==2||!saved.preferences||!Array.isArray(saved.destinations))return false;
       const prefs=saved.preferences;
       return ['shade','bathrooms','stroller'].every(key=>typeof prefs[key]==='boolean')&&['origin','group','time','drive','activity','dietary'].every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]&&(!['origin','group'].includes(id)||option.value!=='')));
