@@ -15,7 +15,7 @@ function browser(storage={}){
  const localStorage=store('local'),sessionStorage=store('session');
  const document={getElementById:get,querySelector:get,querySelectorAll:()=>[]};
  const window={localStorage,sessionStorage,matchMedia:()=>({matches:true})};
- const ctx=vm.createContext({document,window,localStorage,sessionStorage,URLSearchParams,Date});
+ const ctx=vm.createContext({document,window,localStorage,sessionStorage,URLSearchParams,Date,navigator:{}});
  vm.runInContext(script,ctx);
  return {get,storage,api:vm.runInContext('({rankAdventures,matchDetails,shadeAlternative,card,shortlistText,validSavedChoices})',ctx),submit(){get('finderForm').handlers.submit({preventDefault(){}})}};
 }
@@ -65,3 +65,25 @@ test('zero-match preferences restore with a reachable clear control',()=>{
  assert.ok(html.indexOf('id="clearShortlist"')<html.indexOf('<details class="save-plan">'));
 });
 
+
+test('easy walking affects the shortlist, carries into Sage and restores with the shortlist',()=>{
+ const storage={};
+ const first=browser(storage);
+ first.get('activity').value='hiking';
+ first.get('time').value='short';
+ first.get('easyWalking').checked=true;
+ first.submit();
+ const {rankAdventures}=first.api;
+ const ranked=rankAdventures({...initial,time:'short',easyWalking:true});
+ assert.equal(ranked[0].name,'Riparian Preserve at Water Ranch');
+ assert.match(first.get('resultGrid').innerHTML,/Easy walking listed/);
+ assert.match(first.get('resultGrid').innerHTML,/easyWalking=true/);
+ assert.match(first.get('emailShortlist').href,/Prefer%20easy%20walking/);
+ assert.equal(browser(storage).get('easyWalking').checked,true);
+
+ const oldSave=JSON.parse(storage.session);
+ delete oldSave.preferences.easyWalking;
+ const restored=browser({session:JSON.stringify(oldSave)});
+ assert.match(restored.get('resultsSummary').textContent,/Welcome back/);
+ assert.equal(restored.get('easyWalking').checked,false);
+});

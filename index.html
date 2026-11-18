@@ -174,7 +174,7 @@
               <div class="field"><label for="drive">How far will you drive?</label><select id="drive" required><option value="30">About 30 minutes</option><option value="60">About 60 minutes</option><option value="90" selected>About 90 minutes</option><option value="120">Up to 2 hours</option></select></div>
               <div class="field"><label for="activity">What sounds good?</label><select id="activity" required><option value="hiking">Hiking</option><option value="water">Water</option><option value="scenic">Scenic drive / views</option><option value="wildlife">Wildlife</option><option value="town">Small town</option><option value="cooler">Cooler weather</option></select></div>
             </div>
-            <details class="comfort-options"><summary>Comfort &amp; food needs (optional)</summary><p class="small-note">Select what matters. We’ll flag tradeoffs; availability is not guaranteed.</p><div class="comfort-checks"><label><input id="shade" type="checkbox"> Prioritize shade</label><label><input id="bathrooms" type="checkbox"> Bathrooms matter</label><label><input id="stroller" type="checkbox"> Stroller / step-free access matters</label></div>              <div class="field"><label for="dietary">Any food needs?</label><select id="dietary"><option value="">No special request</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Gluten-free">Gluten-free</option><option value="Dairy-free">Dairy-free</option><option value="Nut allergy">Nut allergy</option><option value="Multiple needs">Multiple needs</option></select></div></details>
+            <details class="comfort-options"><summary>Comfort &amp; food needs (optional)</summary><p class="small-note">Select what matters. We’ll flag tradeoffs; availability is not guaranteed.</p><div class="comfort-checks"><label><input id="shade" type="checkbox"> Prioritize shade</label><label><input id="bathrooms" type="checkbox"> Bathrooms matter</label><label><input id="easyWalking" type="checkbox"> Prefer easy walking</label><label><input id="stroller" type="checkbox"> Stroller / step-free access matters</label></div>              <div class="field"><label for="dietary">Any food needs?</label><select id="dietary"><option value="">No special request</option><option value="Vegetarian">Vegetarian</option><option value="Vegan">Vegan</option><option value="Gluten-free">Gluten-free</option><option value="Dairy-free">Dairy-free</option><option value="Nut allergy">Nut allergy</option><option value="Multiple needs">Multiple needs</option></select></div></details>
             <div class="finder-action"><button class="button button-primary" type="submit">Show My Outings</button><p class="small-note">Drive times are broad estimates, not live navigation. Submitted choices stay in this tab so you can return from Sage. Save the shortlist to keep it on this device between visits. Review current access before leaving.</p></div>
             <noscript><p>To use the finder, enable JavaScript. You can also <a href="/arizona">browse Arizona guides</a> or <a href="https://sage.healthandtravels.com/trip-builder">open Sage</a>.</p></noscript>
           </form>
@@ -279,16 +279,22 @@
     function readPreferences(){
       const prefs=Object.fromEntries(['origin','group','time','drive','activity','dietary'].map(id=>[id,document.getElementById(id).value]));
       ['shade','bathrooms','stroller'].forEach(id=>{prefs[id]=document.getElementById(id).checked;});
+      prefs.easyWalking=document.getElementById('easyWalking').checked;
       return prefs;
     }
 
     const activityLabels={hiking:'Hiking',water:'Water and lake scenery',scenic:'Scenic views',wildlife:'Wildlife',town:'Town exploring',cooler:'Cooler-weather setting'};
     function shadeLevel(a){return a.shade==='Good'?2:a.shade==='Some'?1:0;}
+    function isEasyWalk(a){return ['Easy','Easy walking'].includes(a.difficulty);}
     function matchDetails(a,prefs){
       const reasons=[activityLabels[prefs.activity],driveMinutes(a,prefs.origin)+' min estimated one way from '+originLabels[prefs.origin],timeFit(a,prefs.time)];
       const tradeoffs=[];
       if(prefs.shade) tradeoffs.push(shadeLevel(a)===0?'Shade is limited or variable. Choose another outing if continuous shade is essential.':a.shade==='Some'?'Some shade is listed; expect exposed stretches and confirm the route.':'Shade is listed, but continuous shade is not verified. Check your route and weather.');
       if(prefs.bathrooms) tradeoffs.push(a.bathrooms==='Yes'?'Bathrooms are listed; confirm opening hours and access before leaving.':'Bathrooms: '+a.bathrooms+'. Confirm an open restroom before choosing this outing.');
+      if(prefs.easyWalking){
+        if(isEasyWalk(a)) reasons.push('Easy walking listed. Check the specific route.');
+        else tradeoffs.push('Some routes may be more demanding. Check distance, grade and footing before choosing a short walk.');
+      }
       if(prefs.stroller) tradeoffs.push('Step-free access is not verified here; confirm the specific route before planning.');
       if(prefs.group==='toddlers' && /moderate/i.test(a.difficulty)) tradeoffs.push('Toddlers: check footing and choose a short turnaround. Route suitability is not verified.');
       if(!a.times.includes(prefs.time)) tradeoffs.push(timeFit(a,prefs.time)+'.');
@@ -308,6 +314,7 @@
       const selectedDrive=Number(prefs.drive);
       if(driveMinutes(a,prefs.origin)<=selectedDrive) score+=4;
       if(prefs.group!=='adults' && /Very good|Good/.test(a.kid)) score+=2;
+      if(prefs.easyWalking && isEasyWalk(a)) score+=6;
       if(prefs.shade) score+=shadeLevel(a)*3;
       if(prefs.bathrooms && a.bathrooms==='Yes') score+=2;
       return score;
@@ -346,6 +353,7 @@
         utm_medium:'adventure_finder',
         utm_campaign:'homepage_match'
       });
+      if(prefs.easyWalking) q.set('easyWalking','true');
       if(prefs.dietary) q.set('needs',prefs.dietary);
       return 'https://sage.healthandtravels.com/trip-builder?'+q.toString();
     }
@@ -379,7 +387,7 @@
     function shortlistText(ranked,prefs){
       const preferenceLabels={toddlers:'Toddlers / preschoolers',elementary:'Elementary-age kids',teens:'Tweens / teens',adults:'Adults',mixed:'Mixed ages',short:'2–3 hours',half:'Half day',full:'Full day',weekend:'Weekend',hiking:'Hiking',water:'Water',scenic:'Scenic drive / views',wildlife:'Wildlife',town:'Small town',cooler:'Cooler weather'};
       const lines=ranked.map((a,index)=>`${index+1}. ${a.name} (${a.area})\n   ${a.why}\n   Why it fits: ${matchDetails(a,prefs).reasons.join('; ')}\n   Before choosing: ${[...matchDetails(a,prefs).tradeoffs,a.season].join(' ')}\n   Build this trip with Sage: ${sageUrl(a,prefs)}`);
-      return `My Health & Travels Arizona shortlist\n\nGroup: ${preferenceLabels[prefs.group]||prefs.group}\nTime: ${preferenceLabels[prefs.time]||prefs.time}\nActivity: ${preferenceLabels[prefs.activity]||prefs.activity}\nStarting area: ${originLabels[prefs.origin]}\nDrive range: up to ${prefs.drive} minutes${prefs.shade?'\nPrioritize shade':''}${prefs.bathrooms?'\nBathrooms matter':''}${prefs.stroller?'\nStep-free access matters':''}${prefs.dietary?`\nFood needs: ${prefs.dietary}`:''}\n\n${lines.join('\n\n')}\n\nFind another adventure: https://healthandtravels.com/#adventure-finder`;
+      return `My Health & Travels Arizona shortlist\n\nGroup: ${preferenceLabels[prefs.group]||prefs.group}\nTime: ${preferenceLabels[prefs.time]||prefs.time}\nActivity: ${preferenceLabels[prefs.activity]||prefs.activity}\nStarting area: ${originLabels[prefs.origin]}\nDrive range: up to ${prefs.drive} minutes${prefs.shade?'\nPrioritize shade':''}${prefs.bathrooms?'\nBathrooms matter':''}${prefs.easyWalking?'\nPrefer easy walking':''}${prefs.stroller?'\nStep-free access matters':''}${prefs.dietary?`\nFood needs: ${prefs.dietary}`:''}\n\n${lines.join('\n\n')}\n\nFind another adventure: https://healthandtravels.com/#adventure-finder`;
     }
 
     function updateSaveOptions(ranked,prefs){
@@ -471,7 +479,7 @@
     function validSavedChoices(saved){
       if(!saved||saved.version!==2||!saved.preferences||!Array.isArray(saved.destinations))return false;
       const prefs=saved.preferences;
-      return ['shade','bathrooms','stroller'].every(key=>typeof prefs[key]==='boolean')&&['origin','group','time','drive','activity','dietary'].every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]&&(!['origin','group'].includes(id)||option.value!=='')));
+      return (prefs.easyWalking === undefined || typeof prefs.easyWalking === 'boolean')&&['shade','bathrooms','stroller'].every(key=>typeof prefs[key]==='boolean')&&['origin','group','time','drive','activity','dietary'].every(id=>Array.from(document.getElementById(id).options).some(option=>option.value===prefs[id]&&(!['origin','group'].includes(id)||option.value!=='')));
     }
     function restoreShortlist(){
       try{
@@ -488,6 +496,7 @@
         // Render only known destinations and rebuild links from current planner settings.
         const ranked=rankAdventures(prefs);
         if(ranked.length>3||ranked.some(a=>!a)||new Set(ranked).size!==ranked.length) return;
+        document.getElementById('easyWalking').checked=prefs.easyWalking===true;
         fields.forEach(id=>{document.getElementById(id).value=prefs[id];});
         ['shade','bathrooms','stroller'].forEach(id=>{document.getElementById(id).checked=prefs[id];});
         document.getElementById('resultGrid').innerHTML=ranked.map((a,i)=>card(a,prefs,i)).join('');
