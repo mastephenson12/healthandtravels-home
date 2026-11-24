@@ -14,7 +14,7 @@ function initOverview(){
  fallbackStatus.textContent='Overview map · select a colored marker to explore a destination.';
 }
 function showOverview(items){
- if(!overview)return;
+ if(!overview||fallback.hidden)return;
  overviewMarkers.clearLayers();const bounds=[];
  for(const r of items){
   const marker=L.circleMarker([r.lat,r.lng],{radius:9,color:'#fff',weight:2,fillColor:catalog.categories[r.category].color,fillOpacity:1});
@@ -51,12 +51,14 @@ function render(){
  status.textContent=items.length+' resources · '+catalog.coordinateNote;
 }
 search.addEventListener('input',render);category.addEventListener('change',render);
-initOverview();
+try{initOverview();}catch{overview=null;fallback.hidden=true;fallbackStatus.textContent='Overview unavailable. Browse the guides below.';}
 fetch('https://sage.healthandtravels.com/adventure-resources.json',{signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{if(data.schemaVersion!==1||!Array.isArray(data.resources))throw Error();catalog=data;buildLegend();for(const [value,c] of Object.entries(data.categories)){const option=document.createElement('option');option.value=value;option.textContent=c.label;category.append(option);}render();}).catch(()=>{status.textContent='Shared catalog temporarily unavailable. Starter guides remain available.';});
 window.addEventListener('adventure-route',e=>{lastRoute=e.detail;drawRoute();});
 for(const id of ['origin','destination'])$(id).addEventListener('change',()=>{lastRoute=null;if(line){line.setMap(null);line=null;}});
 load.addEventListener('click',async()=>{
  load.disabled=true;
+ mapStatus.textContent='Connecting to Google Maps…';
+ window.gm_authFailure=()=>{canvas.hidden=true;map=null;fallback.hidden=!overview;load.hidden=false;load.disabled=false;mapStatus.textContent='Google Maps authorization failed. Use the overview map instead.';if(overview){overview.invalidateSize();render();}};
  try{
  const response=await fetch('/api/maps-config');if(!response.ok)throw Error();const {key}=await response.json();if(!key)throw Error();
  await new Promise((resolve,reject)=>{const script=document.createElement('script');const cb='initializeAdventureGoogleMap';const timer=setTimeout(()=>{delete window[cb];reject(Error());},15000);window[cb]=()=>{clearTimeout(timer);delete window[cb];resolve();};script.onerror=()=>{clearTimeout(timer);delete window[cb];reject(Error());};script.src='https://maps.googleapis.com/maps/api/js?'+new URLSearchParams({key,callback:cb,libraries:'geometry',loading:'async',v:'quarterly'});document.head.append(script);});
