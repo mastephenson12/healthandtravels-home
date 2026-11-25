@@ -3,6 +3,33 @@
 const $=id=>document.getElementById(id);
 const search=$('resource-search'),category=$('resource-category'),grid=$('resource-grid'),status=$('catalog-status'),mapStatus=$('map-status'),load=$('load-map'),canvas=$('google-map');
 let catalog,map,markers=[],line,lastRoute,overview,overviewMarkers;
+const savedKey='ht-adventure-shortlist-v1',savedOnly=$('saved-only'),savedCount=$('saved-count'),downloadSaved=$('download-saved');
+let saved=new Set(),storageAvailable=true;
+try{const raw=JSON.parse(localStorage.getItem(savedKey)||'[]');if(Array.isArray(raw))saved=new Set(raw.filter(id=>typeof id==='string'));}catch{storageAvailable=false;}
+function updateSaved(){
+ const count=catalog?catalog.resources.filter(r=>saved.has(r.id)).length:saved.size;
+ savedCount.textContent=count===0?'No saved destinations yet.':count+' saved destination'+(count===1?'':'s')+'.';
+ if(!storageAvailable)savedCount.textContent+=' Browser storage unavailable; download your list before leaving.';
+ downloadSaved.disabled=!catalog||count===0;
+}
+function saveButton(resource){
+ const button=document.createElement('button');button.type='button';button.className='save-action';button.dataset.savedId=resource.id;
+ const active=saved.has(resource.id);button.textContent=active?'Remove from saved':'Save destination';button.setAttribute('aria-pressed',String(active));button.setAttribute('aria-label',(active?'Remove ':'Save ')+resource.name);
+ button.addEventListener('click',()=>{if(saved.has(resource.id))saved.delete(resource.id);else saved.add(resource.id);
+ try{localStorage.setItem(savedKey,JSON.stringify([...saved]));}catch{storageAvailable=false;}
+ updateSaved();
+ if(savedOnly.checked){render();savedOnly.focus();}else{document.querySelectorAll('[data-saved-id]').forEach(b=>{if(b.dataset.savedId===resource.id){const active=saved.has(resource.id);b.textContent=active?'Remove from saved':'Save destination';b.setAttribute('aria-pressed',String(active));b.setAttribute('aria-label',(active?'Remove ':'Save ')+resource.name);}});}
+ });return button;
+}
+savedOnly.addEventListener('change',render);
+downloadSaved.addEventListener('click',()=>{
+ if(!catalog)return;
+ const selected=catalog.resources.filter(r=>saved.has(r.id));
+ if(!selected.length)return;
+ const lines=['My Arizona adventure shortlist','Health & Travels | https://healthandtravels.com/adventure-map','Approximate locations; confirm access and conditions before leaving.','',...selected.flatMap(r=>[r.name,r.guide,'https://www.google.com/maps/search/?'+new URLSearchParams({api:'1',query:r.name+', Arizona'}),''])];
+ const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='my-arizona-adventures.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+});
+updateSaved();
 const fallback=$('fallback-map'),fallbackStatus=$('fallback-status'),legend=$('map-legend');
 function planDrive(resource){
  const destination=$('destination');
@@ -30,7 +57,7 @@ function showOverview(items){
   const marker=L.circleMarker([r.lat,r.lng],{radius:9,color:'#fff',weight:2,fillColor:catalog.categories[r.category].color,fillOpacity:1});
   const popup=document.createElement('div'),name=document.createElement('strong');name.textContent=r.name;
   popup.append(name,document.createElement('br'),link('Read guide',r.guide),document.createElement('br'),link('Open in Google Maps','https://www.google.com/maps/search/?'+new URLSearchParams({api:'1',query:r.name+', Arizona'})));
-  popup.append(document.createElement('br'),planButton(r));
+  popup.append(document.createElement('br'),planButton(r),saveButton(r));
   marker.bindPopup(popup).addTo(overviewMarkers);bounds.push([r.lat,r.lng]);
  }
  if(bounds.length===1)overview.setView(bounds[0],11);else if(bounds.length>1)overview.fitBounds(bounds,{padding:[25,25],maxZoom:10});
@@ -47,25 +74,25 @@ function drawRoute(){
 }
 function render(){
  if(!catalog)return;
- const items=catalog.resources.filter(r=>(!category.value||r.category===category.value)&&r.name.toLowerCase().includes(search.value.trim().toLowerCase()));
+ const items=catalog.resources.filter(r=>(!savedOnly.checked||saved.has(r.id))&&(!category.value||r.category===category.value)&&r.name.toLowerCase().includes(search.value.trim().toLowerCase()));
  grid.replaceChildren();markers.forEach(m=>m.setMap(null));markers=[];
  const bounds=map?new google.maps.LatLngBounds():null;
  for(const r of items){
   const article=document.createElement('article'),title=document.createElement('h3'),tag=document.createElement('p');
   title.textContent=r.name;tag.textContent=catalog.categories[r.category].label;tag.style.color=catalog.categories[r.category].color;
   article.append(title,tag,link('Read guide',r.guide),document.createTextNode(' · '),link('Google Maps','https://www.google.com/maps/search/?'+new URLSearchParams({api:'1',query:r.name+', Arizona'})));
-  article.append(document.createElement('br'),planButton(r));
+  article.append(document.createElement('br'),planButton(r),saveButton(r));
   grid.append(article);
   if(map){const position={lat:r.lat,lng:r.lng};const marker=new google.maps.Marker({map,position,title:r.name,icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:catalog.categories[r.category].color,fillOpacity:1,strokeColor:'#fff',strokeWeight:2}});marker.addListener('click',()=>{article.scrollIntoView({block:'nearest'});article.querySelector('a').focus();});markers.push(marker);bounds.extend(position);}
  }
- if(!items.length){const empty=document.createElement('p');empty.textContent='No destinations match. Try another search or choose All categories.';grid.append(empty);}
+ if(!items.length){const empty=document.createElement('p');empty.textContent='No destinations match. Try another search, category, or turn off saved-only filtering.';grid.append(empty);}
  if(map&&items.length){if(items.length===1){map.setCenter(bounds.getCenter());map.setZoom(11);}else map.fitBounds(bounds);}
  showOverview(items);
  status.textContent=items.length+' resources · '+catalog.coordinateNote;
 }
 search.addEventListener('input',render);category.addEventListener('change',render);
 try{initOverview();}catch{overview=null;fallback.hidden=true;fallbackStatus.textContent='Overview unavailable. Browse the guides below.';}
-fetch('https://sage.healthandtravels.com/adventure-resources.json',{signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{if(data.schemaVersion!==1||!Array.isArray(data.resources))throw Error();catalog=data;buildLegend();for(const [value,c] of Object.entries(data.categories)){const option=document.createElement('option');option.value=value;option.textContent=c.label;category.append(option);}render();}).catch(()=>{status.textContent='Shared catalog temporarily unavailable. Starter guides remain available.';});
+fetch('https://sage.healthandtravels.com/adventure-resources.json',{signal:AbortSignal.timeout(10000)}).then(r=>{if(!r.ok)throw Error();return r.json();}).then(data=>{if(data.schemaVersion!==1||!Array.isArray(data.resources))throw Error();catalog=data;updateSaved();buildLegend();for(const [value,c] of Object.entries(data.categories)){const option=document.createElement('option');option.value=value;option.textContent=c.label;category.append(option);}render();}).catch(()=>{status.textContent='Shared catalog temporarily unavailable. Starter guides remain available.';});
 window.addEventListener('adventure-route',e=>{lastRoute=e.detail;drawRoute();});
 for(const id of ['origin','destination'])$(id).addEventListener('change',()=>{lastRoute=null;if(line){line.setMap(null);line=null;}});
 load.addEventListener('click',async()=>{
