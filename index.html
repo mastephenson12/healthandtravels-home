@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Health & Travels | Find Your Next Arizona Family Adventure</title>
   <meta name="description" content="Find an Arizona family adventure based on who is going, how much time you have, how far you want to drive, and what sounds fun. Then build the trip with Sage.">
+  <link rel="stylesheet" href="/saturday-plan.css">
   <link rel="canonical" href="https://healthandtravels.com/">
   <link rel="icon" type="image/png" href="https://raw.githubusercontent.com/mastephenson12/sage-suite-hub/main/assets/Health%20ad%20Travels%20Logo%20512x512.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -153,13 +154,13 @@
         <div>
           <p class="eyebrow">Arizona made easier for families</p>
           <h1>Find your family’s next Arizona adventure.</h1>
-          <p class="hero-copy">Tell us where you’re starting and what fits your family. Choose from a short list, then review and save your day plan with Sage. Free, with no account needed.</p>
+          <p class="hero-copy">Tell us what fits your family. Compare up to three outings, build a practical day plan, and keep it on your phone. Refine it with Sage whenever you want. Free, with no account needed.</p>
           <div class="hero-actions"><a class="button button-primary" href="#adventure-finder">Plan My Arizona Adventure</a></div>
           <p class="direct-plan">Already have a destination? <a href="https://sage.healthandtravels.com/trip-builder?source=health-travels-homepage&amp;utm_source=healthandtravels&amp;utm_medium=homepage_hero&amp;utm_campaign=direct_plan" data-sage-direct>Open Sage</a></p>
         </div>
         <aside class="hero-snapshot" aria-label="From idea to a day out">
           <div class="snapshot-head"><p>From idea to a day out</p><h2>Choose → Plan → Go</h2></div>
-          <div class="snapshot-body"><ol class="journey-steps"><li><strong>Choose what fits</strong><span>Up to three outings, with practical tradeoffs.</span></li><li><strong>Make it your day</strong><span>Your chosen outing and answers carry into Sage.</span></li><li><strong>Keep your plan</strong><span>Save it on your device or email it to yourself.</span></li></ol></div>
+          <div class="snapshot-body"><ol class="journey-steps"><li><strong>Choose what fits</strong><span>Up to three outings, with practical tradeoffs.</span></li><li><strong>Make it your day</strong><span>Set your schedule, food, spending and backup.</span></li><li><strong>Keep your plan</strong><span>Save, share or download your complete day plan.</span></li></ol></div>
         </aside>
       </div>
     </div>
@@ -197,6 +198,53 @@
         </div>
       </div>
     </div>
+
+    <section id="saturday-plan" class="day-plan" hidden aria-labelledby="day-plan-title">
+      <p class="eyebrow">Choose · Make it yours · Get out the door</p>
+      <h2 id="day-plan-title" tabindex="-1">Your Saturday, sorted.</h2>
+      <p id="day-plan-intro"></p>
+      <p class="small-note">A flexible day-trip draft from our outing catalog—not live availability or a reservation. Confirm your route, hours, fees and conditions. For a weekend, this plans one outing day.</p>
+      <form id="day-plan-form">
+        <div class="day-fields">
+          <div class="field"><label for="day-date">Outing date</label><input id="day-date" type="date"></div>
+          <div class="field"><label for="day-depart">Leave home at</label><input id="day-depart" type="time" value="08:00" required></div>
+          <div class="field"><label for="day-hours">Hours from leaving to getting home</label><input id="day-hours" type="number" min="1" max="16" step="0.5" value="5" required></div>
+          <div class="field"><label for="day-budget">Family spending limit ($, optional)</label><input id="day-budget" type="number" min="0" max="100000" step="0.01" placeholder="75"></div>
+        </div>
+        <details><summary>Food, costs and a backup</summary>
+          <p>Blank costs mean unknown, not free. Enter your whole-group estimates after checking prices.</p>
+          <div class="day-fields">
+            <div class="field"><label for="day-fees">Entry and parking ($)</label><input id="day-fees" type="number" min="0" max="100000" step="0.01"></div>
+            <div class="field"><label for="day-food">Food ($)</label><input id="day-food" type="number" min="0" max="100000" step="0.01"></div>
+            <div class="field"><label for="day-fuel">Transport and extras ($)</label><input id="day-fuel" type="number" min="0" max="100000" step="0.01"></div>
+          </div>
+          <div class="field"><label for="day-meal">Food plan</label><input id="day-meal" maxlength="300" placeholder="Pack lunch, or add a restaurant you have checked"></div>
+          <div class="field"><label for="day-backup">Your backup plan</label><input id="day-backup" maxlength="300" placeholder="A shorter stop, checked indoor option, or head home"></div>
+          <p><a href="/arizona-family-food-stops-dietary-needs">Food-stop planning help</a> · <a href="/arizona-family-backup-plans">Browse backup ideas</a></p>
+        </details>
+        <button class="button button-primary" type="submit">Update My Day</button>
+      </form>
+      <div id="day-plan-preview"></div>
+      <fieldset id="day-pack"><legend>Ready to leave?</legend>
+        <label><input type="checkbox" value="Check destination forecast, access, hours and fees"> Check destination forecast, access, hours and fees</label>
+        <label><input type="checkbox" value="Pack water, snacks, layers and personal essentials"> Pack water, snacks, layers and personal essentials</label>
+        <label><input type="checkbox" value="Save directions and tell someone the return plan"> Save directions and tell someone the return plan</label>
+        <label><input type="checkbox" value="Confirm bathrooms, food needs and the backup"> Confirm bathrooms, food needs and the backup</label>
+      </fieldset>
+      <p><a href="/plan-and-pack#day-hike">Open the complete packing checklist</a> · <a href="/arizona-family-hiking-safety-guide">Review trail safety</a></p>
+      <div class="day-actions">
+        <button class="button button-primary" id="day-save" type="button">Save on This Device</button>
+        <button class="button button-secondary" id="day-share" type="button">Share Day Plan</button>
+        <button class="button button-secondary" id="day-download" type="button">Download Text Copy</button>
+        <button class="button button-secondary" id="day-copy" type="button">Copy Day Plan</button>
+        <button class="button button-secondary" id="day-print" type="button">Print / Save PDF</button>
+        <a class="button button-secondary" id="day-sage">Refine with Sage</a>
+        <button class="button button-secondary" id="day-clear" type="button">Remove Saved Day Plan</button>
+      </div>
+      <p class="small-note">Save keeps this plan in this browser until you remove it or clear site data. Share and download contain the plan itself, not a link that requires someone else’s saved data. Sage receives the finder choices in its link; your custom schedule, budget and notes stay here.</p>
+      <p id="day-status" role="status" aria-live="polite"></p>
+      <label id="day-copy-fallback" hidden>Copy your plan manually<textarea id="day-copy-text" readonly rows="10"></textarea></label>
+    </section>
 
     <section class="featured-guides family-needs" aria-labelledby="family-needs-title">
       <div class="section-heading"><p class="eyebrow">Plan around your family</p><h2 id="family-needs-title">What would make the day easier?</h2><p>Start with the detail that matters most to your crew.</p></div>
@@ -389,7 +437,7 @@
           ${alternative?`<a class="compare-link" href="#${cardId(alternative)}" data-compare="${cardId(alternative)}">Want more shade? Compare ${alternative.name} →</a><p class="small-note">Same activity, within your drive and time limits. Continuous shade is not verified.</p>`:prefs.shade&&shadeLevel(a)===0?'<p class="small-note">No more-shaded option is in this shortlist. Try another activity or drive range above; we have kept your limits.</p>':''}
           <details class="route-details"><summary>Route and facility summary</summary><ul class="result-meta"><li>👨‍👩‍👧‍👦 <strong>Kids:</strong> ${a.kid}</li><li>🚻 <strong>Bathrooms:</strong> ${a.bathrooms}</li><li>🌳 <strong>Shade:</strong> ${a.shade}</li><li>🥾 <strong>Difficulty:</strong> ${a.difficulty}</li></ul></details>
           <div class="safety">${a.season}${a.conditionsUrl?` <a href="${a.conditionsUrl}" target="_blank" rel="noopener">Current park alert ↗</a>`:""}</div>
-          <div class="result-actions"><a class="button button-primary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Plan This Outing</a><a class="guide-link" href="${destinationGuides[a.name] || '/arizona'}">${destinationGuides[a.name] ? 'Read Family Guide' : 'Browse Guides'}</a></div>
+          <div class="result-actions"><button class="button button-primary" type="button" data-day-plan="${adventures.indexOf(a)}">Build My Day Plan</button><a class="button button-secondary" href="${sageUrl(a,prefs)}" data-sage-match="${a.name}">Refine with Sage</a><a class="guide-link" href="${destinationGuides[a.name] || '/arizona'}">${destinationGuides[a.name] ? 'Read Family Guide' : 'Browse Guides'}</a></div>
         </div>
       </article>`;
     }
@@ -544,6 +592,7 @@
       if(typeof gtag==='function') gtag('event','sage_cta_click',{source_page:'homepage',placement:'known_destination'});
     }));
     restoreShortlist();
+    window.HTDayPlanner = {adventures, rankAdventures, driveMinutes, sageUrl, matchDetails, originLabels, destinationGuides, validPreferences:prefs=>validSavedChoices({version:2,preferences:prefs,destinations:[]})};
 
     document.getElementById('emailShortlist').addEventListener('click',function(){
       if(typeof gtag==='function') gtag('event','adventure_shortlist_email',{method:'mailto'});
@@ -564,5 +613,6 @@
       }
     });
   </script>
+  <script src="/saturday-plan.js"></script>
 </body>
 </html>
