@@ -4,13 +4,15 @@ const $=id=>document.getElementById(id);
 const search=$('resource-search'),category=$('resource-category'),grid=$('resource-grid'),status=$('catalog-status'),mapStatus=$('map-status'),load=$('load-map'),canvas=$('google-map');
 let catalog,map,markers=[],line,lastRoute,overview,overviewMarkers;
 const savedKey='ht-adventure-shortlist-v1',savedOnly=$('saved-only'),savedCount=$('saved-count'),downloadSaved=$('download-saved');
-let saved=new Set(),storageAvailable=true;
+const copySaved=$('copy-saved'),exportStatus=$('export-status'),exportPreview=$('export-preview'),exportText=$('export-text'),exportLink=$('export-link');
+let saved=new Set(),storageAvailable=true,exportUrl;
+function resetExport(){if(exportUrl)URL.revokeObjectURL(exportUrl);exportUrl=undefined;exportLink.removeAttribute('href');exportPreview.hidden=true;exportStatus.textContent='';}
 try{const raw=JSON.parse(localStorage.getItem(savedKey)||'[]');if(Array.isArray(raw))saved=new Set(raw.filter(id=>typeof id==='string'));}catch{storageAvailable=false;}
 function updateSaved(){
  const count=catalog?catalog.resources.filter(r=>saved.has(r.id)).length:saved.size;
  savedCount.textContent=count===0?'No saved destinations yet.':count+' saved destination'+(count===1?'':'s')+'.';
  if(!storageAvailable)savedCount.textContent+=' Browser storage unavailable; download your list before leaving.';
- downloadSaved.disabled=!catalog||count===0;
+ downloadSaved.disabled=!catalog||count===0;copySaved.disabled=downloadSaved.disabled;resetExport();
 }
 function saveButton(resource){
  const button=document.createElement('button');button.type='button';button.className='save-action';button.dataset.savedId=resource.id;
@@ -22,12 +24,25 @@ function saveButton(resource){
  });return button;
 }
 savedOnly.addEventListener('change',render);
-downloadSaved.addEventListener('click',()=>{
- if(!catalog)return;
+function prepareExport(){
+ if(!catalog){exportStatus.textContent='Destinations are still loading. Try again shortly.';return null;}
  const selected=catalog.resources.filter(r=>saved.has(r.id));
- if(!selected.length)return;
+ if(!selected.length){exportStatus.textContent='Save at least one destination first.';return null;}
+ resetExport();
  const lines=['My Arizona adventure shortlist','Health & Travels | https://healthandtravels.com/adventure-map','Approximate locations; confirm access and conditions before leaving.','',...selected.flatMap(r=>[r.name,r.guide,'https://www.google.com/maps/search/?'+new URLSearchParams({api:'1',query:r.name+', Arizona'}),''])];
- const url=URL.createObjectURL(new Blob([lines.join('\n')],{type:'text/plain;charset=utf-8'}));const a=document.createElement('a');a.href=url;a.download='my-arizona-adventures.txt';document.body.append(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+ const value=lines.join('\n');
+ exportText.value=value;exportPreview.hidden=false;
+ try{exportUrl=URL.createObjectURL(new Blob([value],{type:'text/plain;charset=utf-8'}));exportLink.href=exportUrl;exportLink.hidden=false;}catch{exportLink.hidden=true;}
+ return value;
+}
+downloadSaved.addEventListener('click',()=>{
+ const value=prepareExport();if(value===null)return;
+ if(!exportUrl){exportStatus.textContent='Download unavailable. Copy your shortlist below instead.';return;}
+ try{exportLink.click();exportStatus.textContent='Download requested. Check your browser downloads. If nothing appears, use the download link or copy the text below.';}catch{exportStatus.textContent='Download could not start. Copy your shortlist below instead.';}
+});
+copySaved.addEventListener('click',async()=>{
+ const value=prepareExport();if(value===null)return;
+ try{await navigator.clipboard.writeText(value);exportStatus.textContent='Shortlist copied.';}catch{exportText.focus();exportText.select();exportStatus.textContent='Automatic copying unavailable. Press Ctrl+C or use your device’s Copy command.';}
 });
 updateSaved();
 const fallback=$('fallback-map'),fallbackStatus=$('fallback-status'),legend=$('map-legend');
